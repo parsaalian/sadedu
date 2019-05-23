@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import Links from '/imports/api/links';
+import Members from '/imports/api/members';
+import Registrations from '/imports/api/registrations';
 
-function insertLink(title, url) {
+/*function insertLink(title, url) {
   Links.insert({ title, url, createdAt: new Date() });
 }
 
@@ -28,4 +29,4 @@ Meteor.startup(() => {
       'https://forums.meteor.com'
     );
   }
-});
+});*/
