@@ -11,17 +11,15 @@
     "@babel/runtime": "^7.1.5",
     "bcrypt": "^3.0.6",
     "bootstrap": "^4.3.1",
-    "history": "^4.9.0",
     "meteor-node-stubs": "^0.4.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-pure": "^0.3.1",
-    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "reactstrap": "^7.1.0"
   },
   "meteor": {
     "mainModule": {
-      "client": "client/main.jsx",
+      "client": "client/main.js",
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"
