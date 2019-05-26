@@ -8,8 +8,8 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path='/' exact component={Login} />
-        <Route path='/admin' component={Admin} />
+        {/*<Route path='/' exact component={Login} />*/}
+        <Route path='/' component={Admin} />
       </BrowserRouter>
     );
   }
