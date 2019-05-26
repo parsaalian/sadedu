@@ -1,10 +1,9 @@
 import { Mongo } from 'meteor/mongo';
+import './methods';
 
-const Registrations = new Mongo.Collection('registrations');
+export const Registrations = new Mongo.Collection('registrations');
 
 Registrations.schema = new SimpleSchema({
   cid: { type: Number },
   sid: { type: Number }
 });
-
-export default Registrations;

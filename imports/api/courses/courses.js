@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
+import './methods';
 
-const Courses = new Mongo.Collection('courses');
+export const Courses = new Mongo.Collection('courses');
 
 Courses.schema = new SimpleSchema({
   cid: { type: String, min: 5, max: 5 },
@@ -18,5 +19,3 @@ Courses.schema = new SimpleSchema({
   exam: { type: Date, optional: true },
   time: { type: String, optional: true },
 });
-
-export default Courses;

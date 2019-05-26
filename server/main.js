@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-
-import Courses from '/imports/api/courses';
-import Students from '/imports/api/students';
-import Registrations from '/imports/api/registrations';
+import '/imports/api/courses/courses';
+import '/imports/api/students/students';
+import '/imports/api/registrations/registrations';
 
 import '/imports/startup/users';
