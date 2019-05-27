@@ -9,7 +9,10 @@ export default class Admin extends Component {
         <Row>
           <Col></Col>
           <Col sm={7}>
-            {this.props.children}
+            <div style={{marginTop: '15%'}}>
+              <h1 style={{textAlign: 'center', margin: '16px'}}>{this.props.message}</h1>
+              {this.props.children}
+            </div>
           </Col>
           <Col></Col>
           <Nav page={this.props.page} />

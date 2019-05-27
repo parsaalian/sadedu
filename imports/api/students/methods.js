@@ -12,11 +12,11 @@ Meteor.methods({
   },
 
   'students.remove'({sid}) {
-    if (Students.findOne({sid: sid})) {
-      Students.remove({sid: sid});
+    if (!Students.findOne({sid: sid})) {
+      throw new Meteor.Error('This student is already removed.');
     }
     else {
-      throw new Meteor.Error('This student is already removed.');
+      Students.remove({sid: sid});
     }
   },
 
