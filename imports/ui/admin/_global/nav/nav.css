@@ -1,0 +1,25 @@
+.navigation-col {
+  min-height: 100vh;
+  padding: 0;
+
+  -webkit-box-shadow: -12px 0px 6px 0px rgba(235,236,236,0.5);
+  -moz-box-shadow: -12px 0px 6px 0px rgba(235,236,236,0.5);
+  box-shadow: -12px 0px 6px 0px rgba(235,236,236,0.5);
+}
+
+.navigation {
+  position: sticky;
+  width: 100%;
+  text-align: right;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.navigation-active {
+  -webkit-box-shadow:inset 12px 0px 0px 0px #007BFF;
+  -moz-box-shadow:inset 12px 0px 0px 0px #007BFF;
+  box-shadow:inset 12px 0px 0px 0px #007BFF;
+  background-color: #EBECEC;
+}
