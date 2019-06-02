@@ -47,5 +47,5 @@ export default withTracker(() => {
   Meteor.subscribe("students.admin");
   return {
     students: Students.find().fetch()
-  }
+  };
 })(StudentsTable);

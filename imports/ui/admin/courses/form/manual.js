@@ -1,3 +1,4 @@
+import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import Input from "/imports/ui/_global/input";

@@ -23,6 +23,6 @@ export default class LoginForm extends Component {
         </Form>
         <Button color="primary" onClick={this.login}>Login</Button>
       </React.Fragment>
-    )
+    );
   }
 }

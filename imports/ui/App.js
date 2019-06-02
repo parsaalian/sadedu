@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route } from "react-router-dom";
 import { Students } from "/imports/api/students/students";
 
 import Login from "./login/login";

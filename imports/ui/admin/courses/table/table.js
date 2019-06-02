@@ -1,3 +1,4 @@
+import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
 import { withTracker } from "meteor/react-meteor-data";
 import { Courses } from "/imports/api/courses/courses";
@@ -34,5 +35,5 @@ export default withTracker(() => {
   Meteor.subscribe("courses.admin");
   return {
     courses: Courses.find().fetch()
-  }
+  };
 })(CoursesTable);

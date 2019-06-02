@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Row, Col, Nav } from "react-bootstrap";
 import classNames from "classnames";
-import "./nav.css"
+import "./nav.css";
 
 export default class Navigation extends Component {
   render() {
