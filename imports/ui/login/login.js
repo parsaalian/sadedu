@@ -11,14 +11,12 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    console.log(Meteor.user());
     if (Meteor.user()) {
       this.props.history.push("/admin");
     }
   }
 
   handleLogin(username, password) {
-    console.log(Meteor.user());
     this.setState({ error: "" });
     const user = this.meteorLogin(username, password);
     if (user) {
@@ -27,9 +25,7 @@ class Login extends Component {
   }
 
   meteorLogin(username, password) {
-    console.log(Meteor.user());
     Meteor.loginWithPassword({username: username}, password, e => e ? this.setState({ error: e.reason }) : e);
-    console.log(Meteor.user());
     return Meteor.user();
   }
 
