@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Courses } from '/imports/api/courses/courses';
-import { Table } from 'react-bootstrap';
+import React, { Component } from "react";
+import { withTracker } from "meteor/react-meteor-data";
+import { Courses } from "/imports/api/courses/courses";
+import { Table } from "react-bootstrap";
 
 class CoursesTable extends Component {
   render() {
@@ -31,7 +31,7 @@ class CoursesTable extends Component {
 }
 
 export default withTracker(() => {
-  Meteor.subscribe('courses.admin');
+  Meteor.subscribe("courses.admin");
   return {
     courses: Courses.find().fetch()
   }

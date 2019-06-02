@@ -1,7 +1,7 @@
-import { Mongo } from 'meteor/mongo';
-import './methods';
+import { Mongo } from "meteor/mongo";
+import "./methods";
 
-export const Courses = new Mongo.Collection('courses');
+export const Courses = new Mongo.Collection("courses");
 
 Courses.schema = new SimpleSchema({
   cid: { type: String, min: 5, max: 5 },
@@ -11,7 +11,7 @@ Courses.schema = new SimpleSchema({
   teacher: { type: String, optional: true },
   description: { type: String, optional: true },
   faculty: { type: String, optional: true },
-  section: { type: String, allowedValues: ['bsc', 'mst', 'phd'], optional: true },
+  section: { type: String, allowedValues: ["bsc", "mst", "phd"], optional: true },
   capacity: { type: Number, optional: true },
   registered: { type: Number, optional: true },
   reserveCapacity: { type: Number, optional: true },

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { FormGroup, Container, Row } from 'react-bootstrap';
+import React, { Component } from "react";
+import { FormGroup, Container, Row } from "react-bootstrap";
 
 export default class Form extends Component {
   render() {

@@ -1,28 +1,28 @@
-import { Meteor } from 'meteor/meteor';
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import Form from './form/form';
+import { Meteor } from "meteor/meteor";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import Form from "./form/form";
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { error: '' };
+    this.state = { error: "" };
     this.handleLogin = this.handleLogin.bind(this);
   }
 
   componentDidMount() {
     console.log(Meteor.user());
     if (Meteor.user()) {
-      this.props.history.push('/admin');
+      this.props.history.push("/admin");
     }
   }
 
   handleLogin(username, password) {
     console.log(Meteor.user());
-    this.setState({ error: '' });
+    this.setState({ error: "" });
     const user = this.meteorLogin(username, password);
     if (user) {
-      this.props.history.push('/admin');
+      this.props.history.push("/admin");
     }
   }
 

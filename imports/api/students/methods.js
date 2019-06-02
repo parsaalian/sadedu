@@ -1,26 +1,26 @@
-import { Meteor } from 'meteor/meteor';
-import { Students } from './students';
+import { Meteor } from "meteor/meteor";
+import { Students } from "./students";
 
 Meteor.methods({
-  'students.add'({sid, name, familyName, rand}) {
+  "students.add"({sid, name, familyName, rand}) {
     if (!Students.findOne({sid: sid})) {
       Students.insert({sid, name, familyName, rand});
     }
     else {
-      throw new Meteor.Error('This student is already added.');
+      throw new Meteor.Error("This student is already added.");
     }
   },
 
-  'students.remove'({sid}) {
+  "students.remove"({sid}) {
     if (!Students.findOne({sid: sid})) {
-      throw new Meteor.Error('This student is already removed.');
+      throw new Meteor.Error("This student is already removed.");
     }
     else {
       Students.remove({sid: sid});
     }
   },
 
-  'students.removeAll'() {
+  "students.removeAll"() {
     Students.remove({});
   }
 });

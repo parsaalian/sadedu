@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-import Input from '/imports/ui/_global/input';
+import React, { Component } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
+import Input from "/imports/ui/_global/input";
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -16,12 +16,12 @@ export default class LoginForm extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.error !== '' ? <Alert color="danger">{this.props.error}</Alert> : <span></span>}
+        {this.props.error !== "" ? <Alert color="danger">{this.props.error}</Alert> : <span></span>}
         <Form>
-          <Input name='username' type='text' ref='username' label='Username' />
-          <Input name='password' type='password' ref='password' label='Password' />
+          <Input name="username" type="text" ref="username" label="Username" />
+          <Input name="password" type="password" ref="password" label="Password" />
         </Form>
-        <Button color='primary' onClick={this.login}>Login</Button>
+        <Button color="primary" onClick={this.login}>Login</Button>
       </React.Fragment>
     )
   }

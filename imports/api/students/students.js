@@ -1,7 +1,7 @@
-import { Mongo } from 'meteor/mongo';
-import './methods';
+import { Mongo } from "meteor/mongo";
+import "./methods";
 
-export const Students = new Mongo.Collection('students');
+export const Students = new Mongo.Collection("students");
 
 Students.schema = new SimpleSchema({
   sid: { type: Number },

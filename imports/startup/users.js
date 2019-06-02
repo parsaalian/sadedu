@@ -1,5 +1,5 @@
-import { Accounts } from 'meteor/accounts-base';
+import { Accounts } from "meteor/accounts-base";
 
-if (!Accounts.findUserByUsername('admin')) {
-  Accounts.createUser({username: 'admin', password: 'admin', profile: {type: 'admin'}});
+if (!Accounts.findUserByUsername("admin")) {
+  Accounts.createUser({username: "admin", password: "admin", profile: {type: "admin"}});
 }

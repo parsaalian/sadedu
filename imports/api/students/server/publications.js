@@ -1,6 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-import { Students } from '../students';
+import { Meteor } from "meteor/meteor";
+import { Students } from "../students";
 
-Meteor.publish('students.admin', function() {
+Meteor.publish("students.admin", function() {
   return Students.find();
 });

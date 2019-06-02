@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
+import React, { Component } from "react";
+import { Form } from "react-bootstrap";
 
 export default class InputField extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = { value: "" };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -24,7 +24,7 @@ export default class InputField extends Component {
               id={this.props.name}
               onChange={this.handleChange}
               value={this.state.value}
-              autoComplete='off' />
+              autoComplete="off" />
       </Form.Group>
     );
   }
