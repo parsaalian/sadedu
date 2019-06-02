@@ -1,4 +1,5 @@
 # Educational System
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ecd52e685dfb45a69cc418dedac39c0f)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=parsaalian/sadedu&amp;utm_campaign=Badge_Grade)
 In this project we will build a website only for SUT course registration handling.
 
 ## Code Style
