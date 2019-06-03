@@ -8,3 +8,5 @@ Registrations.schema = new SimpleSchema({
   cid: { type: Number },
   sid: { type: Number }
 });
+
+Registrations.attachSchema(Registrations.schema);
