@@ -14,7 +14,7 @@ Meteor.methods({
 
   "courses.remove"({cid, prereq, group, credit}) {
     if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
-      Courses.remove({cid: cid, prereq: prereq, group: group, credit: credit})
+      Courses.remove({cid: cid, prereq: prereq, group: group, credit: credit});
     } else {
       throw new Meteor.Error("This course doesn\'t exists.");
     }
