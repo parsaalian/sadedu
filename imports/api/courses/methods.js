@@ -10,5 +10,13 @@ Meteor.methods({
       Courses.insert({cid, prereq, group, credit, teacher, description, faculty, section, capacity, registered,
         reserveCapacity, reserveRegistered, exam, time});
     }
+  },
+
+  "courses.remove"({cid, prereq, group, credit}) {
+    if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
+      Courses.remove({cid: cid, prereq: prereq, group: group, credit: credit})
+    } else {
+      throw new Meteor.Error("This course doesn\'t exists.");
+    }
   }
 });
