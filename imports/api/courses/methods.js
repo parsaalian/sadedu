@@ -22,5 +22,16 @@ Meteor.methods({
 
   "courses.removeAll"() {
     Courses.remove({});
+  },
+
+  "courses.changeInfo"({prevCid, prevPrereq, prevGroup, prevCredit, cid, prereq, group, credit, teacher, description,
+                         faculty, section, capacity, registered, reserveCapacity, reserveRegistered, exam, time}) {
+    if (Courses.findOne({cid: prevCid, prereq: prevPrereq, group: prevGroup, credit: prevCredit})) {
+      Courses.update({cid: prevCid, prereq: prevPrereq, group: prevGroup, credit: prevCredit},
+        {cid, prereq, group, credit, teacher, description, faculty, section, capacity, registered,
+          reserveCapacity, reserveRegistered, exam, time});
+    } else {
+      throw new Meteor.Error("This course doesn\'t exists.");
+    }
   }
 });
