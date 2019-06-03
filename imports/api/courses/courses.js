@@ -20,3 +20,5 @@ Courses.schema = new SimpleSchema({
   exam: { type: Date, optional: true },
   time: { type: String, optional: true },
 });
+
+Courses.attachSchema(Courses.schema);
