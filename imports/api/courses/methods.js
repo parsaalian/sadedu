@@ -42,5 +42,14 @@ Meteor.methods({
     } else {
       throw new Meteor.Error("This course doesn\'t exists.");
     }
+  },
+
+  "courses.changeReserveCapacity"({cid, prereq, group, credit, newReserveCapacity}) {
+    if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
+      Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
+        {reserveCapacity: newReserveCapacity});
+    } else {
+      throw new Meteor.Error("This course doesn\'t exists.");
+    }
   }
 });
