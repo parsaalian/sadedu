@@ -20,5 +20,9 @@ Meteor.methods({
     } else {
       throw new Meteor.Error('This student doesn\'t take this course.');
     }
+  },
+
+  'registrations.removeAll'() {
+    Registrations.remove({});
   }
 });
