@@ -18,5 +18,9 @@ Meteor.methods({
     } else {
       throw new Meteor.Error("This course doesn\'t exists.");
     }
+  },
+
+  "courses.removeAll"() {
+    Courses.remove({});
   }
 });
