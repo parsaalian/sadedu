@@ -8,15 +8,18 @@ import Login from "./login/login";
 import AdminHome from "./admin/home";
 import AdminStudents from "./admin/students/students";
 import AdminCourses from "./admin/courses/courses";
+// assistant panel pages
+import AssistantHome from './assistant/home';
 
 class App extends Component {
     render() {
         return (
             <BrowserRouter>
                 <Route path="/" exact component={Login}/>
-                {/*<Route path="/" exact component={AdminHome} />*/}
+                <Route path="/admin" exact component={AdminHome} />
                 <Route path="/admin/students" exact component={AdminStudents}/>
                 <Route path="/admin/courses" exact component={AdminCourses}/>
+                <Route path="/assistant" exact component={AssistantHome} />
             </BrowserRouter>
         );
     }

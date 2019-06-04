@@ -24,7 +24,8 @@ export default class InputField extends Component {
               id={this.props.name}
               onChange={this.handleChange}
               value={this.state.value}
-              autoComplete="off" />
+              autoComplete="off"
+              {...this.props}/>
       </Form.Group>
     );
   }

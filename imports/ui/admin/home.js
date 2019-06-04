@@ -1,8 +1,7 @@
-import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
 import Admin from "/imports/ui/admin/_global/admin/admin";
 
-export default class StudentsPage extends Component {
+export default class AdminPage extends Component {
   render() {
     return (
       <Admin page="home">

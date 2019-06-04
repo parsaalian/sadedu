@@ -19,16 +19,17 @@ export default class LoginForm extends Component {
         return (
             <form className="demoForm">
                 <h4>ورود با حساب کاربری</h4>
-
-                <div className={`form-group`}>
-                    <label htmlFor="username">نام کاربری</label>
+                <div className="form-group">
+                    <Input type="text" name="username" label="نام کاربری" className="form-control" ref="username" align="center" placeholder="نام کاربری" />
+                    {/*<label htmlFor="username">نام کاربری</label>
                     <input type="username" required className="form-control" name="username"
-                           placeholder="نام کاربری" align={"center"}/>
+                           placeholder="نام کاربری" align={"center"} ref='username'/>*/}
                 </div>
-                <div className={`form-group `}>
-                    <label htmlFor="password">کلمه عبور</label>
+                <div className="form-group">
+                <Input type="password" name="password" label="کلمه عبور" className="form-control" ref="password" align="center" placeholder="کلمه عبور" />
+                    {/*<label htmlFor="password">کلمه عبور</label>
                     <input type="password" className="form-control" name="password"
-                           placeholder="کلمه عبور"/>
+                           placeholder="کلمه عبور" ref='password'/>*/}
                 </div>
                 <Form.Group controlId="formBasicChecbox">
                     <Form.Check type="checkbox" label="مرا به خاطر بسپار"/>
