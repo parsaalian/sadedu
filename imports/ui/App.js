@@ -10,6 +10,7 @@ import AdminStudents from "./admin/students/students";
 import AdminCourses from "./admin/courses/courses";
 // assistant panel pages
 import AssistantHome from './assistant/home';
+import StudentHome from './students/home';
 
 class App extends Component {
     render() {
@@ -20,6 +21,7 @@ class App extends Component {
                 <Route path="/admin/students" exact component={AdminStudents}/>
                 <Route path="/admin/courses" exact component={AdminCourses}/>
                 <Route path="/assistant" exact component={AssistantHome} />
+                <Route path="/students" exact component={StudentHome} />
             </BrowserRouter>
         );
     }
