@@ -8,7 +8,7 @@ Courses.schema = new SimpleSchema({
   cid: { type: String, min: 5, max: 5 },
   prereq: { type: String, min: 5, max: 5, optional: true },
   group: { type: Number, optional: true },
-  credit: { type: Number, min: 1, max: 4, optional: true },
+  credit: { type: Number, min: 0, max: 4, optional: true },
   teacher: { type: String, optional: true },
   description: { type: String, optional: true },
   faculty: { type: String, optional: true },
