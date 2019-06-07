@@ -40,9 +40,21 @@ Meteor.methods({
 
   "courses.changeCapacity"({cid, prereq, group, credit, newCapacity}) {
     if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
-      if (newCapacity >= Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit}).registered) {
+      const course = Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit}).registered;
+      if (newCapacity >= course.registered) {
         Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
           {capacity: newCapacity});
+        if (newCapacity > course.registered && course.reserveRegistered > 0) {
+          const len = newCapacity - course.registered;
+          const min = min(len, Registrations.find(
+            {cid: cid, prereq: prereq, group: group, credit: credit, isReserved: true}).count());
+          Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
+            {$inc: {registered: min, reserveRegistered: -min}});
+          Registrations.update({cid: cid, prereq: prereq, group: group, credit: credit, isReserved: true,
+              placeInReservedQueue: {$le: len}}, {isReserved: false, placeInReservedQueue: 0});
+          Registrations.update({cid: cid, prereq: prereq, group: group, credit: credit, isReserved: true,
+            placeInReservedQueue: {$gt: len}}, {$inc: {placeInReservedQueue: -min}});
+        }
       } else {
         throw new Meteor.Error("New capacity is less than registered students.");
       }
