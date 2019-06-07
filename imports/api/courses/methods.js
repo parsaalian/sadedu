@@ -16,7 +16,7 @@ Meteor.methods({
     if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
       Courses.remove({cid: cid, prereq: prereq, group: group, credit: credit});
     } else {
-      throw new Meteor.Error("This course doesn\'t exists.");
+      throw new Meteor.Error("This course doesn\"t exists.");
     }
   },
 
@@ -31,7 +31,7 @@ Meteor.methods({
         {cid, prereq, group, credit, teacher, description, faculty, section, capacity, registered,
           reserveCapacity, reserveRegistered, exam, time});
     } else {
-      throw new Meteor.Error("This course doesn\'t exists.");
+      throw new Meteor.Error("This course doesn\"t exists.");
     }
   },
 
@@ -40,7 +40,7 @@ Meteor.methods({
       Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
         {capacity: newCapacity});
     } else {
-      throw new Meteor.Error("This course doesn\'t exists.");
+      throw new Meteor.Error("This course doesn\"t exists.");
     }
   },
 
@@ -49,7 +49,7 @@ Meteor.methods({
       Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
         {reserveCapacity: newReserveCapacity});
     } else {
-      throw new Meteor.Error("This course doesn\'t exists.");
+      throw new Meteor.Error("This course doesn\"t exists.");
     }
   },
 
@@ -58,7 +58,7 @@ Meteor.methods({
       Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
         {prereq: newPrereq});
     } else {
-      throw new Meteor.Error("This course doesn\'t exists.");
+      throw new Meteor.Error("This course doesn\"t exists.");
     }
   }
 });

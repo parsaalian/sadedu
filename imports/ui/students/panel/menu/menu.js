@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.css";
 import "./menu.css";
 import {Layout, Menu, Breadcrumb, Icon} from "antd";
 

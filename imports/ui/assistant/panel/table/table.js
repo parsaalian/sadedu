@@ -1,38 +1,38 @@
-import { Meteor } from 'meteor/meteor';
-import React, { Component } from 'react';
-import { Table, Input, Button, Icon } from 'antd';
-import Highlighter from 'react-highlight-words';
+import { Meteor } from "meteor/meteor";
+import React, { Component } from "react";
+import { Table, Input, Button, Icon } from "antd";
+import Highlighter from "react-highlight-words";
 
 const data = [
   {
-    key: '1',
-    name: 'John Brown',
+    key: "1",
+    name: "John Brown",
     age: 32,
-    address: 'New York No. 1 Lake Park',
+    address: "New York No. 1 Lake Park",
   },
   {
-    key: '2',
-    name: 'Joe Black',
+    key: "2",
+    name: "Joe Black",
     age: 42,
-    address: 'London No. 1 Lake Park',
+    address: "London No. 1 Lake Park",
   },
   {
-    key: '3',
-    name: 'Jim Green',
+    key: "3",
+    name: "Jim Green",
     age: 32,
-    address: 'Sidney No. 1 Lake Park',
+    address: "Sidney No. 1 Lake Park",
   },
   {
-    key: '4',
-    name: 'Jim Red',
+    key: "4",
+    name: "Jim Red",
     age: 32,
-    address: 'London No. 2 Lake Park',
+    address: "London No. 2 Lake Park",
   },
 ];
 
 export default class PanelTable extends Component {
   state = {
-    searchText: '',
+    searchText: "",
   };
 
   getColumnSearchProps = dataIndex => ({
@@ -46,7 +46,7 @@ export default class PanelTable extends Component {
           value={selectedKeys[0]}
           onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Button
           type="primary"
@@ -63,7 +63,7 @@ export default class PanelTable extends Component {
       </div>
     ),
     filterIcon: filtered => (
-      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+      <Icon type="search" style={{ color: filtered ? "#1890ff" : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -77,7 +77,7 @@ export default class PanelTable extends Component {
     },
     render: text => (
       <Highlighter
-        highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
         searchWords={[this.state.searchText]}
         autoEscape
         textToHighlight={text.toString()}
@@ -92,30 +92,30 @@ export default class PanelTable extends Component {
 
   handleReset = clearFilters => {
     clearFilters();
-    this.setState({ searchText: '' });
+    this.setState({ searchText: "" });
   };
 
   render() {
     const columns = [
       {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: '30%',
-        ...this.getColumnSearchProps('name'),
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
+        width: "30%",
+        ...this.getColumnSearchProps("name"),
       },
       {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        width: '20%',
-        ...this.getColumnSearchProps('age'),
+        title: "Age",
+        dataIndex: "age",
+        key: "age",
+        width: "20%",
+        ...this.getColumnSearchProps("age"),
       },
       {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-        ...this.getColumnSearchProps('address'),
+        title: "Address",
+        dataIndex: "address",
+        key: "address",
+        ...this.getColumnSearchProps("address"),
       },
     ];
     return <Table columns={columns} dataSource={data} />;
