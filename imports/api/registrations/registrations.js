@@ -10,7 +10,8 @@ Registrations.schema = new SimpleSchema({
   group: { type: Number, optional: true },
   credit: { type: Number, min: 0, max: 4, optional: true },
   sid: { type: Number },
-  isReserved: { type: Boolean}
+  isReserved: { type: Boolean },
+  placeInReservedQueue: { type: Number, optional: true }
 });
 
 Registrations.attachSchema(Registrations.schema);
