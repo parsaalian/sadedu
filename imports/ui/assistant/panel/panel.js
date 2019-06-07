@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
 import { Statistic, Card, Row, Col } from "antd";
-import Table from "./table/table"
+import Table from "./table/table";
 import Page from "/imports/ui/assistant/_global/page/page";
 
 const Countdown = Statistic.Countdown;
