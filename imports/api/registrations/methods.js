@@ -41,15 +41,12 @@ Meteor.methods({
       if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
         if (Registrations.findOne({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
           isReserved: true})) {
-          const placeInReservedQueue = Registrations.findOne({cid: cid, prereq: prereq, group: group,
+          const thisPlaceInReservedQueue = Registrations.findOne({cid: cid, prereq: prereq, group: group,
             credit: credit, sid: sid}).placeInReservedQueue;
           Registrations.remove({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid});
-          Registrations.find({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
-            isReserved: true}).forEach( () => {
-              if (this.placeInReservedQueue > placeInReservedQueue) {
-                this.placeInReservedQueue = this.placeInReservedQueue - 1;
-              }
-          });
+          Registrations.update({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
+            isReserved: true, placeInReservedQueue: {$gt: thisPlaceInReservedQueue}},
+            {$inc: {placeInReservedQueue: -1}});
           Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
             {$inc: {reserveRegistered: -1}});
         } else if (Registrations.findOne({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
