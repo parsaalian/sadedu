@@ -6,6 +6,6 @@ const boxStyle = { padding: "10px", border: "1px solid black", };
 
 export default class AssistantPage extends Component {
   render() {
-    return <Chart></Chart>
+    return <Chart></Chart>;
   }
 }
