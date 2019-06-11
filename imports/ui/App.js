@@ -20,8 +20,8 @@ export default class App extends Component {
         <Route path="/admin" exact component={AdminHome} />
         <Route path="/admin/students" exact component={AdminStudents}/>
         <Route path="/admin/courses" exact component={AdminCourses}/>
-        <Route path="/assistant" component={AssistantHome} />
-        <Route path="/assistant/:page" component={AssistantHome} />
+        <Route path="/assistant" exact component={AssistantHome} />
+        <Route path="/assistant/:page" exact component={AssistantHome} />
         <Route path="/students" exact component={StudentHome} />
       </BrowserRouter>
     );
