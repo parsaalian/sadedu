@@ -1,4 +1,6 @@
-/*import { List, Avatar, Icon } from antd;
+import Table, {List, Avatar, Icon, Breadcrumb, Row, Col, Card, Statistic} from "antd";
+import React, {Component} from "react";
+import Page from "../_global/page/page";
 
 const listData = [];
 for (let i = 1; i < 10; i++) {
@@ -13,53 +15,55 @@ for (let i = 1; i < 10; i++) {
   });
 }
 
-const IconText = ({ type, text }) => (
+const IconText = ({type, text}) => (
   <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
+    <Icon type={type} style={{marginRight: 8}}/>
     {text}
   </span>
 );
 
-ReactDOM.render(
-  <List
-    itemLayout="vertical"
-    size="large"
-    pagination={{
-      onChange: page => {
-        console.log(page);
-      },
-      pageSize: 4,
-    }}
-    dataSource={listData}
-    footer={
-      <div>
-        <b>CE</b> Department Courses
-      </div>
-    }
-    renderItem={item => (
-      <List.Item
-        key={item.title}
-        actions={[
-          <IconText type="edit" text="70/70" />,
-          <IconText type="form-o" text="5/15" />
-        ]}
-        extra={
-          <img
-            width={260}
-            alt="logo"
-            src="https://www.itchronicles.com/wp-content/uploads/2018/10/bigstock-Programming-Web-Banner-Best-P-258081862.jpg"
-          />
+export default class List extends Component {
+  render() {
+    return (
+      <List
+        itemLayout="vertical"
+        size="large"
+        pagination={{
+          onChange: page => {
+            console.log(page);
+          },
+          pageSize: 4,
+        }}
+        dataSource={listData}
+        footer={
+          <div>
+            <b>CE</b> Department Courses
+          </div>
         }
-      >
-        <List.Item.Meta
-          avatar={<Avatar src={item.avatar} />}
-          title={<a href={item.href}>{item.title}</a>}
-          description={item.description}
-        />
-        {item.content}
-      </List.Item>
-    )}
-  />,
-  mountNode,
-);
-*/
+        renderItem={item => (
+          <List.Item
+            key={item.title}
+            actions={[
+              <IconText type="edit" text="70/70"/>,
+              <IconText type="form-o" text="5/15"/>
+            ]}
+            extra={
+              <img
+                width={260}
+                alt="logo"
+                src="https://www.itchronicles.com/wp-content/uploads/2018/10/bigstock-Programming-Web-Banner-Best-P-258081862.jpg"
+              />
+            }
+          >
+            <List.Item.Meta
+              avatar={<Avatar src={item.avatar}/>}
+              title={<a href={item.href}>{item.title}</a>}
+              description={item.description}
+            />
+            {item.content}
+          </List.Item>
+        )}
+      />
+    );
+  }
+}
