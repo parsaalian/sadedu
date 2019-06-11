@@ -1,6 +1,5 @@
-import Table, {List, Avatar, Icon, Breadcrumb, Row, Col, Card, Statistic} from "antd";
+import {List, Avatar, Icon} from "antd";
 import React, {Component} from "react";
-import Page from "../_global/page/page";
 
 const listData = [];
 for (let i = 1; i < 10; i++) {
@@ -22,7 +21,7 @@ const IconText = ({type, text}) => (
   </span>
 );
 
-export default class List extends Component {
+export default class CoursesList extends Component {
   render() {
     return (
       <List

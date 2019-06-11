@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
-import { Statistic, Card, Row, Col } from "antd";
+import React, {Component} from "react";
+import {Breadcrumb, Icon} from "antd";
+import {Statistic, Card, Row, Col} from "antd";
 import Table from "./table/table";
+import List from "./../courses/courses";
 import Page from "/imports/ui/assistant/_global/page/page";
 
 const Countdown = Statistic.Countdown;
@@ -15,33 +16,39 @@ export default class Panel extends Component {
   render() {
     return (
       <Page>
-        <Breadcrumb style={{ margin: "16px 0" }}>
+        <Breadcrumb style={{margin: "16px 0"}}>
           <Breadcrumb.Item>Courses</Breadcrumb.Item>
           <Breadcrumb.Item>CE</Breadcrumb.Item>
         </Breadcrumb>
 
-        <Row gutter={16} style={{ background: "#fff", padding: "30px" }}>
+        <List></List>
+
+        <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
           <Col span={6}>
-            <Card style={{ width: 200 }} title="Student Requests">
-              <Statistic value={11} precision={0} valueStyle={{ color: "#3f8600" }} prefix={<Icon type="bell" theme="twoTone" twoToneColor="#52c41a" />} />
+            <Card style={{width: 200}} title="Student Requests">
+              <Statistic value={11} precision={0} valueStyle={{color: "#3f8600"}}
+                         prefix={<Icon type="bell" theme="twoTone" twoToneColor="#52c41a"/>}/>
             </Card>
           </Col>
 
           <Col span={6}>
-            <Card style={{ width: 200 }} title="Remained Time">
-              <Countdown value={deadline} valueStyle={{ color: "#932381" }} onFinish={onFinish} prefix={<Icon type="dashboard" theme="twoTone" twoToneColor="#932381" />} />
+            <Card style={{width: 200}} title="Remained Time">
+              <Countdown value={deadline} valueStyle={{color: "#932381"}} onFinish={onFinish}
+                         prefix={<Icon type="dashboard" theme="twoTone" twoToneColor="#932381"/>}/>
             </Card>
           </Col>
 
           <Col span={6}>
-            <Card style={{ width: 200 }} title="Registerd Students">
-              <Statistic value={40} valueStyle={{ color: "#179ba1" }} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#179ba1" />} suffix="/ 40" />
+            <Card style={{width: 200}} title="Registerd Students">
+              <Statistic value={40} valueStyle={{color: "#179ba1"}}
+                         prefix={<Icon type="edit" theme="twoTone" twoToneColor="#179ba1"/>} suffix="/ 40"/>
             </Card>
           </Col>
 
           <Col span={6}>
-            <Card style={{ width: 200 }} title="Reseved Students">
-              <Statistic value={9} valueStyle={{ color: "#f0931b" }} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#f0931b" />} suffix="/ 15" />
+            <Card style={{width: 200}} title="Reseved Students">
+              <Statistic value={9} valueStyle={{color: "#f0931b"}}
+                         prefix={<Icon type="edit" theme="twoTone" twoToneColor="#f0931b"/>} suffix="/ 15"/>
             </Card>
           </Col>
         </Row>
