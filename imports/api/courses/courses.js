@@ -14,9 +14,9 @@ Courses.schema = new SimpleSchema({
   faculty: { type: String, optional: true },
   section: { type: String, allowedValues: ["bsc", "mst", "phd"], optional: true },
   capacity: { type: Number, min: 0, optional: true },
-  registered: { type: Number, min: 0, max: this.capacity, optional: true },
+  registered: { type: Number, min: 0, optional: true },
   reserveCapacity: { type: Number, min: 0, optional: true },
-  reserveRegistered: { type: Number, min: 0, max: this.reserveCapacity, optional: true },
+  reserveRegistered: { type: Number, min: 0, optional: true },
   exam: { type: Date, optional: true },
   time: { type: String, optional: true },
 });
