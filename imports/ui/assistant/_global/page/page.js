@@ -25,7 +25,7 @@ class Page extends Component {
       <Layout style={{minHeight: "100vh"}}>
         <Layout.Header>
           <Menu theme="dark" defaultSelectedKeys={[this.props.history.location.pathname.replace('/assistant', '')]} mode="horizontal" style={{ lineHeight: '64px' }}>
-            <Menu.Item key="/" onClick={this.onClick}>
+            <Menu.Item key="/" onClick={this.onClick} disabled={true}>
               <Icon type="home" />
               <span>Home</span>
             </Menu.Item>
@@ -35,7 +35,7 @@ class Page extends Component {
               <span>Courses</span>
             </Menu.Item>
 
-            <Menu.Item key="/students" onClick={this.onClick}>
+            <Menu.Item key="/students" onClick={this.onClick} disabled={true}>
               <Icon type="team" />
               <span>Students</span>
             </Menu.Item>
@@ -45,7 +45,7 @@ class Page extends Component {
               <span>Course Chart</span>
             </Menu.Item>
 
-            <Menu.Item key="/messages" onClick={this.onClick}>
+            <Menu.Item key="/messages" onClick={this.onClick} disabled={true}>
               <Icon type="notification" />
               <span>Messages</span>
             </Menu.Item>
