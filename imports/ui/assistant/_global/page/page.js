@@ -1,67 +1,67 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Layout, Menu, Icon } from "antd";
 import "./page.css";
 
-export default class Page extends Component {
+class Page extends Component {
   constructor(props) {
     super(props);
     this.state = { collapsed: false };
     this.onCollapse = this.onCollapse.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   onCollapse(collapsed) {
     this.setState({ collapsed });
   }
 
+  onClick(e) {
+    console.log(this.props.history);
+    this.props.history.push('/assistant' + e.key);
+  }
+
   render() {
     return (
       <Layout style={{minHeight: "100vh"}}>
-        <Layout.Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="10">
+        <Layout.Header>
+          <Menu theme="dark" defaultSelectedKeys={[this.props.history.location.pathname.replace('/assistant', '')]} mode="horizontal" style={{ lineHeight: '64px' }}>
+            <Menu.Item key="/" onClick={this.onClick}>
               <Icon type="home" />
               <span>Home</span>
             </Menu.Item>
 
-            <Menu.SubMenu key="sub1" title={
-                <span>
-                  <Icon type="book" />
-                  <span>Courses</span>
-                </span>
-              }>
-              <Menu.Item key="3">CE</Menu.Item>
-              <Menu.Item key="4">General Studies</Menu.Item>
-              <Menu.Item key="5">Others</Menu.Item>
-            </Menu.SubMenu>
+            <Menu.Item key="/courses" onClick={this.onClick}>
+              <Icon type="home" />
+              <span>Courses</span>
+            </Menu.Item>
 
-            <Menu.Item key="1">
+            <Menu.Item key="/students" onClick={this.onClick}>
               <Icon type="team" />
               <span>Students</span>
             </Menu.Item>
 
-            <Menu.Item key="2">
+            <Menu.Item key="/chart" onClick={this.onClick}>
               <Icon type="pie-chart" />
               <span>Course Chart</span>
             </Menu.Item>
 
-            <Menu.Item key="6">
+            <Menu.Item key="/messages" onClick={this.onClick}>
               <Icon type="notification" />
               <span>Messages</span>
             </Menu.Item>
           </Menu>
-        </Layout.Sider>
+        </Layout.Header>
 
-        <Layout>
-          <Layout.Content style={{ margin: "0 16px" }}>
-            {this.props.children}
-          </Layout.Content>
+        <Layout.Content style={{ padding: "24px" }}>
+          {this.props.children}
+        </Layout.Content>
 
-          <Layout.Footer style={{ textAlign: "center" }}>
-              SUT Registration System ©2019 Created by Our Team
-          </Layout.Footer>
-        </Layout>
+        <Layout.Footer style={{ textAlign: "center" }}>
+            SUT Registration System ©2019 Created by Our Team
+        </Layout.Footer>
       </Layout>
     );
   }
 }
+
+export default withRouter(Page);
