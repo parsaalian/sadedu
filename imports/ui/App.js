@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Students } from "/imports/api/students/students";
 
 import Login from "./login/login";
@@ -20,19 +20,21 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" exact component={Login}/>
+        <Switch>
+          <Route path="/" exact component={Login}/>
 
-        <Route path="/admin" exact component={AdminHome} />
-        <Route path="/admin/students" exact component={AdminStudents}/>
-        <Route path="/admin/courses" exact component={AdminCourses}/>
+          <Route path="/admin" exact component={AdminHome} />
+          <Route path="/admin/students" exact component={AdminStudents}/>
+          <Route path="/admin/courses" exact component={AdminCourses}/>
 
-        <Route path="/assistant" exact component={AssistantHome} />
-        <Route path="/assistant/courses" exact component={AssistantCourses} />
-        <Route path="/assistant/courses/:id" exact component={AssistantCoursePanel} />
+          <Route path="/assistant" exact component={AssistantHome} />
+          <Route path="/assistant/courses" exact component={AssistantCourses} />
+          <Route path="/assistant/courses/:id" exact component={AssistantCoursePanel} />
 
-        <Route path="/students" exact component={StudentHome} />
+          <Route path="/students" exact component={StudentHome} />
 
-        <Route component={NotFound} />
+          <Route exact component={NotFound} />
+        </Switch>
       </BrowserRouter>
     );
   }
