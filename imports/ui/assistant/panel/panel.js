@@ -21,8 +21,6 @@ export default class Panel extends Component {
           <Breadcrumb.Item>CE</Breadcrumb.Item>
         </Breadcrumb>
 
-        <List></List>
-
         <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
           <Col span={6}>
             <Card style={{width: 200}} title="Student Requests">
