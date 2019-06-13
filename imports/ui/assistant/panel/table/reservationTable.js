@@ -8,6 +8,7 @@ const data = [
     key: "1",
     id: "96105771",
     name: "Sasha Obama",
+    gender: "Female",
     level: "BSc",
     credit: 12,
     major: "Computer Engineering",
@@ -17,6 +18,7 @@ const data = [
     key: "2",
     id: "95105022",
     name: "Joe Black",
+    gender: "Male",
     level: "BSc",
     credit: 16,
     major: "Computer Engineering",
@@ -26,6 +28,7 @@ const data = [
     key: "3",
     id: "95105067",
     name: "Jim Green",
+    gender: "Male",
     level: "MSc",
     credit: 15,
     major: "Computer Engineering",
@@ -114,6 +117,12 @@ export default class ReservationTable extends Component {
         ...this.getColumnSearchProps("name"),
       },
       {
+        title: 'Gender',
+        dataIndex: 'gender',
+        filters: [{text: 'Male', value: 'male'}, {text: 'Female', value: 'female'}],
+        key: 'gender',
+      },
+      {
         title: 'Level',
         dataIndex: 'level',
         key: 'level',
@@ -162,7 +171,7 @@ export default class ReservationTable extends Component {
         render: (text, record) => (
           <Popconfirm title="Are you sure you want to Remove this student?">
             <a href="javascript:;">Remove</a>
-            <Divider type="vertical" />
+            <Divider type="vertical"/>
             <a href="javascript:;">Register</a>
           </Popconfirm>
         ),
