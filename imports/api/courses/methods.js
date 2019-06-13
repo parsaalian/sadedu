@@ -5,14 +5,14 @@ import { Roles } from "meteor/alanning:roles";
 import {ROLES} from "../../startup/roles";
 
 Meteor.methods({
-  "courses.add"({cid, prereq, group, credit, teacher, description, faculty, section, capacity, registered,
+  "courses.add"({cid, title, prereq, group, credit, teacher, description, faculty, section, capacity, registered,
                   reserveCapacity, reserveRegistered, exam, time}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
         throw new Meteor.Error("This course already exists.");
       } else {
         Courses.insert({
-          cid, prereq, group, credit, teacher, description, faculty, section, capacity, registered,
+          cid, title, prereq, group, credit, teacher, description, faculty, section, capacity, registered,
           reserveCapacity, reserveRegistered, exam, time
         });
       }
@@ -43,13 +43,13 @@ Meteor.methods({
     }
   },
 
-  "courses.changeInfo"({prevCid, prevPrereq, prevGroup, prevCredit, cid, group, credit, teacher, description,
+  "courses.changeInfo"({prevCid, prevPrereq, prevGroup, prevCredit, cid, title, group, credit, teacher, description,
                          faculty, section, exam, time}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (Courses.findOne({cid: prevCid, prereq: prevPrereq, group: prevGroup, credit: prevCredit})) {
         Courses.update({cid: prevCid, prereq: prevPrereq, group: prevGroup, credit: prevCredit},
           {
-            cid: cid, group: group, credit: credit, teacher: teacher, description: description,
+            cid: cid, title: title, group: group, credit: credit, teacher: teacher, description: description,
             faculty: faculty, section: section, exam: exam, time: time
           });
       } else {
@@ -63,7 +63,7 @@ Meteor.methods({
   "courses.changeCapacity"({cid, prereq, group, credit, newCapacity}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
-        const course = Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit}).registered;
+        const course = Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit});
         if (newCapacity >= course.registered) {
           Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
             {capacity: newCapacity});
