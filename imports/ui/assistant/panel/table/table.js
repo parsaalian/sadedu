@@ -6,35 +6,39 @@ import Highlighter from "react-highlight-words";
 const data = [
   {
     key: "1",
+    id: "95105011",
     name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
+    level: "MSc",
+    major: "Computer Engineering",
     tags: ['eligible'],
   },
   {
     key: "2",
+    id: "95105022",
     name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
+    level: "BSc",
+    major: "Computer Science",
     tags: ['eligible'],
   },
   {
     key: "3",
+    id: "95105067",
     name: "Jim Green",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
+    level: "BSc",
+    major: "Computer Science",
     tags: ['eligible'],
   },
   {
     key: "4",
+    id: "95105055",
     name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
+    level: "BSc",
+    major: "Computer Science",
     tags: ['eligible'],
   },
 ];
 
-export default class PanelTable extends Component {
+export default class RegistrationTable extends Component {
   state = {
     searchText: "",
   };
@@ -105,6 +109,8 @@ export default class PanelTable extends Component {
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
+        ...this.getColumnSearchProps("id"),
+        render: text => <a href="javascript:;">{text}</a>,
       },
       {
         title: "Name",
@@ -113,16 +119,16 @@ export default class PanelTable extends Component {
         ...this.getColumnSearchProps("name"),
       },
       {
-        title: "Age",
-        dataIndex: "age",
-        key: "age",
-        ...this.getColumnSearchProps("age"),
+        title: 'Level',
+        dataIndex: 'level',
+        key: 'level',
+        ...this.getColumnSearchProps("level"),
       },
       {
-        title: "Address",
-        dataIndex: "address",
-        key: "address",
-        ...this.getColumnSearchProps("address"),
+        title: 'major',
+        dataIndex: 'major',
+        key: 'major',
+        ...this.getColumnSearchProps("major"),
       },
       {
         title: 'Status',
