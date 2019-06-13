@@ -43,8 +43,8 @@ Meteor.methods({
     }
   },
 
-  "courses.changeInfo"({prevCid, prevPrereq, prevGroup, prevCredit, cid, title, group, credit, teacher, description,
-                         faculty, section, exam, time}) {
+  "courses.changeInfo"({prevCid, prevPrereq, prevGroup, prevCredit, cid, title, group, prereq, credit, teacher,
+                         description, faculty, section, capacity, reserveCapacity, exam, time}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (Courses.findOne({cid: prevCid, prereq: prevPrereq, group: prevGroup, credit: prevCredit})) {
         Courses.update({cid: prevCid, prereq: prevPrereq, group: prevGroup, credit: prevCredit},
@@ -52,6 +52,9 @@ Meteor.methods({
             cid: cid, title: title, group: group, credit: credit, teacher: teacher, description: description,
             faculty: faculty, section: section, exam: exam, time: time
           });
+        Meteor.call("courses.changePrereq", {cid, prevPrereq, group, credit, prereq});
+        Meteor.call("courses.changeCapacity", {cid, prereq, group, credit, capacity});
+        Meteor.call("courses.changeReserveCapacity", {cid, prereq, group, credit, reserveCapacity});
       } else {
         throw new Meteor.Error("This course doesn\'t exists.");
       }

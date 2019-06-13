@@ -156,5 +156,35 @@ Meteor.methods({
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
     }
+  },
+
+  "registrations.changeGroup"({cid, prereq, prevGroup, credit, sid, newGroup}) {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
+      if (Students.findOne({sid: sid})) {
+        if (Courses.findOne({cid: cid, prereq: prereq, group: prevGroup, credit: credit})) {
+          if (Courses.findOne({cid: cid, prereq: prereq, group: newGroup, credit: credit})) {
+            if (prevGroup !== newGroup) {
+              const course = Courses.findOne({cid: cid, prereq: prereq, group: newGroup, credit: credit});
+              if (!(course.registered === course.capacity && course.reserveRegistered === course.reserveCapacity)) {
+                Meteor.call("registrations.remove", {cid, prereq, prevGroup, credit, sid});
+                Meteor.call("registrations.add", {cid, prereq, newGroup, credit, sid});
+              } else {
+                throw new Meteor.Error("Capacity and reserve capacity of new group is full.");
+              }
+            } else {
+              throw new Meteor.Error("New group is equal to previous group.");
+            }
+          } else {
+            throw new Meteor.Error("New group of course doesn\'t exist.");
+          }
+        } else {
+          throw new Meteor.Error("This course doesn\'t exist.");
+        }
+      } else {
+        throw new Meteor.Error("This student doesn\'t exist.");
+      }
+    } else {
+      throw new Meteor.Error("You are not allowed to do this action.");
+    }
   }
 });
