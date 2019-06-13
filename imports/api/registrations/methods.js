@@ -108,7 +108,7 @@ Meteor.methods({
   },
 
   "registrations.removeAll"() {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       Registrations.remove({});
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
