@@ -35,7 +35,7 @@ class Page extends Component {
               <span>Courses</span>
             </Menu.Item>
 
-            <Menu.Item key="/students" onClick={this.onClick} disabled={true}>
+            <Menu.Item key="/students" onClick={this.onClick}>
               <Icon type="team" />
               <span>Students</span>
             </Menu.Item>
