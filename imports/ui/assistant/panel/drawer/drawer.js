@@ -151,7 +151,7 @@ class DrawerForm extends Component {
             </Row>
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Course Syllabes">
+                <Form.Item label="Course Syllabus">
                   <div className="dropbox">
                     {getFieldDecorator('dragger', {
                       valuePropName: 'fileList',

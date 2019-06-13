@@ -6,6 +6,7 @@ export const Courses = new Mongo.Collection("courses");
 
 Courses.schema = new SimpleSchema({
   cid: { type: String, min: 5, max: 5 },
+  title: { type: String },
   prereq: { type: String, min: 5, max: 5, optional: true },
   group: { type: Number, optional: true },
   credit: { type: Number, min: 0, max: 4, optional: true },
