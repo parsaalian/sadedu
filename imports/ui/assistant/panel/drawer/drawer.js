@@ -1,4 +1,4 @@
-import {Drawer, Form, Button, Col, Row, Input, Select, DatePicker, Icon, Upload} from "antd";
+import {Drawer, Form, Button, Col, Row, Input, Select, DatePicker, TimePicker, Icon, Upload, InputNumber} from "antd";
 import React, {Component} from "react";
 
 const {Option} = Select;
@@ -42,34 +42,23 @@ class DrawerForm extends Component {
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Name">
-                  {getFieldDecorator('name', {
-                    rules: [{required: true, message: 'Please enter user name'}],
-                  })(<Input placeholder="Please enter user name"/>)}
+                <Form.Item label="Credits">
+                  {(<InputNumber defaultValue="3" min={0} max={4}/>)}
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Course Website">
-                  {getFieldDecorator('url', {
-                    rules: [{required: true, message: 'Please enter url'}],
-                  })(
-                    <Input
-                      style={{width: '100%'}}
-                      addonBefore="http://"
-                      addonAfter=".edu"
-                      placeholder="Please enter url"
-                    />,
-                  )}
+                <Form.Item label="Group">
+                  {(<InputNumber defaultValue="2" min={1} max={4}/>)}
                 </Form.Item>
               </Col>
             </Row>
 
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Name">
+                <Form.Item label="Instructor(s)">
                   {getFieldDecorator('name', {
-                    rules: [{required: true, message: 'Please enter user name'}],
-                  })(<Input placeholder="Please enter user name"/>)}
+                    rules: [{required: true, message: 'Please enter instructor(s) name'}],
+                  })(<Input placeholder="Please enter instructor(s) name"/>)}
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -115,27 +104,13 @@ class DrawerForm extends Component {
             </Row>
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Approver">
-                  {getFieldDecorator('approver', {
-                    rules: [{required: true, message: 'Please choose the approver'}],
-                  })(
-                    <Select placeholder="Please choose the approver">
-                      <Option value="jack">Jack Ma</Option>
-                      <Option value="tom">Tom Liu</Option>
-                    </Select>,
-                  )}
+                <Form.Item label="Class Time">
+                  {getFieldDecorator('time-picker')(<TimePicker />)}
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="DateTime">
-                  {getFieldDecorator('dateTime', {
-                    rules: [{required: true, message: 'Please choose the dateTime'}],
-                  })(
-                    <DatePicker.RangePicker
-                      style={{width: '100%'}}
-                      getPopupContainer={trigger => trigger.parentNode}
-                    />,
-                  )}
+                <Form.Item label="Class Place">
+                  {getFieldDecorator('text')(<Input placeholder="Please enter class place"/>)}
                 </Form.Item>
               </Col>
             </Row>
@@ -206,7 +181,7 @@ class DrawerForm extends Component {
               Cancel
             </Button>
             <Button onClick={this.onClose} type="primary">
-              Submit
+              Save
             </Button>
           </div>
         </Drawer>
