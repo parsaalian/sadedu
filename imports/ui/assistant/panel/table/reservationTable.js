@@ -6,39 +6,34 @@ import Highlighter from "react-highlight-words";
 const data = [
   {
     key: "1",
-    id: "95105011",
-    name: "John Brown",
-    level: "MSc",
+    id: "96105771",
+    name: "Sasha Obama",
+    level: "BSc",
+    credit: 12,
     major: "Computer Engineering",
-    tags: ['eligible'],
+    tags: ['prerequistics'],
   },
   {
     key: "2",
     id: "95105022",
     name: "Joe Black",
     level: "BSc",
-    major: "Computer Science",
+    credit: 16,
+    major: "Computer Engineering",
     tags: ['eligible'],
   },
   {
     key: "3",
     id: "95105067",
     name: "Jim Green",
-    level: "BSc",
-    major: "Computer Science",
-    tags: ['eligible'],
-  },
-  {
-    key: "4",
-    id: "95105055",
-    name: "Jim Red",
-    level: "BSc",
-    major: "Computer Science",
+    level: "MSc",
+    credit: 15,
+    major: "Computer Engineering",
     tags: ['eligible'],
   },
 ];
 
-export default class RegistrationTable extends Component {
+export default class ReservationTable extends Component {
   state = {
     searchText: "",
   };
@@ -131,6 +126,11 @@ export default class RegistrationTable extends Component {
         ...this.getColumnSearchProps("major"),
       },
       {
+        title: 'Registered Credits',
+        dataIndex: 'credit',
+        key: 'credit',
+      },
+      {
         title: 'Status',
         key: 'tags',
         dataIndex: 'tags',
@@ -162,10 +162,17 @@ export default class RegistrationTable extends Component {
         render: (text, record) => (
           <Popconfirm title="Are you sure you want to Remove this student?">
             <a href="javascript:;">Remove</a>
+            <Divider type="vertical" />
+            <a href="javascript:;">Register</a>
           </Popconfirm>
         ),
       },
     ];
-    return <Table columns={columns} dataSource={data}/>;
+    return <Table columns={columns}
+                  dataSource={data}
+                  size='middle'
+                  bordered
+                  title={() => 'Reserved Students List'}
+                  footer={() => ''}/>;
   }
 }

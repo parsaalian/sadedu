@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Breadcrumb, Icon} from "antd";
 import {Statistic, Card, Row, Col} from "antd";
-import Table from "./table/table";
-import List from "./../courses/courses";
+import RegistrationTable from "./table/registrationTable";
+import ReservationTable from "./table/reservationTable";
 import Page from "/imports/ui/assistant/_global/page/page";
 
 const Countdown = Statistic.Countdown;
@@ -51,8 +51,12 @@ export default class Panel extends Component {
           </Col>
         </Row>
 
-        <Row>
-          <Table></Table>
+        <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
+          <RegistrationTable></RegistrationTable>
+        </Row>
+
+        <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
+          <ReservationTable></ReservationTable>
         </Row>
       </Page>
     );
