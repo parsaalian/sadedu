@@ -1,37 +1,22 @@
-import React, {Component} from "react";
 import _ from 'lodash';
+import { Meteor } from 'meteor/meteor';
+import React, { Component } from "react";
+import { withTracker } from "meteor/react-meteor-data";
+import { Courses } from "/imports/api/courses/courses";
 import { List, Avatar, Icon } from "antd";
 
-const listData = [];
-for (let i = 1; i < 10; i++) {
-  listData.push({
-    href: `/assistant/courses/4040${i}`,
-    title: `4040${i} - Advanced Programming`,
-    avatar: 'http://www.eldergrove.k12.mt.us/docs/_full_/district/basic%20images/graduation%20cap%20and%20diploma.png?id=716&thumbwidth=190&fullwidth=500',
-    description:
-      'Group: 2 - Instructor: Alireza Mazloumi',
-    content:
-      'This course extends the study of basic programming principles introduced in Fundamentals of Programming. Advanced concepts of program design, implementation and testing will be introduced within a framework of object oriented programming using the Java or C++ programming language.',
-  });
-}
-
 const IconText = ({type, text}) => (
-  <span>
+  <React.Fragment>
     <Icon type={type} style={{marginRight: 8}}/>
     {text}
-  </span>
+  </React.Fragment>
 );
 
-export default class CoursesList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { list: listData };
-  }
-
+class CoursesList extends Component {
   filterWithCondition() {
-    return _.filter(this.state.list, (item) => {
+    return _.filter(this.props.courses, (item) => {
         return _.reduce(this.props.conditions, (result, value, key) => {
-          return result && (item[key] === undefined || _.startsWith(item[key], value))
+          return result && (item[key] === undefined || _.startsWith(item[key].toLowerCase(), value.toLowerCase()))
       }, true)
     });
   }
@@ -39,29 +24,25 @@ export default class CoursesList extends Component {
   render() {
     return (
       <List itemLayout="vertical" size="large"
-          pagination={{
-            onChange: page => {
-              console.log(page);
-            },
-            pageSize: 4,
-          }}
+          pagination={{pageSize: 4}}
           dataSource={this.filterWithCondition()}
           renderItem={item => (
             <List.Item
               key={item.title}
               actions={[
-                <IconText type="edit" text="70/70"/>,
-                <IconText type="form-o" text="5/15"/>
+                <IconText type="edit" text={item.registered + '/' + item.capacity} />,
+                <IconText type="form-o" text={item.reserveRegistered + '/' + item.reserveCapacity}/>
               ]}
               extra={
-                <img
-                  width={260}
-                  alt="logo"
-                  src="https://www.itchronicles.com/wp-content/uploads/2018/10/bigstock-Programming-Web-Banner-Best-P-258081862.jpg"
-                />
+                <img width={260} alt="logo"
+                  src="https://www.itchronicles.com/wp-content/uploads/2018/10/bigstock-Programming-Web-Banner-Best-P-258081862.jpg" />
               }
               style={{ backgroundColor: "white", padding: "24px", margin: "12px" }}>
-            <List.Item.Meta avatar={<Avatar src={item.avatar}/>} title={<a href={item.href}>{item.title}</a>} description={item.description} />
+            <List.Item.Meta avatar={
+                <Avatar src='http://www.eldergrove.k12.mt.us/docs/_full_/district/basic%20images/graduation%20cap%20and%20diploma.png?id=716&thumbwidth=190&fullwidth=500'/>
+              }
+              title={<a href={'/assistant/courses/' + item.cid}>{item.cid + ' - ' + item.title}</a>}
+              description={item.description} />
             {item.content}
           </List.Item>
         )}
@@ -69,3 +50,10 @@ export default class CoursesList extends Component {
     );
   }
 }
+
+export default withTracker(() => {
+  Meteor.subscribe("courses.admin");
+  return {
+    courses: Courses.find().fetch()
+  };
+})(CoursesList);
