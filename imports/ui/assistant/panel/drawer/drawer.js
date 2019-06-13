@@ -41,14 +41,24 @@ class DrawerForm extends Component {
         >
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col span={6}>
                 <Form.Item label="Credits">
                   {(<InputNumber defaultValue="3" min={0} max={4}/>)}
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={6}>
                 <Form.Item label="Group">
                   {(<InputNumber defaultValue="2" min={1} max={4}/>)}
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Form.Item label="Capacity">
+                  {(<InputNumber defaultValue="30" min={0} max={100}/>)}
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Form.Item label="Reserve Capacity">
+                  {(<InputNumber defaultValue="10" min={0} max={25}/>)}
                 </Form.Item>
               </Col>
             </Row>
@@ -78,39 +88,50 @@ class DrawerForm extends Component {
             </Row>
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Owner">
-                  {getFieldDecorator('owner', {
-                    rules: [{required: true, message: 'Please select an owner'}],
+                <Form.Item label="Level">
+                  {getFieldDecorator('level', {
+                    rules: [{required: true, message: 'Please choose the level'}],
                   })(
-                    <Select placeholder="Please select an owner">
-                      <Option value="xiao">Xiaoxiao Fu</Option>
-                      <Option value="mao">Maomao Zhou</Option>
+                    <Select placeholder="Please choose the level">
+                      <Option value="bsc">BSc</Option>
+                      <Option value="msc">MSc</Option>
+                      <Option value="phd">Phd</Option>
                     </Select>,
                   )}
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Level">
-                  {getFieldDecorator('level', {
-                    rules: [{required: true, message: 'Please choose the level'}],
+                <Form.Item label="Pre-requisites">
+                  {getFieldDecorator('select-multiple', {
+                    rules: [
+                      {required: true, message: 'Please select pre-requisites!', type: 'array'},
+                    ],
                   })(
-                    <Select placeholder="Please choose the type">
-                      <Option value="private">Private</Option>
-                      <Option value="public">Public</Option>
+                    <Select mode="multiple" placeholder="Please select pre-requisites">
+                      <Option value="40-414">40-414</Option>
+                      <Option value="40-415">40-415</Option>
+                      <Option value="40-416">40-416</Option>
                     </Select>,
                   )}
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col span={6}>
                 <Form.Item label="Class Time">
-                  {getFieldDecorator('time-picker')(<TimePicker />)}
+                  {getFieldDecorator('time-picker')(<TimePicker/>)}
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={9}>
                 <Form.Item label="Class Place">
                   {getFieldDecorator('text')(<Input placeholder="Please enter class place"/>)}
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Form.Item label="Exam Date and Time">
+                  {getFieldDecorator('date-time-picker')(
+                    <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>,
+                  )}
                 </Form.Item>
               </Col>
             </Row>
