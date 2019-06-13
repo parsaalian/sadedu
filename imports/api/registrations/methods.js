@@ -64,7 +64,7 @@ Meteor.methods({
             }).placeInReservedQueue;
             Registrations.remove({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid});
             Registrations.update({
-                cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
+                cid: cid, prereq: prereq, group: group, credit: credit,
                 isReserved: true, placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
               },
               {$inc: {placeInReservedQueue: -1}});
@@ -110,6 +110,68 @@ Meteor.methods({
   "registrations.removeAll"() {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       Registrations.remove({});
+    } else {
+      throw new Meteor.Error("You are not allowed to do this action.");
+    }
+  },
+
+  "registrations.forceAdd"({cid, prereq, group, credit, sid}) {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
+      if (Students.findOne({sid: sid})) {
+        if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
+          if (!Courses.findOne({
+            cid: cid, prereq: prereq, group: group, credit: credit, $and: [
+              "this.reserveRegistered === this.reserveCapacity", "this.registered === this.capacity"]
+          })) {
+            if (!Registrations.findOne({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid
+              , isReserved: false})) {
+              if (Courses.findOne({
+                cid: cid, prereq: prereq, group: group, credit: credit,
+                $where: "this.registered < this.capacity"
+              })) {
+                Registrations.insert({cid, prereq, group, credit, sid, isReserved: false, placeInReservedQueue: 0});
+                Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
+                  {$inc: {registered: 1}});
+              } else if (Courses.findOne({
+                cid: cid, prereq: prereq, group: group, credit: credit,
+                $where: "this.reserveRegistered < this.reserveCapacity"
+              })) {
+                Registrations.insert({
+                  cid, prereq, group, credit, sid, isReserved: true,
+                  placeInReservedQueue: Registrations.find({isReserved: true}).count() + 1
+                });
+                Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
+                  {$inc: {reserveRegistered: 1}});
+              }
+            } else if (!Registrations.findOne({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid
+              , isReserved: true})) {
+              const thisPlaceInReservedQueue = Registrations.findOne({
+                cid: cid, prereq: prereq, group: group,
+                credit: credit, sid: sid
+              }).placeInReservedQueue;
+              Registrations.update({
+                  cid: cid, prereq: prereq, group: group, credit: credit,
+                  isReserved: true, placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
+                },
+                {$inc: {placeInReservedQueue: -1}});
+              Registrations.update({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid},
+                {isReserved: false, PlaceInReservedQueue: 0});
+              Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
+                {$inc: {reserveRegistered: -1, registered: 1, capacity: 1}});
+            } else {
+              throw new Meteor.Error("This student already has this course.");
+            }
+          } else {
+            Registrations.insert({cid, prereq, group, credit, sid, isReserved: false, placeInReservedQueue: 0});
+            Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
+              {$inc: {registered: 1, capacity: 1}});
+          }
+        } else {
+          throw new Meteor.Error("This course doesn\'t exist.");
+        }
+      } else {
+        throw new Meteor.Error("This student doesn\'t exist.");
+      }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
     }

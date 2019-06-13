@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { Courses } from "./courses";
 import { Registrations } from "../registrations/registrations";
+import { Roles } from "meteor/alanning:roles";
 import {ROLES} from "../../startup/roles";
 
 Meteor.methods({

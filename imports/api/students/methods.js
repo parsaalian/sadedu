@@ -1,5 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { Students } from "./students";
+import { Roles } from "meteor/alanning:roles";
 import {ROLES} from "../../startup/roles";
 
 Meteor.methods({
