@@ -103,7 +103,7 @@ Meteor.methods({
         throw new Meteor.Error("This student doesn\'t exist.");
       }
     } else {
-    throw new Meteor.Error("You are not allowed to do this action.");
+      throw new Meteor.Error("You are not allowed to do this action.");
     }
   },
 
