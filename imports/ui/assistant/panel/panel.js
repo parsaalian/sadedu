@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {Breadcrumb, Icon} from "antd";
-import {Statistic, Card, Row, Col} from "antd";
+import { Breadcrumb, Icon, Statistic, Card, Row, Col, Tabs } from "antd";
 import RegistrationTable from "./table/registrationTable";
 import ReservationTable from "./table/reservationTable";
 import Page from "/imports/ui/assistant/_global/page/page";
@@ -52,11 +51,14 @@ export default class Panel extends Component {
         </Row>
 
         <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
-          <RegistrationTable></RegistrationTable>
-        </Row>
-
-        <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
-          <ReservationTable></ReservationTable>
+          <Tabs defaultActiveKey="reg">
+           <Tabs.TabPane tab="Registered" key="reg">
+             <RegistrationTable></RegistrationTable>
+           </Tabs.TabPane>
+           <Tabs.TabPane tab="Reserved" key="res">
+             <ReservationTable></ReservationTable>
+           </Tabs.TabPane>
+          </Tabs>
         </Row>
       </Page>
     );
