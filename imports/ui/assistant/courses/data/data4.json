@@ -1,0 +1,14 @@
+{
+  "cid": "40212",
+  "title": "Logical Design",
+  "group": 1,
+  "credit": 3,
+  "teacher": "Alireza Ejlali",
+  "description": "This course concerns the design of digital systems using integrated circuits. The main emphasis is on the theoretical concepts and systematic synthesis techniques that can be applied to the design of practical digital systems.",
+  "faculty": "Computer Engineering",
+  "section": "bsc",
+  "capacity": 45,
+  "reserveCapacity": 15,
+  "exam": "2019-04-23T10:00:00",
+  "time": "Saturday, Monday 13:30-15"
+}

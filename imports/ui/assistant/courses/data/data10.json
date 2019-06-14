@@ -1,0 +1,15 @@
+{
+  "cid": "40223",
+  "title": "Digital System Design",
+  "prereq": "40126",
+  "group": 1,
+  "credit": 3,
+  "teacher": "Siavash Bayat-Sarmadi",
+  "description": "",
+  "faculty": "Computer Engineering",
+  "section": "bsc",
+  "capacity": 35,
+  "reserveCapacity": 15,
+  "exam": "2019-04-23T10:00:00",
+  "time": "Saturday, Monday 9-10:30"
+}

@@ -1,0 +1,15 @@
+{
+  "cid": "40424",
+  "title": "Operating Systems",
+  "prereq": "40323",
+  "group": 1,
+  "credit": 3,
+  "teacher": "Mehdi Kharrazi",
+  "description": "",
+  "faculty": "Computer Engineering",
+  "section": "bsc",
+  "capacity": 40,
+  "reserveCapacity": 15,
+  "exam": "2019-04-23T10:00:00",
+  "time": "Saturday, Monday 9-10:30"
+}

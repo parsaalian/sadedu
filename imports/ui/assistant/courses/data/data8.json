@@ -1,0 +1,14 @@
+{
+  "cid": "40108",
+  "title": "Computer Workshop",
+  "group": 2,
+  "credit": 1,
+  "teacher": "Morteza Amini",
+  "description": "",
+  "faculty": "Computer Engineering",
+  "section": "bsc",
+  "capacity": 25,
+  "reserveCapacity": 5,
+  "exam": "2019-04-23T10:00:00",
+  "time": "Wednesday 9:30-11:30"
+}
