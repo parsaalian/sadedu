@@ -15,7 +15,7 @@ export default class Panel extends Component {
           <Breadcrumb.Item>CE</Breadcrumb.Item>
         </Breadcrumb>
 
-        <Info course={this.props.match.params.id} />
+        { this.props.match ? <Info course={this.props.match.params.id} /> : <React.Fragment /> }
 
         <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
           <Tabs defaultActiveKey="reg">

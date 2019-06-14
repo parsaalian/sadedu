@@ -7,19 +7,20 @@ export const Courses = new Mongo.Collection("courses");
 Courses.schema = new SimpleSchema({
   cid: { type: String, min: 5, max: 5 },
   title: { type: String },
-  prereq: { type: String, min: 5, max: 5, optional: true },
-  group: { type: Number, optional: true },
-  credit: { type: Number, min: 0, max: 4, optional: true },
+  prereq: { type: [String], min: 5, max: 5, optional: true },
+  group: { type: Number },
+  credit: { type: Number, min: 0, max: 4 },
   teacher: { type: String, optional: true },
   description: { type: String, optional: true },
-  faculty: { type: String, optional: true },
-  section: { type: String, allowedValues: ["bsc", "mst", "phd"], optional: true },
-  capacity: { type: Number, min: 0, optional: true },
-  registered: { type: Number, min: 0, optional: true },
-  reserveCapacity: { type: Number, min: 0, optional: true },
-  reserveRegistered: { type: Number, min: 0, optional: true },
-  exam: { type: Date, optional: true },
-  time: { type: String, optional: true },
+  faculty: { type: String },
+  section: { type: String, allowedValues: ["bsc", "mst", "phd"] },
+  capacity: { type: Number, min: 0 },
+  registered: { type: Number, min: 0, defaultValue: 0 },
+  reserveCapacity: { type: Number, min: 0 },
+  reserveRegistered: { type: Number, min: 0, defaultValue: 0 },
+  exam: { type: Date },
+  time: { type: String },
+  gender: { type: String, allowedValues: ["m", "f", "b"] }
 });
 
 Courses.attachSchema(Courses.schema);

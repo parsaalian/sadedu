@@ -6,3 +6,4 @@ import "/imports/api/students/server/publications";
 import "/imports/api/courses/server/publications";
 import "/imports/api/registrations/server/publications";
 import "/imports/startup/users";
+import "/imports/startup/courses";
