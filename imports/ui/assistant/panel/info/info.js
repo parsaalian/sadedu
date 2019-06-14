@@ -5,41 +5,48 @@ import { Courses } from "/imports/api/courses/courses";
 import { Icon, Statistic, Card, Row, Col } from "antd";
 import DrawerForm from "../drawer/drawer";
 
-const Countdown = Statistic.Countdown;
-const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
-
-const getAttr = (prop, attr, def) => {
-  return prop ? prop[attr] : def;
-};
-
 class Info extends Component {
   render() {
     const course = this.props.course;
-    return(
-      <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
-        <Col span={6}>
-          <Card style={{width: 200}} title="Student Requests">
-            <Statistic value={11} precision={0} valueStyle={{color: "#3f8600"}} prefix={<Icon type="bell" theme="twoTone" twoToneColor="#52c41a"/>}/>
-          </Card>
+    return (
+      course ?
+        <Row type="flex" justify="center" gutter={16} style={{background: "#fff", padding: "30px"}}>
+          <Col span={9}>
+            <Card title={course.title}>
+              <h6>Group {course.group} - Credit {course.credit}</h6>
+              <h6>Instructor: {course.teacher}</h6>
+              {course.description}
+            </Card>
+          </Col>
 
-          <Card style={{width: 200}} title="Remaining Time">
-            <Countdown value={deadline} valueStyle={{color: "#932381"}} prefix={<Icon type="dashboard" theme="twoTone" twoToneColor="#932381"/>}/>
-          </Card>
-        </Col>
+          <Col span={12}>
+            <Row type="flex" justify="center">
+              <Col>
+                <Card style={{width: 200}} title="Student Requests">
+                  <Statistic value={11} precision={0} valueStyle={{color: "#3f8600"}} prefix={<Icon type="bell" theme="twoTone" twoToneColor="#52c41a"/>}/>
+                </Card>
 
-        <Col span={6}>
-          <Card style={{width: 200}} title="Registered Students">
-            <Statistic value={getAttr(course, 'registered', 0)} valueStyle={{color: "#179ba1"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#179ba1"/>} suffix={"/" + getAttr(course, 'capacity', 0)} />
-          </Card>
-          <Card style={{width: 200}} title="Reserved Students">
-            <Statistic value={getAttr(course, 'reserveRegistered', 0)} valueStyle={{color: "#f0931b"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#f0931b"/>} suffix={"/" + getAttr(course, 'reserveCapacity', 0)} />
-          </Card>
-        </Col>
+                <Card style={{width: 200}} title="Remaining Time">
+                  <Statistic.Countdown value={Date.now() + 172830000} valueStyle={{color: "#932381"}} prefix={<Icon type="dashboard" theme="twoTone" twoToneColor="#932381"/>}/>
+                </Card>
+              </Col>
 
-        <Col span={6}>
-          <DrawerForm/>
-        </Col>
-      </Row>
+              <Col>
+                <Card style={{width: 200}} title="Registered Students">
+                  <Statistic value={course.registered} valueStyle={{color: "#179ba1"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#179ba1"/>} suffix={"/" + course.capacity} />
+                </Card>
+                <Card style={{width: 200}} title="Reserved Students">
+                  <Statistic value={course.reserveRegistered} valueStyle={{color: "#f0931b"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#f0931b"/>} suffix={"/" + course.reserveCapacity} />
+                </Card>
+              </Col>
+            </Row>
+
+            <Row type="flex" justify="center" style={{margin: "16px"}}>
+              <DrawerForm/>
+            </Row>
+          </Col>
+        </Row> :
+        <React.Fragment />
     );
   }
 }

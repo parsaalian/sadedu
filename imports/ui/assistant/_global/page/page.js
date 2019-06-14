@@ -23,7 +23,7 @@ class Page extends Component {
   render() {
     return (
       <Layout style={{minHeight: "100vh"}}>
-        <Layout.Header>
+        <div style={{position: 'fixed', zIndex: '100', width: '100%'}}>
           <Menu theme="dark" defaultSelectedKeys={[this.props.history.location.pathname.replace('/assistant', '')]} mode="horizontal" style={{ lineHeight: '64px' }}>
             <Menu.Item key="/" onClick={this.onClick} disabled={true}>
               <Icon type="home" />
@@ -50,7 +50,8 @@ class Page extends Component {
               <span>Messages</span>
             </Menu.Item>
           </Menu>
-        </Layout.Header>
+        </div>
+        <div style={{ lineHeight: '64px' }}>let this be here without reason</div>
 
         <Layout.Content style={{ padding: "24px" }}>
           {this.props.children}
