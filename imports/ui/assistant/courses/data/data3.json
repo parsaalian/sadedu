@@ -1,0 +1,14 @@
+{
+  "cid": "40153",
+  "title": "Fundamentals of Programming Programming",
+  "group": 1,
+  "credit": 3,
+  "teacher": "Omid Gheibi",
+  "description": "This course aims to introduce you to foundational knowledge about computer systems and their components and interactions between components, the conceptual building blocks necessary for programming and basic computer programming skills.",
+  "faculty": "Computer Engineering",
+  "section": "bsc",
+  "capacity": 80,
+  "reserveCapacity": 15,
+  "exam": "2019-04-23T10:00:00",
+  "time": "Sunday, Tuesday 9-10:30"
+}

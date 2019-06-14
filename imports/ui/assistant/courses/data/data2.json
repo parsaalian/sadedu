@@ -1,0 +1,15 @@
+{
+  "cid": "40424",
+  "title": "Advanced Programming",
+  "prereq": "40153",
+  "group": 2,
+  "credit": 3,
+  "teacher": "Mahdi Mostafa-Zadeh",
+  "description": "This course extends the study of basic programming principles introduced in Programming Fundamentals. Advanced concepts of program design, implementation and testing will be introduced within a framework of object oriented programming using the Java/C++ programming language.",
+  "faculty": "Computer Engineering",
+  "section": "bsc",
+  "capacity": 40,
+  "reserveCapacity": 10,
+  "exam": "2019-04-23T10:00:00",
+  "time": "Sunday, Tuesday 10:30-12"
+}
