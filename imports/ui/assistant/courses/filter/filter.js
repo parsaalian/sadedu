@@ -7,7 +7,7 @@ export default class Filter extends Component {
   render() {
     return (
       <React.Fragment>
-        <Row className='fa rtl' style={{backgroundColor: "white", padding: "24px", borderRadius: "6px", marginBottom: "12px", textAlign: 'right'}}>
+        <Row className="fa rtl" style={{backgroundColor: "white", padding: "24px", borderRadius: "6px", marginBottom: "12px", textAlign: "right"}}>
           <Row style={{margin: "12px"}}>
             <h6 className="float-right">فیلترها</h6>
           </Row>
@@ -31,7 +31,7 @@ export default class Filter extends Component {
           </Row>
         </Row>
 
-        <Row className='fa rtl' style={{backgroundColor: "white", padding: "24px", borderRadius: "6px", marginBottom: "12px", textAlign: 'right'}}>
+        <Row className="fa rtl" style={{backgroundColor: "white", padding: "24px", borderRadius: "6px", marginBottom: "12px", textAlign: "right"}}>
           <Row style={{margin: "12px"}}>
             <h6 className="float-right">مشخصات درس</h6>
             <Input.Search
@@ -49,7 +49,7 @@ export default class Filter extends Component {
           </Row>
         </Row>
 
-        <Row className='fa rtl' style={{backgroundColor: "white", padding: "24px", borderRadius: "6px", marginBottom: "12px", textAlign: 'right'}}>
+        <Row className="fa rtl" style={{backgroundColor: "white", padding: "24px", borderRadius: "6px", marginBottom: "12px", textAlign: "right"}}>
           <Row style={{margin: "12px"}}>
             <h6 className="float-right">مشخصات استاد</h6>
             <Input.Search
