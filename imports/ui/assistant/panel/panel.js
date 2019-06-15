@@ -4,6 +4,7 @@ import { Breadcrumb, Row, Col, Tabs } from "antd";
 import Page from "/imports/ui/assistant/_global/page/page";
 import Table from "./table/table";
 import Info from "./info/info";
+import Drawer from './drawer/drawer';
 
 export default class Panel extends Component {
   render() {
@@ -27,6 +28,9 @@ export default class Panel extends Component {
 
           <Col span={6}>
             { this.props.match ? <Info course={this.props.match.params.id.split("-")[0]} /> : <React.Fragment /> }
+            <Row className='fa' type="flex" justify="center" style={{margin: '24px'}}>
+              <Drawer />
+            </Row>
           </Col>
         </Row>
       </Page>
