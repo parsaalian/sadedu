@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import _ from 'lodash';
-import { Row, Col } from "antd";
+import { Layout, Row, Col } from "antd";
 import Page from "/imports/ui/assistant/_global/page/page";
 import List from "./list/list";
 import Filter from "./filter/filter";
@@ -30,10 +30,16 @@ export default class CoursesList extends Component {
   render() {
     return (
       <Page>
-        <Row type="flex" justify="center">
-          <Col span={12}>
+        <Row>
+          <Col span={20}>
+            <Row type="flex" justify="center">
+              <Col span={18}>
+                <List conditions={this.mapStateToFilter()}></List>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={4} style={{position: 'fixed', right: '32px'}}>
             <Filter {...this.state.fields} onChange={this.handleFormChange} />
-            <List conditions={this.mapStateToFilter()}></List>
           </Col>
         </Row>
       </Page>

@@ -28,10 +28,10 @@ class TopMenu extends Component {
   render() {
     return(
       <React.Fragment>
-        <div style={{position: 'fixed', zIndex: '100', width: '100%'}}>
-          <Menu className="rtl" theme="dark" defaultSelectedKeys={[this.props.history.location.pathname.replace('/assistant', '')]} mode="horizontal" style={{ lineHeight: '64px' }}>
+        <div style={{position: 'fixed', zIndex: '100', width: '100%', boxShadow: '0 1px 2px 0 rgba(34,36,38,.15)'}}>
+          <Menu className="rtl" defaultSelectedKeys={[this.props.history.location.pathname.replace('/assistant', '')]} mode="horizontal" style={{ lineHeight: '64px' }}>
             <Menu.Item className="float-right">
-              <img style={{height: '54px'}} src='/images/logow.png' />
+              <img style={{height: '54px'}} src='/images/logob.png' />
             </Menu.Item>
 
             <Menu.Item className="float-right" key="/courses" onClick={this.onClick}>
@@ -50,7 +50,7 @@ class TopMenu extends Component {
             </Menu.Item>
 
             <Menu.Item key='/notifications' onClick={this.onClick}>
-              <Icon type="bell" theme="filled" style={{ fontSize: '1.5rem' }} />
+              <Icon type="bell" theme="filled" style={{ fontSize: '1.5rem', marginLeft: 'auto', marginRight: 'auto' }} />
             </Menu.Item>
 
             <Menu.SubMenu

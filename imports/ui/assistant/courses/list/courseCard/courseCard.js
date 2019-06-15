@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { List, Avatar, Icon } from "antd";
+import Truncate from 'react-truncate';
 
 const IconText = ({type, text}) => (
   <React.Fragment>
@@ -28,7 +29,11 @@ export default class CourseCard extends Component {
               <Avatar src='http://www.eldergrove.k12.mt.us/docs/_full_/district/basic%20images/graduation%20cap%20and%20diploma.png?id=716&thumbwidth=190&fullwidth=500'/>
             }
             title={<a href={this.props.linked ? '/assistant/courses/' + item.cid + '-' + item.group + '-' + item.credit : undefined}>{item.cid + ' - ' + item.title}</a>}
-            description={item.description} />
+            description={
+              <Truncate lines={3} ellipsis={<span>...</span>}>
+                {item.description}
+              </Truncate>
+            } />
         {item.content}
       </List.Item> :
       <React.Fragment />

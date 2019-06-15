@@ -17,7 +17,7 @@ class CoursesList extends Component {
 
   render() {
     return (
-      <List itemLayout="vertical" size="large" pagination={{pageSize: 4}} dataSource={this.filterWithCondition()}
+      <List grid={{gutter: 16, column: 2}} itemLayout="vertical" size="large" pagination={{pageSize: 4}} dataSource={this.filterWithCondition()}
         renderItem={item => (<CourseCard item={item} hasAction={true} linked={true} />)} />
     );
   }

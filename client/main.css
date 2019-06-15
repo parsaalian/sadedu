@@ -16,6 +16,10 @@ body {
   float: right;
 }
 
+.fa {
+  font-family: iransans;
+}
+
 @font-face {
   font-family: iransans;
   src: url('/fonts/iransans.eot') format('embedded-opentype');

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Row, Col } from 'antd';
 
 export default CustomizedForm = Form.create({
   name: 'global_state',
@@ -17,12 +17,21 @@ export default CustomizedForm = Form.create({
 })(props => {
   const { getFieldDecorator } = props.form;
   return (
-    <Form layout="inline">
-      <Form.Item label="Title">
-        {getFieldDecorator('title', {
-          rules: [{ required: false, message: 'Title is required!' }],
-        })(<Input />)}
-      </Form.Item>
-    </Form>
+    <React.Fragment>
+      <Form labelAlign="left">
+        <Form.Item label="موضوع" style={{fontFamily: 'iransans'}}>
+          {getFieldDecorator('title', {
+            rules: [{ required: false, message: 'Title is required!' }],
+          })(<Input />)}
+        </Form.Item>
+      </Form>
+      <Row>
+        <h4 className='fa' style={{float: 'right'}}>موضوع</h4>
+        <span>
+          <Input />
+          <Input />
+        </span>
+      </Row>
+    </React.Fragment>
   );
 });
