@@ -38,7 +38,7 @@ class DrawerForm extends Component {
           width={720}
           onClose={this.onClose}
           visible={this.state.visible}
-          placement='left'>
+          placement="left">
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
               <Col span={6}>

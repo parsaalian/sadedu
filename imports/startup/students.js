@@ -1,4 +1,4 @@
-import randomName from 'node-random-name';
+import randomName from "node-random-name";
 import { Students } from "/imports/api/students/students";
 
 if (!Students.findOne({})) {

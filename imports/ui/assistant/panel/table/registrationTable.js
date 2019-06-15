@@ -195,7 +195,7 @@ export default class RegistrationTable extends Component {
         ),
       },
     ];
-    return <Table className='rtl'
+    return <Table className="rtl"
                   columns={columns}
                   dataSource={data}
                   size="middle"

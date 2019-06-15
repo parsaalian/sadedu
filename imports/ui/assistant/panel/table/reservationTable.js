@@ -177,7 +177,7 @@ export default class ReservationTable extends Component {
         ),
       },
     ];
-    return <Table className='rtl'
+    return <Table className="rtl"
                   columns={columns}
                   dataSource={data}
                   size="middle"

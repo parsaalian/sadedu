@@ -15,7 +15,7 @@ export default class CourseCard extends Component {
     return(
       item ?
       <List.Item key={item.title}>
-        <Card className='fa rtl' style={{textAlign: 'center'}}
+        <Card className="fa rtl" style={{textAlign: "center"}}
               title={item.cid + " - " + item.title + " - گروه " + item.group}
               extra={<a href={"/assistant/courses/" + item.cid + "-" + item.group + "-" + item.credit}>بیشتر</a>}>
           <Card.Grid>{"ثبت‌نام " + item.registered + "/" + item.capacity}</Card.Grid>

@@ -12,7 +12,7 @@ class Info extends Component {
       course ?
         <React.Fragment>
           <Row type="flex" justify="center">
-            <Card className='fa rtl' title={course.title} style={{background: "#fff", textAlign: 'center', width: '100%'}}>
+            <Card className="fa rtl" title={course.title} style={{background: "#fff", textAlign: "center", width: "100%"}}>
               <h6>گروه {course.group} - {course.credit} واحدی</h6>
               <h6>استاد درس: {course.teacher}</h6>
               {course.description}
@@ -20,12 +20,12 @@ class Info extends Component {
           </Row>
 
           <Row type="flex" justify="center">
-            <Card className='fa rtl' title='ثبت‌نام' style={{background: "#fff", textAlign: 'center', width: '100%'}}>
-              <Card.Grid style={{width: '50%'}}>
+            <Card className="fa rtl" title="ثبت‌نام" style={{background: "#fff", textAlign: "center", width: "100%"}}>
+              <Card.Grid style={{width: "50%"}}>
                 <h6 >رزرو</h6>
                 {course.reserveRegistered} از {course.reserveCapacity}
               </Card.Grid>
-              <Card.Grid style={{width: '50%'}}>
+              <Card.Grid style={{width: "50%"}}>
                 <h6 >عادی</h6>
                 {course.registered} از {course.capacity}
               </Card.Grid>
@@ -33,12 +33,12 @@ class Info extends Component {
           </Row>
 
           <Row type="flex" justify="center">
-            <Card className='fa rtl' title='زمان' style={{background: "#fff", textAlign: 'center', width: '100%'}}>
-              <Card.Grid style={{width: '50%'}}>
+            <Card className="fa rtl" title="زمان" style={{background: "#fff", textAlign: "center", width: "100%"}}>
+              <Card.Grid style={{width: "50%"}}>
                 <h6 >برنامه‌ی هفتگی</h6>
                 {course.time}
               </Card.Grid>
-              <Card.Grid style={{width: '50%'}}>
+              <Card.Grid style={{width: "50%"}}>
                 <h6 >امتحان</h6>
                 {String(course.exam)}
               </Card.Grid>
