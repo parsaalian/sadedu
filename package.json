@@ -16,6 +16,7 @@
     "indexof": "0.0.1",
     "lodash": "^4.17.11",
     "meteor-node-stubs": "^0.4.1",
+    "node-random-name": "^1.0.1",
     "react": "^16.8.6",
     "react-archer": "^1.1.0",
     "react-bootstrap": "^1.0.0-beta.9",

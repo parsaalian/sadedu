@@ -8,7 +8,8 @@ Students.schema = new SimpleSchema({
   sid: { type: Number },
   name: { type: String },
   familyName: { type: String },
-  rand: { type: Number }
+  rand: { type: Number },
+  gender: { type: String, allowedValues: ["m", "f"] }
 });
 
 Students.attachSchema(Students.schema);

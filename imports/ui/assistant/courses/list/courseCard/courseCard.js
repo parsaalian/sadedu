@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Avatar, Icon } from "antd";
+import { List, Card, Icon } from "antd";
 import Truncate from "react-truncate";
 
 const IconText = ({type, text}) => (
@@ -14,27 +14,17 @@ export default class CourseCard extends Component {
     const item = this.props.item;
     return(
       item ?
-        <List.Item
-            key={item.title}
-            actions={this.props.hasAction ? [
-              <IconText type="edit" text={item.registered + "/" + item.capacity} />,
-              <IconText type="form-o" text={item.reserveRegistered + "/" + item.reserveCapacity}/>
-            ] : <React.Fragment />}
-            extra={
-              <img width={260} alt="logo"
-                src="https://www.itchronicles.com/wp-content/uploads/2018/10/bigstock-Programming-Web-Banner-Best-P-258081862.jpg" />
-            }
-            style={{ backgroundColor: "white", padding: "24px", margin: "12px" }}>
-          <List.Item.Meta avatar={
-              <Avatar src="http://www.eldergrove.k12.mt.us/docs/_full_/district/basic%20images/graduation%20cap%20and%20diploma.png?id=716&thumbwidth=190&fullwidth=500"/>
-            }
-            title={<a href={this.props.linked ? "/assistant/courses/" + item.cid + "-" + item.group + "-" + item.credit : undefined}>{item.cid + " - " + item.title}</a>}
-            description={
-              <Truncate lines={3} ellipsis={<span>...</span>}>
-                {item.description}
-              </Truncate>
-            } />
-        {item.content}
+      <List.Item key={item.title}>
+        <Card className='fa rtl' style={{textAlign: 'center'}}
+              title={item.cid + " - " + item.title + " - گروه " + item.group}
+              extra={<a href={"/assistant/courses/" + item.cid + "-" + item.group + "-" + item.credit}>بیشتر</a>}>
+          <Card.Grid>{"ثبت‌نام " + item.registered + "/" + item.capacity}</Card.Grid>
+          <Card.Grid>{"رزرو " + item.reserveRegistered + "/" + item.reserveCapacity}</Card.Grid>
+          <Card.Grid>{"استاد " + item.teacher}</Card.Grid>
+          <Card.Grid>{"زمان " + item.time}</Card.Grid>
+          <Card.Grid>{item.faculty}</Card.Grid>
+          <Card.Grid>{"مقطع " + item.section}</Card.Grid>
+        </Card>
       </List.Item> :
       <React.Fragment />
     );

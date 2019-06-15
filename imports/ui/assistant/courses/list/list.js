@@ -3,7 +3,7 @@ import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
 import { withTracker } from "meteor/react-meteor-data";
 import { Courses } from "/imports/api/courses/courses";
-import { List } from "antd";
+import { List, Pagination } from "antd";
 import CourseCard from "./courseCard/courseCard";
 
 class CoursesList extends Component {
@@ -17,8 +17,10 @@ class CoursesList extends Component {
 
   render() {
     return (
-      <List grid={{gutter: 16, column: 2}} itemLayout="vertical" size="large" pagination={{pageSize: 4}} dataSource={this.filterWithCondition()}
-        renderItem={item => (<CourseCard item={item} hasAction={true} linked={true} />)} />
+      <List grid={{gutter: 16, column: 2}} itemLayout="vertical"
+        pagination={<Pagination className='fa rtl' style={{}} pageSize={8} />}
+        dataSource={this.filterWithCondition()}
+        renderItem={item => (<CourseCard item={item} />)} />
     );
   }
 }
