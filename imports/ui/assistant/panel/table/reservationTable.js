@@ -181,7 +181,7 @@ export default class ReservationTable extends Component {
                   dataSource={data}
                   size='middle'
                   bordered
-                  title={() => 'Reserved Students List'}
+                  title={() => 'لیست دانشجویان رزرو'}
                   footer={() => ''}/>;
   }
 }

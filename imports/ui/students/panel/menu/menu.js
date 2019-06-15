@@ -82,7 +82,7 @@ export default class SiderDemo extends React.Component {
                         </div>
                     </Content>
                     <Footer style={{textAlign: "center"}}>
-                        SUT Registration System ©2019 Created by Our Team
+                      © سامانه آموزش دانشگاه صنعتی شریف ۱۳۹۸
                     </Footer>
                 </Layout>
             </Layout>

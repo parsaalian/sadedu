@@ -36,7 +36,7 @@ class TopMenu extends Component {
 
             <Menu.Item className="float-right" key="/courses" onClick={this.onClick}>
               <Icon type="book" style={{ marginRight: 0, marginLeft: '10px', position: 'relative', top: '-3px' }} />
-              <span style={{fontFamily: 'iransans', fontWeight: '600'}}>درس‌ها</span>
+              <span style={{fontFamily: 'IRANSans', fontWeight: '600'}}>درس‌ها</span>
             </Menu.Item>
 
             <Menu.Item className="float-right" key="/students" onClick={this.onClick}>

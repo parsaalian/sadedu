@@ -124,43 +124,43 @@ export default class RegistrationTable extends Component {
   render() {
     const columns = [
       {
-        title: 'ID',
+        title: 'شماره دانشجویی',
         dataIndex: 'id',
         key: 'id',
         ...this.getColumnSearchProps("id"),
         render: text => <a href="javascript:;">{text}</a>,
       },
       {
-        title: "Name",
+        title: "نام و نام خانوادگی",
         dataIndex: "name",
         key: "name",
         ...this.getColumnSearchProps("name"),
       },
       {
-        title: 'Gender',
+        title: 'جنسیت',
         dataIndex: 'gender',
         filters: [{ text: 'Male', value: 'male' }, { text: 'Female', value: 'female' }],
         key: 'gender',
       },
       {
-        title: 'Level',
+        title: 'مقطع',
         dataIndex: 'level',
         key: 'level',
         ...this.getColumnSearchProps("level"),
       },
       {
-        title: 'major',
+        title: 'رشته تحصیلی',
         dataIndex: 'major',
         key: 'major',
         ...this.getColumnSearchProps("major"),
       },
       {
-        title: 'Registered Credits',
+        title: 'تعداد واحد',
         dataIndex: 'credit',
         key: 'credit',
       },
       {
-        title: 'Status',
+        title: 'وضعیت',
         key: 'tags',
         dataIndex: 'tags',
         render: tags => (
@@ -186,11 +186,11 @@ export default class RegistrationTable extends Component {
         ),
       },
       {
-        title: 'Action',
+        title: 'عملیات',
         key: 'action',
         render: (text, record) => (
           <Popconfirm title="Are you sure you want to Remove this student?">
-            <a href="javascript:;">Remove</a>
+            <a href="javascript:;">حذف</a>
           </Popconfirm>
         ),
       },
@@ -199,7 +199,7 @@ export default class RegistrationTable extends Component {
                   dataSource={data}
                   size='middle'
                   bordered
-                  title={() => 'Registered Students List'}
+                  title={() => 'لیست دانشجویان ثبت نامی'}
                   footer={() => ''}/>;
   }
 }
