@@ -10,42 +10,41 @@ class Info extends Component {
     const course = this.props.course;
     return (
       course ?
-        <Row type="flex" justify="center" gutter={16} style={{background: "#fff", padding: "30px"}}>
-          <Col span={9}>
-            <Card title={course.title}>
-              <h6>Group {course.group} - Credit {course.credit}</h6>
-              <h6>Instructor: {course.teacher}</h6>
+        <React.Fragment>
+          <Row type="flex" justify="center">
+            <Card className='fa rtl' title={course.title} style={{background: "#fff", textAlign: 'center', width: '100%'}}>
+              <h6>گروه {course.group} - {course.credit} واحدی</h6>
+              <h6>استاد درس: {course.teacher}</h6>
               {course.description}
             </Card>
-          </Col>
+          </Row>
 
-          <Col span={12}>
-            <Row type="flex" justify="center">
-              <Col>
-                <Card style={{width: 250}} title="درخواست های دانشجویان">
-                  <Statistic value={11} precision={0} valueStyle={{color: "#3f8600"}} prefix={<Icon type="bell" theme="twoTone" twoToneColor="#52c41a"/>}/>
-                </Card>
+          <Row type="flex" justify="center">
+            <Card className='fa rtl' title='ثبت‌نام' style={{background: "#fff", textAlign: 'center', width: '100%'}}>
+              <Card.Grid style={{width: '50%'}}>
+                <h6 >رزرو</h6>
+                {course.reserveRegistered} از {course.reserveCapacity}
+              </Card.Grid>
+              <Card.Grid style={{width: '50%'}}>
+                <h6 >عادی</h6>
+                {course.registered} از {course.capacity}
+              </Card.Grid>
+            </Card>
+          </Row>
 
-                <Card style={{width: 250}} title="زمان باقی مانده تا ثبت نام">
-                  <Statistic.Countdown value={Date.now() + 172830000} valueStyle={{color: "#932381"}} prefix={<Icon type="dashboard" theme="twoTone" twoToneColor="#932381"/>}/>
-                </Card>
-              </Col>
-
-              <Col>
-                <Card style={{width: 250}} title="تعداد دانشجویان ثبت نامی">
-                  <Statistic value={course.registered} valueStyle={{color: "#179ba1"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#179ba1"/>} suffix={"/" + course.capacity} />
-                </Card>
-                <Card style={{width: 250}} title="تعداد دانشجویان رزرو">
-                  <Statistic value={course.reserveRegistered} valueStyle={{color: "#f0931b"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#f0931b"/>} suffix={"/" + course.reserveCapacity} />
-                </Card>
-              </Col>
-            </Row>
-
-            <Row type="flex" justify="center" style={{margin: "16px"}}>
-              <DrawerForm/>
-            </Row>
-          </Col>
-        </Row> :
+          <Row type="flex" justify="center">
+            <Card className='fa rtl' title='زمان' style={{background: "#fff", textAlign: 'center', width: '100%'}}>
+              <Card.Grid style={{width: '50%'}}>
+                <h6 >برنامه‌ی هفتگی</h6>
+                {course.time}
+              </Card.Grid>
+              <Card.Grid style={{width: '50%'}}>
+                <h6 >امتحان</h6>
+                {String(course.exam)}
+              </Card.Grid>
+            </Card>
+          </Row>
+        </React.Fragment> :
         <React.Fragment />
     );
   }
