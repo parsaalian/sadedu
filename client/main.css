@@ -7,3 +7,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.rtl {
+  direction: rtl;
+}
+
+.float-right {
+  float: right;
+}
+
+@font-face {
+    font-family: 'IRANSans';
+    src: url('/fonts/iransans.woff2') format('woff2'),
+        url('/fonts/iransans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

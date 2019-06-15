@@ -22,32 +22,32 @@ class Page extends Component {
 
   render() {
     return (
-      <Layout style={{minHeight: "100vh"}}>
+      <Layout style={{minHeight: '100vh'}}>
         <div style={{position: 'fixed', zIndex: '100', width: '100%'}}>
-          <Menu theme="dark" defaultSelectedKeys={[this.props.history.location.pathname.replace('/assistant', '')]} mode="horizontal" style={{ lineHeight: '64px' }}>
-            <Menu.Item key="/" onClick={this.onClick} disabled={true}>
+          <Menu className="rtl" theme="dark" defaultSelectedKeys={[this.props.history.location.pathname.replace('/assistant', '')]} mode="horizontal" style={{ lineHeight: '64px' }}>
+            <Menu.Item className="float-right" key="/" onClick={this.onClick} disabled={true}>
               <Icon type="home" />
-              <span>Home</span>
+              <span>خانه</span>
             </Menu.Item>
 
-            <Menu.Item key="/courses" onClick={this.onClick}>
-              <Icon type="home" />
-              <span>Courses</span>
+            <Menu.Item className="float-right" key="/courses" onClick={this.onClick}>
+              <Icon type="home" style={{ marginRight: 0, marginLeft: '10px', position: 'relative', top: '-3px' }} />
+              <span style={{fontFamily: 'IRANSans'}}>درس‌ها</span>
             </Menu.Item>
 
-            <Menu.Item key="/students" onClick={this.onClick}>
-              <Icon type="team" />
-              <span>Students</span>
+            <Menu.Item className="float-right" key="/students" onClick={this.onClick}>
+              <Icon type="team" style={{ marginRight: 0, marginLeft: '10px', position: 'relative', top: '-3px' }} />
+              <span>دانشجویان</span>
             </Menu.Item>
 
-            <Menu.Item key="/chart" onClick={this.onClick}>
-              <Icon type="pie-chart" />
-              <span>Course Chart</span>
+            <Menu.Item className="float-right" key="/chart" onClick={this.onClick}>
+              <Icon type="pie-chart" style={{ marginRight: 0, marginLeft: '10px', position: 'relative', top: '-3px' }} />
+              <span>جدول درسی</span>
             </Menu.Item>
 
-            <Menu.Item key="/messages" onClick={this.onClick} disabled={true}>
-              <Icon type="notification" />
-              <span>Messages</span>
+            <Menu.Item className="float-right" key="/messages" onClick={this.onClick} disabled={true}>
+              <Icon type="notification" style={{ marginRight: 0, marginLeft: '10px', position: 'relative', top: '-3px' }} />
+              <span>پیام‌ها</span>
             </Menu.Item>
           </Menu>
         </div>
