@@ -32,5 +32,8 @@
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.12.0"
   }
 }
