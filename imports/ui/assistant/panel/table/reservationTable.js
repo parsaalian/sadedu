@@ -7,31 +7,31 @@ const data = [
   {
     key: "1",
     id: "96105771",
-    name: "Sasha Obama",
-    gender: "Female",
-    level: "BSc",
+    name: "ارغوان موسوی",
+    gender: "زن",
+    level: "کارشناسی",
     credit: 12,
-    major: "Computer Engineering",
+    major: "مهندسی کامپیوتر",
     tags: ['عدم رعایت پیشنیازی'],
   },
   {
     key: "2",
     id: "95105022",
-    name: "Joe Black",
-    gender: "Male",
-    level: "BSc",
+    name: "علی حمیدی",
+    gender: "مرد",
+    level: "کارشناسی",
     credit: 16,
-    major: "Computer Engineering",
+    major: "مهندسی کامپیوتر",
     tags: ['مجاز'],
   },
   {
     key: "3",
     id: "95105067",
-    name: "Jim Green",
-    gender: "Male",
-    level: "MSc",
+    name: "حسین راد",
+    gender: "مرد",
+    level: " کارشناسی ارشد",
     credit: 15,
-    major: "Computer Engineering",
+    major: "مهندسی کامپیوتر",
     tags: ['مجاز'],
   },
 ];
@@ -104,50 +104,50 @@ export default class ReservationTable extends Component {
   render() {
     const columns = [
       {
-        title: 'ID',
+        title: 'شماره دانشجویی',
         dataIndex: 'id',
         key: 'id',
         ...this.getColumnSearchProps("id"),
         render: text => <a href="javascript:;">{text}</a>,
       },
       {
-        title: "Name",
+        title: "نام و نام خانوادگی",
         dataIndex: "name",
         key: "name",
         ...this.getColumnSearchProps("name"),
       },
       {
-        title: 'Gender',
+        title: 'جنسیت',
         dataIndex: 'gender',
-        filters: [{text: 'Male', value: 'male'}, {text: 'Female', value: 'female'}],
+        filters: [{ text: 'مرد', value: 'male' }, { text: 'زن', value: 'female' }],
         key: 'gender',
       },
       {
-        title: 'Level',
+        title: 'مقطع',
         dataIndex: 'level',
         key: 'level',
         ...this.getColumnSearchProps("level"),
       },
       {
-        title: 'major',
+        title: 'رشته تحصیلی',
         dataIndex: 'major',
         key: 'major',
         ...this.getColumnSearchProps("major"),
       },
       {
-        title: 'Registered Credits',
+        title: 'تعداد واحد',
         dataIndex: 'credit',
         key: 'credit',
       },
       {
-        title: 'Status',
+        title: 'وضعیت',
         key: 'tags',
         dataIndex: 'tags',
         render: tags => (
           <span>
         {tags.map(tag => {
           let color = 'blue';
-          if (tag === 'جنسیت غیرمجاز') {
+          if (tag === 'gender') {
             color = 'volcano';
           }
           if (tag === 'عدم رعایت پیشنیازی') {
@@ -166,13 +166,13 @@ export default class ReservationTable extends Component {
         ),
       },
       {
-        title: 'Action',
+        title: 'عملیات',
         key: 'action',
         render: (text, record) => (
-          <Popconfirm title="Are you sure you want to Remove this student?">
-            <a href="javascript:;">Remove</a>
+          <Popconfirm title="آیا از حذف این دانشجو مطمئن هستید؟">
+            <a href="javascript:;">حذف</a>
             <Divider type="vertical"/>
-            <a href="javascript:;">Register</a>
+            <a href="javascript:;">ثبت نام</a>
           </Popconfirm>
         ),
       },
