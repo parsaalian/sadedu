@@ -40,10 +40,10 @@ Meteor.methods({
             throw new Meteor.Error("This course capacity and reserve capacity is full.");
           }
         } else {
-          throw new Meteor.Error("This course doesn\'t exist.");
+          throw new Meteor.Error("This course doesn\"t exist.");
         }
       } else {
-        throw new Meteor.Error("This student doesn\'t exist.");
+        throw new Meteor.Error("This student doesn\"t exist.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -94,13 +94,13 @@ Meteor.methods({
                 {$inc: {registered: -1}});
             }
           } else {
-            throw new Meteor.Error("This student hasn\'t this course.");
+            throw new Meteor.Error("This student hasn\"t this course.");
           }
         } else {
-          throw new Meteor.Error("This course doesn\'t exist.");
+          throw new Meteor.Error("This course doesn\"t exist.");
         }
       } else {
-        throw new Meteor.Error("This student doesn\'t exist.");
+        throw new Meteor.Error("This student doesn\"t exist.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -148,10 +148,10 @@ Meteor.methods({
             throw new Meteor.Error("This student already has this course.");
           }
         } else {
-          throw new Meteor.Error("This course doesn\'t exist.");
+          throw new Meteor.Error("This course doesn\"t exist.");
         }
       } else {
-        throw new Meteor.Error("This student doesn\'t exist.");
+        throw new Meteor.Error("This student doesn\"t exist.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -175,13 +175,13 @@ Meteor.methods({
               throw new Meteor.Error("New group is equal to previous group.");
             }
           } else {
-            throw new Meteor.Error("New group of course doesn\'t exist.");
+            throw new Meteor.Error("New group of course doesn\"t exist.");
           }
         } else {
-          throw new Meteor.Error("This course doesn\'t exist.");
+          throw new Meteor.Error("This course doesn\"t exist.");
         }
       } else {
-        throw new Meteor.Error("This student doesn\'t exist.");
+        throw new Meteor.Error("This student doesn\"t exist.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");

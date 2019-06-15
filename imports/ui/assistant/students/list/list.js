@@ -12,7 +12,7 @@ const data = [
     level: "BSc",
     credit: 12,
     major: "Computer Engineering",
-    tags: ['non-eligible'],
+    tags: ["non-eligible"],
   },
   {
     key: "2",
@@ -22,7 +22,7 @@ const data = [
     level: "BSc",
     credit: 16,
     major: "Computer Engineering",
-    tags: ['eligible'],
+    tags: ["eligible"],
   },
   {
     key: "3",
@@ -32,7 +32,7 @@ const data = [
     level: "MSc",
     credit: 15,
     major: "Computer Engineering",
-    tags: ['eligible'],
+    tags: ["eligible"],
   },
 ];
 
@@ -104,9 +104,9 @@ export default class StudentsTable extends Component {
   render() {
     const columns = [
       {
-        title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
         ...this.getColumnSearchProps("id"),
         render: text => <a href="javascript:;">{text}</a>,
       },
@@ -117,41 +117,41 @@ export default class StudentsTable extends Component {
         ...this.getColumnSearchProps("name"),
       },
       {
-        title: 'Gender',
-        dataIndex: 'gender',
-        filters: [{text: 'Male', value: 'male'}, {text: 'Female', value: 'female'}],
-        key: 'gender',
+        title: "Gender",
+        dataIndex: "gender",
+        filters: [{text: "Male", value: "male"}, {text: "Female", value: "female"}],
+        key: "gender",
       },
       {
-        title: 'Level',
-        dataIndex: 'level',
-        key: 'level',
+        title: "Level",
+        dataIndex: "level",
+        key: "level",
         ...this.getColumnSearchProps("level"),
       },
       {
-        title: 'major',
-        dataIndex: 'major',
-        key: 'major',
+        title: "major",
+        dataIndex: "major",
+        key: "major",
         ...this.getColumnSearchProps("major"),
       },
       {
-        title: 'Registered Credits',
-        dataIndex: 'credit',
-        key: 'credit',
+        title: "Registered Credits",
+        dataIndex: "credit",
+        key: "credit",
       },
       {
-        title: 'Registration Status',
-        key: 'tags',
-        dataIndex: 'tags',
+        title: "Registration Status",
+        key: "tags",
+        dataIndex: "tags",
         render: tags => (
           <span>
         {tags.map(tag => {
-          let color = 'blue';
-          if (tag === 'non-eligible') {
-            color = 'volcano';
+          let color = "blue";
+          if (tag === "non-eligible") {
+            color = "volcano";
           }
-          if (tag === 'eligible') {
-            color = 'green';
+          if (tag === "eligible") {
+            color = "green";
           }
           return (
             <Tag color={color} key={tag}>
@@ -165,9 +165,9 @@ export default class StudentsTable extends Component {
     ];
     return <Table columns={columns}
                   dataSource={data}
-                  size='middle'
+                  size="middle"
                   bordered
-                  title={() => 'Students List'}
-                  footer={() => ''}/>;
+                  title={() => "Students List"}
+                  footer={() => ""}/>;
   }
 }

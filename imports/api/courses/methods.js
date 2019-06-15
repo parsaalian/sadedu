@@ -27,7 +27,7 @@ Meteor.methods({
         Courses.remove({cid: cid, prereq: prereq, group: group, credit: credit});
         Registrations.remove({cid: cid, prereq: prereq, group: group, credit: credit});
       } else {
-        throw new Meteor.Error("This course doesn\'t exists.");
+        throw new Meteor.Error("This course doesn\"t exists.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -56,7 +56,7 @@ Meteor.methods({
         Meteor.call("courses.changeCapacity", {cid, prereq, group, credit, capacity});
         Meteor.call("courses.changeReserveCapacity", {cid, prereq, group, credit, reserveCapacity});
       } else {
-        throw new Meteor.Error("This course doesn\'t exists.");
+        throw new Meteor.Error("This course doesn\"t exists.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -89,7 +89,7 @@ Meteor.methods({
           throw new Meteor.Error("New capacity is less than registered students.");
         }
       } else {
-        throw new Meteor.Error("This course doesn\'t exists.");
+        throw new Meteor.Error("This course doesn\"t exists.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -106,7 +106,7 @@ Meteor.methods({
           placeInReservedQueue: {$gt: newReserveCapacity}
         });
       } else {
-        throw new Meteor.Error("This course doesn\'t exists.");
+        throw new Meteor.Error("This course doesn\"t exists.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -119,7 +119,7 @@ Meteor.methods({
         Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
           {prereq: newPrereq});
       } else {
-        throw new Meteor.Error("This course doesn\'t exists.");
+        throw new Meteor.Error("This course doesn\"t exists.");
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");

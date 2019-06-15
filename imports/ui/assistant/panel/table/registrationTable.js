@@ -12,7 +12,7 @@ const data = [
     level: "کارشناسی ارشد",
     credit: 10,
     major: "مهندسی کامپیوتر",
-    tags: ['مجاز'],
+    tags: ["مجاز"],
   },
   {
     key: "2",
@@ -22,7 +22,7 @@ const data = [
     level: "کارشناسی",
     credit: 15,
     major: "علوم کامپیوتر",
-    tags: ['مجاز'],
+    tags: ["مجاز"],
   },
   {
     key: "3",
@@ -32,7 +32,7 @@ const data = [
     level: "کارشناسی",
     credit: 17,
     major: "علوم کامپیوتر",
-    tags: ['مجاز'],
+    tags: ["مجاز"],
   },
   {
     key: "4",
@@ -42,7 +42,7 @@ const data = [
     level: "کارشناسی",
     credit: 13,
     major: "علوم کامپیوتر",
-    tags: ['مجاز'],
+    tags: ["مجاز"],
   },
   {
     key: "5",
@@ -52,7 +52,7 @@ const data = [
     level: "کارشناسی",
     credit: 14,
     major: "مهندسی برق",
-    tags: ['عدم رعایت پیشنیازی'],
+    tags: ["عدم رعایت پیشنیازی"],
   },
 ];
 
@@ -124,9 +124,9 @@ export default class RegistrationTable extends Component {
   render() {
     const columns = [
       {
-        title: 'شماره دانشجویی',
-        dataIndex: 'id',
-        key: 'id',
+        title: "شماره دانشجویی",
+        dataIndex: "id",
+        key: "id",
         ...this.getColumnSearchProps("id"),
         render: text => <a href="javascript:;">{text}</a>,
       },
@@ -137,44 +137,44 @@ export default class RegistrationTable extends Component {
         ...this.getColumnSearchProps("name"),
       },
       {
-        title: 'جنسیت',
-        dataIndex: 'gender',
-        filters: [{ text: 'مرد', value: 'male' }, { text: 'زن', value: 'female' }],
-        key: 'gender',
+        title: "جنسیت",
+        dataIndex: "gender",
+        filters: [{ text: "مرد", value: "male" }, { text: "زن", value: "female" }],
+        key: "gender",
       },
       {
-        title: 'مقطع',
-        dataIndex: 'level',
-        key: 'level',
+        title: "مقطع",
+        dataIndex: "level",
+        key: "level",
         ...this.getColumnSearchProps("level"),
       },
       {
-        title: 'رشته تحصیلی',
-        dataIndex: 'major',
-        key: 'major',
+        title: "رشته تحصیلی",
+        dataIndex: "major",
+        key: "major",
         ...this.getColumnSearchProps("major"),
       },
       {
-        title: 'تعداد واحد',
-        dataIndex: 'credit',
-        key: 'credit',
+        title: "تعداد واحد",
+        dataIndex: "credit",
+        key: "credit",
       },
       {
-        title: 'وضعیت',
-        key: 'tags',
-        dataIndex: 'tags',
+        title: "وضعیت",
+        key: "tags",
+        dataIndex: "tags",
         render: tags => (
           <span>
         {tags.map(tag => {
-          let color = 'blue';
-          if (tag === 'gender') {
-            color = 'volcano';
+          let color = "blue";
+          if (tag === "gender") {
+            color = "volcano";
           }
-          if (tag === 'عدم رعایت پیشنیازی') {
-            color = 'red';
+          if (tag === "عدم رعایت پیشنیازی") {
+            color = "red";
           }
-          if (tag === 'مجاز') {
-            color = 'green';
+          if (tag === "مجاز") {
+            color = "green";
           }
           return (
             <Tag color={color} key={tag}>
@@ -186,8 +186,8 @@ export default class RegistrationTable extends Component {
         ),
       },
       {
-        title: 'عملیات',
-        key: 'action',
+        title: "عملیات",
+        key: "action",
         render: (text, record) => (
           <Popconfirm title="آیا از حذف این دانشجو مطمئن هستید؟">
             <a href="javascript:;">حذف</a>
@@ -197,9 +197,9 @@ export default class RegistrationTable extends Component {
     ];
     return <Table columns={columns}
                   dataSource={data}
-                  size='middle'
+                  size="middle"
                   bordered
-                  title={() => 'لیست دانشجویان ثبت نامی'}
-                  footer={() => ''}/>;
+                  title={() => "لیست دانشجویان ثبت نامی"}
+                  footer={() => ""}/>;
   }
 }

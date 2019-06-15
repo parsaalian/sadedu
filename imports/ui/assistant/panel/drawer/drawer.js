@@ -19,7 +19,7 @@ class DrawerForm extends Component {
   };
 
   normFile = e => {
-    console.log('Upload event:', e);
+    console.log("Upload event:", e);
     if (Array.isArray(e)) {
       return e;
     }
@@ -66,18 +66,18 @@ class DrawerForm extends Component {
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item label="استاد">
-                  {getFieldDecorator('name', {
-                    rules: [{required: true, message: 'Please enter instructor(s) name'}],
+                  {getFieldDecorator("name", {
+                    rules: [{required: true, message: "Please enter instructor(s) name"}],
                   })(<Input placeholder="Please enter instructor(s) name"/>)}
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item label="صفحه درس">
-                  {getFieldDecorator('url', {
-                    rules: [{required: true, message: 'Please enter url'}],
+                  {getFieldDecorator("url", {
+                    rules: [{required: true, message: "Please enter url"}],
                   })(
                     <Input
-                      style={{width: '100%'}}
+                      style={{width: "100%"}}
                       addonBefore="http://"
                       addonAfter=".edu"
                       placeholder="Please enter url"
@@ -89,8 +89,8 @@ class DrawerForm extends Component {
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item label="مقطع">
-                  {getFieldDecorator('level', {
-                    rules: [{required: true, message: 'Please choose the level'}],
+                  {getFieldDecorator("level", {
+                    rules: [{required: true, message: "Please choose the level"}],
                   })(
                     <Select placeholder="Please choose the level">
                       <Option value="bsc"> کارشناسی</Option>
@@ -102,9 +102,9 @@ class DrawerForm extends Component {
               </Col>
               <Col span={12}>
                 <Form.Item label="پیشنیازها">
-                  {getFieldDecorator('select-multiple', {
+                  {getFieldDecorator("select-multiple", {
                     rules: [
-                      {required: true, message: 'Please select pre-requisites!', type: 'array'},
+                      {required: true, message: "Please select pre-requisites!", type: "array"},
                     ],
                   })(
                     <Select mode="multiple" placeholder="Please select pre-requisites">
@@ -119,17 +119,17 @@ class DrawerForm extends Component {
             <Row gutter={16}>
               <Col span={6}>
                 <Form.Item label="زمان کلاس">
-                  {getFieldDecorator('time-picker')(<TimePicker/>)}
+                  {getFieldDecorator("time-picker")(<TimePicker/>)}
                 </Form.Item>
               </Col>
               <Col span={9}>
                 <Form.Item label="محل کلاس">
-                  {getFieldDecorator('text')(<Input placeholder="مکان کلاس را وارد نمایید."/>)}
+                  {getFieldDecorator("text")(<Input placeholder="مکان کلاس را وارد نمایید."/>)}
                 </Form.Item>
               </Col>
               <Col span={6}>
                 <Form.Item label="تاریخ و زمان آزمون نهایی">
-                  {getFieldDecorator('date-time-picker')(
+                  {getFieldDecorator("date-time-picker")(
                     <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>,
                   )}
                 </Form.Item>
@@ -138,11 +138,11 @@ class DrawerForm extends Component {
             <Row gutter={16}>
               <Col span={24}>
                 <Form.Item label="شرح درس">
-                  {getFieldDecorator('description', {
+                  {getFieldDecorator("description", {
                     rules: [
                       {
                         required: true,
-                        message: 'please enter url description',
+                        message: "please enter url description",
                       },
                     ],
                   })(<Input.TextArea rows={4} placeholder="خلاصه ای از شرح درس را وارد نمایید."/>)}
@@ -153,8 +153,8 @@ class DrawerForm extends Component {
               <Col span={12}>
                 <Form.Item label="قوانین">
                   <div className="dropbox">
-                    {getFieldDecorator('dragger', {
-                      valuePropName: 'fileList',
+                    {getFieldDecorator("dragger", {
+                      valuePropName: "fileList",
                       getValueFromEvent: this.normFile,
                     })(
                       <Upload.Dragger name="files" action="/upload.do">
@@ -170,8 +170,8 @@ class DrawerForm extends Component {
               <Col span={12}>
                 <Form.Item label="تقویم آموزشی">
                   <div className="dropbox">
-                    {getFieldDecorator('dragger', {
-                      valuePropName: 'fileList',
+                    {getFieldDecorator("dragger", {
+                      valuePropName: "fileList",
                       getValueFromEvent: this.normFile,
                     })(
                       <Upload.Dragger name="files" action="/upload.do">
@@ -188,14 +188,14 @@ class DrawerForm extends Component {
           </Form>
           <div
             style={{
-              position: 'absolute',
+              position: "absolute",
               left: 0,
               bottom: 0,
-              width: '100%',
-              borderTop: '1px solid #e9e9e9',
-              padding: '10px 16px',
-              background: '#fff',
-              textAlign: 'right',
+              width: "100%",
+              borderTop: "1px solid #e9e9e9",
+              padding: "10px 16px",
+              background: "#fff",
+              textAlign: "right",
             }}
           >
             <Button onClick={this.onClose} style={{marginRight: 8}}>

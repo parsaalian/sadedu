@@ -4,7 +4,7 @@ import { Breadcrumb, Row, Col, Tabs } from "antd";
 import Page from "/imports/ui/assistant/_global/page/page";
 import RegistrationTable from "./table/registrationTable";
 import ReservationTable from "./table/reservationTable";
-import Info from './info/info';
+import Info from "./info/info";
 
 export default class Panel extends Component {
   render() {

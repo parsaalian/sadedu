@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { List, Avatar, Icon } from "antd";
-import Truncate from 'react-truncate';
+import Truncate from "react-truncate";
 
 const IconText = ({type, text}) => (
   <React.Fragment>
@@ -17,8 +17,8 @@ export default class CourseCard extends Component {
         <List.Item
             key={item.title}
             actions={this.props.hasAction ? [
-              <IconText type="edit" text={item.registered + '/' + item.capacity} />,
-              <IconText type="form-o" text={item.reserveRegistered + '/' + item.reserveCapacity}/>
+              <IconText type="edit" text={item.registered + "/" + item.capacity} />,
+              <IconText type="form-o" text={item.reserveRegistered + "/" + item.reserveCapacity}/>
             ] : <React.Fragment />}
             extra={
               <img width={260} alt="logo"
@@ -26,9 +26,9 @@ export default class CourseCard extends Component {
             }
             style={{ backgroundColor: "white", padding: "24px", margin: "12px" }}>
           <List.Item.Meta avatar={
-              <Avatar src='http://www.eldergrove.k12.mt.us/docs/_full_/district/basic%20images/graduation%20cap%20and%20diploma.png?id=716&thumbwidth=190&fullwidth=500'/>
+              <Avatar src="http://www.eldergrove.k12.mt.us/docs/_full_/district/basic%20images/graduation%20cap%20and%20diploma.png?id=716&thumbwidth=190&fullwidth=500"/>
             }
-            title={<a href={this.props.linked ? '/assistant/courses/' + item.cid + '-' + item.group + '-' + item.credit : undefined}>{item.cid + ' - ' + item.title}</a>}
+            title={<a href={this.props.linked ? "/assistant/courses/" + item.cid + "-" + item.group + "-" + item.credit : undefined}>{item.cid + " - " + item.title}</a>}
             description={
               <Truncate lines={3} ellipsis={<span>...</span>}>
                 {item.description}
