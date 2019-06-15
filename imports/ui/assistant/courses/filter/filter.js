@@ -1,37 +1,32 @@
 import React, { Component } from "react";
-import { Form, Input, Row, Col } from "antd";
+import { Form, Input, Option, Row, Col } from "antd";
 
-export default CustomizedForm = Form.create({
-  name: "global_state",
-  onFieldsChange(props, changedFields) {
-    props.onChange(changedFields);
-  },
-  mapPropsToFields(props) {
-    return {
-      title: Form.createFormField({
-        ...props.title,
-        value: props.title.value,
-      }),
-    };
+export default class Filter extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Row style={{backgroundColor: 'white', padding: '24px', borderRadius: '6px', marginBottom: '12px'}}>
+          <Row style={{margin: '12px'}}>
+            <h6 className='fa rtl float-right'>شماره‌ی درس</h6>
+            <Input />
+          </Row>
+          <Row style={{margin: '12px'}}>
+            <h6 className='fa rtl float-right'>نام درس</h6>
+            <Input />
+          </Row>
+        </Row>
+
+        <Row style={{backgroundColor: 'white', padding: '24px', borderRadius: '6px', marginBottom: '12px'}}>
+          <Row style={{margin: '12px'}}>
+            <h6 className='fa rtl float-right'>نام استاد</h6>
+            <Input />
+          </Row>
+          <Row style={{margin: '12px'}}>
+            <h6 className='fa rtl float-right'></h6>
+            <Input />
+          </Row>
+        </Row>
+      </React.Fragment>
+    );
   }
-})(props => {
-  const { getFieldDecorator } = props.form;
-  return (
-    <React.Fragment>
-      <Form labelAlign="left">
-        <Form.Item label="موضوع" style={{fontFamily: "iransans"}}>
-          {getFieldDecorator("title", {
-            rules: [{ required: false, message: "Title is required!" }],
-          })(<Input />)}
-        </Form.Item>
-      </Form>
-      <Row>
-        <h4 className="fa" style={{float: "right"}}>موضوع</h4>
-        <span>
-          <Input />
-          <Input />
-        </span>
-      </Row>
-    </React.Fragment>
-  );
-});
+}

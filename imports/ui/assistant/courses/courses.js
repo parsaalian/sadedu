@@ -31,14 +31,14 @@ export default class CoursesList extends Component {
     return (
       <Page>
         <Row>
-          <Col span={20}>
+          <Col span={18}>
             <Row type="flex" justify="center">
               <Col span={18}>
                 <List conditions={this.mapStateToFilter()}></List>
               </Col>
             </Row>
           </Col>
-          <Col span={4} style={{position: "fixed", right: "32px"}}>
+          <Col span={6} style={{position: "fixed", right: "32px"}}>
             <Filter {...this.state.fields} onChange={this.handleFormChange} />
           </Col>
         </Row>
