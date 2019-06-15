@@ -8,7 +8,7 @@ const data = [
     key: "1",
     id: "95105011",
     name: "John Brown",
-    gender: "Male",
+    gender: "مرد",
     level: "MSc",
     credit: 10,
     major: "Computer Engineering",
@@ -18,41 +18,41 @@ const data = [
     key: "2",
     id: "95105022",
     name: "Joe Black",
-    gender: "Male",
+    gender: "مرد",
     level: "BSc",
     credit: 15,
     major: "Computer Science",
-    tags: ['eligible'],
+    tags: ['مجاز'],
   },
   {
     key: "3",
     id: "95105067",
     name: "Jim Green",
-    gender: "Male",
+    gender: "مرد",
     level: "BSc",
     credit: 17,
     major: "Computer Science",
-    tags: ['eligible'],
+    tags: ['مجاز'],
   },
   {
     key: "4",
     id: "95105055",
     name: "Jim Red",
-    gender: "Male",
+    gender: "مرد",
     level: "BSc",
     credit: 13,
     major: "Computer Science",
-    tags: ['eligible'],
+    tags: ['مجاز'],
   },
   {
     key: "5",
     id: "94108900",
     name: "Rose Green",
-    gender: "Female",
+    gender: "زن",
     level: "BSc",
     credit: 14,
     major: "Electrical Engineering",
-    tags: ['prerequistics'],
+    tags: ['عدم رعایت پیشنیازی'],
   },
 ];
 
@@ -139,7 +139,7 @@ export default class RegistrationTable extends Component {
       {
         title: 'جنسیت',
         dataIndex: 'gender',
-        filters: [{ text: 'Male', value: 'male' }, { text: 'Female', value: 'female' }],
+        filters: [{ text: 'مرد', value: 'male' }, { text: 'زن', value: 'female' }],
         key: 'gender',
       },
       {
@@ -170,10 +170,10 @@ export default class RegistrationTable extends Component {
           if (tag === 'gender') {
             color = 'volcano';
           }
-          if (tag === 'prerequistics') {
+          if (tag === 'عدم رعایت پیشنیازی') {
             color = 'red';
           }
-          if (tag === 'eligible') {
+          if (tag === 'مجاز') {
             color = 'green';
           }
           return (

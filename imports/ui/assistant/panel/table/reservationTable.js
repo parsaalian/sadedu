@@ -12,7 +12,7 @@ const data = [
     level: "BSc",
     credit: 12,
     major: "Computer Engineering",
-    tags: ['prerequistics'],
+    tags: ['عدم رعایت پیشنیازی'],
   },
   {
     key: "2",
@@ -22,7 +22,7 @@ const data = [
     level: "BSc",
     credit: 16,
     major: "Computer Engineering",
-    tags: ['eligible'],
+    tags: ['مجاز'],
   },
   {
     key: "3",
@@ -32,7 +32,7 @@ const data = [
     level: "MSc",
     credit: 15,
     major: "Computer Engineering",
-    tags: ['eligible'],
+    tags: ['مجاز'],
   },
 ];
 
@@ -147,13 +147,13 @@ export default class ReservationTable extends Component {
           <span>
         {tags.map(tag => {
           let color = 'blue';
-          if (tag === 'gender') {
+          if (tag === 'جنسیت غیرمجاز') {
             color = 'volcano';
           }
-          if (tag === 'prerequistics') {
+          if (tag === 'عدم رعایت پیشنیازی') {
             color = 'red';
           }
-          if (tag === 'eligible') {
+          if (tag === 'مجاز') {
             color = 'green';
           }
           return (

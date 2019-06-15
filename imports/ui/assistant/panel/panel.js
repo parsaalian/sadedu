@@ -21,10 +21,10 @@ export default class Panel extends Component {
 
             <Row gutter={16} style={{background: "#fff", padding: "30px"}}>
               <Tabs defaultActiveKey="reg">
-               <Tabs.TabPane tab="Registered" key="reg">
+               <Tabs.TabPane tab="لیست ثبت نام" key="reg">
                  <RegistrationTable></RegistrationTable>
                </Tabs.TabPane>
-               <Tabs.TabPane tab="Reserved" key="res">
+               <Tabs.TabPane tab="لیست رزرو" key="res">
                  <ReservationTable></ReservationTable>
                </Tabs.TabPane>
               </Tabs>

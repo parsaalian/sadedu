@@ -22,20 +22,20 @@ class Info extends Component {
           <Col span={12}>
             <Row type="flex" justify="center">
               <Col>
-                <Card style={{width: 200}} title="Student Requests">
+                <Card style={{width: 250}} title="درخواست های دانشجویان">
                   <Statistic value={11} precision={0} valueStyle={{color: "#3f8600"}} prefix={<Icon type="bell" theme="twoTone" twoToneColor="#52c41a"/>}/>
                 </Card>
 
-                <Card style={{width: 200}} title="Remaining Time">
+                <Card style={{width: 250}} title="زمان باقی مانده تا ثبت نام">
                   <Statistic.Countdown value={Date.now() + 172830000} valueStyle={{color: "#932381"}} prefix={<Icon type="dashboard" theme="twoTone" twoToneColor="#932381"/>}/>
                 </Card>
               </Col>
 
               <Col>
-                <Card style={{width: 200}} title="Registered Students">
+                <Card style={{width: 250}} title="تعداد دانشجویان ثبت نامی">
                   <Statistic value={course.registered} valueStyle={{color: "#179ba1"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#179ba1"/>} suffix={"/" + course.capacity} />
                 </Card>
-                <Card style={{width: 200}} title="Reserved Students">
+                <Card style={{width: 250}} title="تعداد دانشجویان رزرو">
                   <Statistic value={course.reserveRegistered} valueStyle={{color: "#f0931b"}} prefix={<Icon type="edit" theme="twoTone" twoToneColor="#f0931b"/>} suffix={"/" + course.reserveCapacity} />
                 </Card>
               </Col>

@@ -31,10 +31,10 @@ class DrawerForm extends Component {
     return (
       <div>
         <Button type="primary" onClick={this.showDrawer}>
-          <Icon type="edit"/> Edit Information
+          <Icon type="edit"/> تغییر اطلاعات
         </Button>
         <Drawer
-          title="Edit Course Information"
+          title="اطلاعات درس"
           width={720}
           onClose={this.onClose}
           visible={this.state.visible}
@@ -42,22 +42,22 @@ class DrawerForm extends Component {
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
               <Col span={6}>
-                <Form.Item label="Credits">
+                <Form.Item label="تعداد واحد">
                   {(<InputNumber defaultValue="3" min={0} max={4}/>)}
                 </Form.Item>
               </Col>
               <Col span={6}>
-                <Form.Item label="Group">
+                <Form.Item label="شماره گروه">
                   {(<InputNumber defaultValue="2" min={1} max={4}/>)}
                 </Form.Item>
               </Col>
               <Col span={6}>
-                <Form.Item label="Capacity">
+                <Form.Item label="ظرفیت">
                   {(<InputNumber defaultValue="30" min={0} max={100}/>)}
                 </Form.Item>
               </Col>
               <Col span={6}>
-                <Form.Item label="Reserve Capacity">
+                <Form.Item label="ظرفیت رزرو">
                   {(<InputNumber defaultValue="10" min={0} max={25}/>)}
                 </Form.Item>
               </Col>
@@ -65,14 +65,14 @@ class DrawerForm extends Component {
 
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Instructor(s)">
+                <Form.Item label="استاد">
                   {getFieldDecorator('name', {
                     rules: [{required: true, message: 'Please enter instructor(s) name'}],
                   })(<Input placeholder="Please enter instructor(s) name"/>)}
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Course Website">
+                <Form.Item label="صفحه درس">
                   {getFieldDecorator('url', {
                     rules: [{required: true, message: 'Please enter url'}],
                   })(
@@ -88,20 +88,20 @@ class DrawerForm extends Component {
             </Row>
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Level">
+                <Form.Item label="مقطع">
                   {getFieldDecorator('level', {
                     rules: [{required: true, message: 'Please choose the level'}],
                   })(
                     <Select placeholder="Please choose the level">
-                      <Option value="bsc">BSc</Option>
-                      <Option value="msc">MSc</Option>
-                      <Option value="phd">Phd</Option>
+                      <Option value="bsc"> کارشناسی</Option>
+                      <Option value="msc">کارشناسی ارشد</Option>
+                      <Option value="phd">دکترا</Option>
                     </Select>,
                   )}
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Pre-requisites">
+                <Form.Item label="پیشنیازها">
                   {getFieldDecorator('select-multiple', {
                     rules: [
                       {required: true, message: 'Please select pre-requisites!', type: 'array'},
@@ -118,17 +118,17 @@ class DrawerForm extends Component {
             </Row>
             <Row gutter={16}>
               <Col span={6}>
-                <Form.Item label="Class Time">
+                <Form.Item label="زمان کلاس">
                   {getFieldDecorator('time-picker')(<TimePicker/>)}
                 </Form.Item>
               </Col>
               <Col span={9}>
-                <Form.Item label="Class Place">
-                  {getFieldDecorator('text')(<Input placeholder="Please enter class place"/>)}
+                <Form.Item label="محل کلاس">
+                  {getFieldDecorator('text')(<Input placeholder="مکان کلاس را وارد نمایید."/>)}
                 </Form.Item>
               </Col>
               <Col span={6}>
-                <Form.Item label="Exam Date and Time">
+                <Form.Item label="تاریخ و زمان آزمون نهایی">
                   {getFieldDecorator('date-time-picker')(
                     <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>,
                   )}
@@ -137,7 +137,7 @@ class DrawerForm extends Component {
             </Row>
             <Row gutter={16}>
               <Col span={24}>
-                <Form.Item label="Course Description">
+                <Form.Item label="شرح درس">
                   {getFieldDecorator('description', {
                     rules: [
                       {
@@ -145,13 +145,13 @@ class DrawerForm extends Component {
                         message: 'please enter url description',
                       },
                     ],
-                  })(<Input.TextArea rows={4} placeholder="please enter url description"/>)}
+                  })(<Input.TextArea rows={4} placeholder="خلاصه ای از شرح درس را وارد نمایید."/>)}
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Course Syllabus">
+                <Form.Item label="قوانین">
                   <div className="dropbox">
                     {getFieldDecorator('dragger', {
                       valuePropName: 'fileList',
@@ -161,14 +161,14 @@ class DrawerForm extends Component {
                         <p className="ant-upload-drag-icon">
                           <Icon type="inbox"/>
                         </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                        <p className="ant-upload-text">فایل را بکشید یا بر روی این ناحیه کلیک نمایید.</p>
                       </Upload.Dragger>,
                     )}
                   </div>
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Course Calendar">
+                <Form.Item label="تقویم آموزشی">
                   <div className="dropbox">
                     {getFieldDecorator('dragger', {
                       valuePropName: 'fileList',
@@ -178,7 +178,7 @@ class DrawerForm extends Component {
                         <p className="ant-upload-drag-icon">
                           <Icon type="inbox"/>
                         </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                        <p className="ant-upload-text">فایل را بکشید یا بر روی این ناحیه کلیک نمایید.</p>
                       </Upload.Dragger>,
                     )}
                   </div>
