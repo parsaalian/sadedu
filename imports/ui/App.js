@@ -16,6 +16,9 @@ import AssistantCoursePanel from "./assistant/panel/panel";
 // student panel pages
 import StudentHome from "./students/home";
 import StudentCourses from "./students/courses/courses";
+import RegistrationPage from "./students/registration/registration"
+import SchedulePage from "./students/calendar/calendar"
+import ChartPage from "./students/chart/chart"
 
 export default class App extends Component {
   render() {
@@ -34,6 +37,9 @@ export default class App extends Component {
 
           <Route path="/students" exact component={StudentHome}/>
           <Route path="/students/courses" exact component={StudentCourses}/>
+          <Route path="/students/registration" exact component={RegistrationPage}/>
+          <Route path="/students/calendar" exact component={SchedulePage}/>
+          <Route path="/students/chart" exact component={ChartPage}/>
 
           <Route exact component={NotFound}/>
         </Switch>
