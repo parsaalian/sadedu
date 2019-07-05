@@ -10,7 +10,7 @@ class CoursesList extends Component {
   filterWithCondition() {
     return _.filter(this.props.courses, (item) => {
         return _.reduce(this.props.conditions, (result, value, key) => {
-          return result && (item[key] === undefined || _.startsWith(item[key].toLowerCase(), value.toLowerCase()))
+          return result && (item[key] === undefined || _.startsWith(item[key], value))
       }, true)
     });
   }
@@ -18,7 +18,6 @@ class CoursesList extends Component {
   render() {
     return (
       <List grid={{gutter: 16, column: 2}} itemLayout="vertical"
-        pagination={<Pagination className="fa rtl" style={{}} pageSize={8} />}
         dataSource={this.filterWithCondition()}
         renderItem={item => (<CourseCard item={item} />)} />
     );

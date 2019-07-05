@@ -14,8 +14,8 @@ import AssistantHome from "./assistant/home";
 import AssistantCourses from "./assistant/courses/courses";
 import AssistantCoursePanel from "./assistant/panel/panel";
 // student panel pages
-import StudentHome from "./students/home";
-import StudentCourses from "./students/courses/courses";
+// import StudentHome from "./students/home";
+// import StudentCourses from "./students/courses/courses";
 
 export default class App extends Component {
   render() {
@@ -32,8 +32,8 @@ export default class App extends Component {
           <Route path="/assistant/courses" exact component={AssistantCourses}/>
           <Route path="/assistant/courses/:id" exact component={AssistantCoursePanel}/>
 
-          <Route path="/students" exact component={StudentHome}/>
-          <Route path="/students/courses" exact component={StudentCourses}/>
+          {/*<Route path="/students" exact component={StudentHome}/>
+          <Route path="/students/courses" exact component={StudentCourses}/>*/}
 
           <Route exact component={NotFound}/>
         </Switch>

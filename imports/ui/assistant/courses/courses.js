@@ -8,7 +8,7 @@ import Filter from "./filter/filter";
 export default class CoursesList extends Component {
   constructor(props) {
     super(props);
-    this.state = { fields: { title: { value: "" } } };
+    this.state = { fields: { capacity: "", faculty: "", section: "", cid: "", title: "", teacher: "" } };
     this.handleFormChange = this.handleFormChange.bind(this);
   }
 
@@ -20,8 +20,8 @@ export default class CoursesList extends Component {
 
   mapStateToFilter() {
     return _.reduce(this.state.fields, (result, value, key) => {
-      if (value.value !== "") {
-        result[key] = value.value;
+      if (value !== "") {
+        result[key] = value;
       }
       return result;
     }, {});
@@ -38,7 +38,7 @@ export default class CoursesList extends Component {
               </Col>
             </Row>
           </Col>
-          <Col span={6} style={{position: "fixed", right: "32px"}}>
+          <Col span={6}>
             <Filter {...this.state.fields} onChange={this.handleFormChange} />
           </Col>
         </Row>
