@@ -14,11 +14,16 @@ import AssistantHome from "./assistant/home";
 import AssistantCourses from "./assistant/courses/courses";
 import AssistantCoursePanel from "./assistant/panel/panel";
 // student panel pages
+<<<<<<< HEAD
+// import StudentHome from "./students/home";
+// import StudentCourses from "./students/courses/courses";
+=======
 import StudentHome from "./students/home";
 import StudentCourses from "./students/courses/courses";
 import RegistrationPage from "./students/registration/registration"
 import SchedulePage from "./students/calendar/calendar"
 import ChartPage from "./students/chart/chart"
+>>>>>>> cb6c2e505b844cd3b6031637ccf65470bee810a0
 
 export default class App extends Component {
   render() {
@@ -35,11 +40,16 @@ export default class App extends Component {
           <Route path="/assistant/courses" exact component={AssistantCourses}/>
           <Route path="/assistant/courses/:id" exact component={AssistantCoursePanel}/>
 
+<<<<<<< HEAD
+          {/*<Route path="/students" exact component={StudentHome}/>
+          <Route path="/students/courses" exact component={StudentCourses}/>*/}
+=======
           <Route path="/students" exact component={StudentHome}/>
           <Route path="/students/courses" exact component={StudentCourses}/>
           <Route path="/students/registration" exact component={RegistrationPage}/>
           <Route path="/students/calendar" exact component={SchedulePage}/>
           <Route path="/students/chart" exact component={ChartPage}/>
+>>>>>>> cb6c2e505b844cd3b6031637ccf65470bee810a0
 
           <Route exact component={NotFound}/>
         </Switch>
