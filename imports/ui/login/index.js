@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { css } from "@emotion/core";
 
-import Form from "./form/form";
+import Form from "./form";
 
 class Login extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Login extends Component {
       this.setState({ loading: true });
       setTimeout(() => {
         this.getUser();
-      }, 1000);
+      }, 500);
     }
   }
 
@@ -41,7 +41,7 @@ class Login extends Component {
     } else {
       setTimeout(() => {
         this.getUser();
-      }, 1000);
+      }, 500);
     }
   }
 
@@ -49,7 +49,20 @@ class Login extends Component {
     this.setState({ error: "" });
     const user = this.meteorLogin(username, password);
     if (user) {
-      this.props.history.push("/admin");
+      switch (user.roles[0]) {
+        case "admin":
+          this.props.history.push("/admin");
+          break;
+        case "assistant":
+          this.props.history.push("/assistant");
+          break;
+        case "student":
+          this.props.history.push("/student");
+          break;
+        default:
+          this.setState({ loading: false });
+          this.props.history.push("/");
+      }
     }
   }
 

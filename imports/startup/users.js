@@ -19,3 +19,19 @@ if (!Accounts.findUserByUsername("admin")) {
     profile: { type: "admin" }
   });
 }
+
+if (!Accounts.findUserByUsername("assistant")) {
+  Accounts.createUser({
+    username: "assistant",
+    password: "assistant",
+    profile: { type: "assistant" }
+  });
+}
+
+if (!Accounts.findUserByUsername("student")) {
+  Accounts.createUser({
+    username: "student",
+    password: "student",
+    profile: { type: "student" }
+  });
+}

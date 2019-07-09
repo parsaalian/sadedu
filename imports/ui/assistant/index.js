@@ -1,4 +1,3 @@
-import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
 
 import Page from "./_global/page";

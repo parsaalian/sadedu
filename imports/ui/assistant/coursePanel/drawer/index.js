@@ -70,15 +70,6 @@ class DrawerForm extends Component {
         newTeacher: this.refs.teacher.state.value
       });
     }
-    console.log(this.refs.description);
-    if (course.description !== this.refs.description.state.value) {
-      Meteor.call("courses.changeDescription", {
-        cid: course.cid,
-        group: course.group,
-        credit: course.credit,
-        newDescription: this.refs.description.state.value
-      });
-    }
   }
 
   render() {

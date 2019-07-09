@@ -22,7 +22,11 @@ class TopMenu extends Component {
 
   logout(e) {
     Meteor.logout();
-    this.props.history.push("/");
+    if (Meteor.userId()) {
+      setTimeout(() => this.logout(e), 250);
+    } else {
+      this.props.history.push("/");
+    }
   }
 
   render() {

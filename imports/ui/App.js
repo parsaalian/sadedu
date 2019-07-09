@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Login from "./login/login";
+import Login from "./login";
 import NotFound from "./_global/404";
 // admin panel pages
 import AdminHome from "./admin";
