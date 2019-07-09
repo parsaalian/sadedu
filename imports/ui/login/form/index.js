@@ -23,7 +23,8 @@ export default class LoginForm extends Component {
             style={{
               padding: "2rem",
               boxShadow: "0px 0px 7px -2px rgba(17,17,17,0.5)",
-              borderRadius: "1rem"
+              borderRadius: "1rem",
+              backgroundColor: "white"
             }}
           >
             <h1>ورود به سامانه</h1>

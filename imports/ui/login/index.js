@@ -75,7 +75,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div style={{ width: "100vw", height: "100vh", display: "flex" }}>
+      <div style={{ width: "100vw", height: "100vh", display: "flex", backgroundColor: "#F5F5F5" }}>
         {this.state.loading ? (
           <ClipLoader
             css={`
