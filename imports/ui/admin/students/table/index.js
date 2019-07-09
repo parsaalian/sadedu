@@ -12,7 +12,7 @@ class StudentsTable extends Component {
 
   remove(e) {
     e.preventDefault();
-    Meteor.call("students.remove", {sid: Number(e.target.name)});
+    Meteor.call("students.remove", { sid: Number(e.target.name) });
   }
 
   render() {
@@ -33,7 +33,11 @@ class StudentsTable extends Component {
                 <td>{std.sid}</td>
                 <td>{std.name}</td>
                 <td>{std.familyName}</td>
-                <td><Button name={std.sid} variant="danger" onClick={this.remove}>Remove</Button></td>
+                <td>
+                  <Button name={std.sid} variant="danger" onClick={this.remove}>
+                    Remove
+                  </Button>
+                </td>
               </tr>
             );
           })}

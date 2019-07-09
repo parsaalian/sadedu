@@ -1,6 +1,6 @@
-import {Meteor} from "meteor/meteor";
-import React, {Component} from "react";
-import {Table, Input, Button, Icon, Tag} from "antd";
+import { Meteor } from "meteor/meteor";
+import React, { Component } from "react";
+import { Table, Input, Button, Icon, Tag } from "antd";
 import Highlighter from "react-highlight-words";
 
 const data = [
@@ -12,7 +12,7 @@ const data = [
     level: "BSc",
     credit: 12,
     major: "Computer Engineering",
-    tags: ["non-eligible"],
+    tags: ["non-eligible"]
   },
   {
     key: "2",
@@ -22,7 +22,7 @@ const data = [
     level: "BSc",
     credit: 16,
     major: "Computer Engineering",
-    tags: ["eligible"],
+    tags: ["eligible"]
   },
   {
     key: "3",
@@ -32,44 +32,55 @@ const data = [
     level: "MSc",
     credit: 15,
     major: "Computer Engineering",
-    tags: ["eligible"],
-  },
+    tags: ["eligible"]
+  }
 ];
 
 export default class StudentsTable extends Component {
   state = {
-    searchText: "",
+    searchText: ""
   };
 
   getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
-      <div style={{padding: 8}}>
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters
+    }) => (
+      <div style={{ padding: 8 }}>
         <Input
           ref={node => {
             this.searchInput = node;
           }}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onChange={e =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
           onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
-          style={{width: 188, marginBottom: 8, display: "block"}}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Button
           type="primary"
           onClick={() => this.handleSearch(selectedKeys, confirm)}
           icon="search"
           size="small"
-          style={{width: 90, marginRight: 8}}
+          style={{ width: 90, marginRight: 8 }}
         >
           Search
         </Button>
-        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{width: 90}}>
+        <Button
+          onClick={() => this.handleReset(clearFilters)}
+          size="small"
+          style={{ width: 90 }}
+        >
           Reset
         </Button>
       </div>
     ),
     filterIcon: filtered => (
-      <Icon type="search" style={{color: filtered ? "#1890ff" : undefined}}/>
+      <Icon type="search" style={{ color: filtered ? "#1890ff" : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -83,22 +94,22 @@ export default class StudentsTable extends Component {
     },
     render: text => (
       <Highlighter
-        highlightStyle={{backgroundColor: "#ffc069", padding: 0}}
+        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
         searchWords={[this.state.searchText]}
         autoEscape
         textToHighlight={text.toString()}
       />
-    ),
+    )
   });
 
   handleSearch = (selectedKeys, confirm) => {
     confirm();
-    this.setState({searchText: selectedKeys[0]});
+    this.setState({ searchText: selectedKeys[0] });
   };
 
   handleReset = clearFilters => {
     clearFilters();
-    this.setState({searchText: ""});
+    this.setState({ searchText: "" });
   };
 
   render() {
@@ -108,36 +119,39 @@ export default class StudentsTable extends Component {
         dataIndex: "id",
         key: "id",
         ...this.getColumnSearchProps("id"),
-        render: text => <a href="javascript:;">{text}</a>,
+        render: text => <a href="javascript:;">{text}</a>
       },
       {
         title: "Name",
         dataIndex: "name",
         key: "name",
-        ...this.getColumnSearchProps("name"),
+        ...this.getColumnSearchProps("name")
       },
       {
         title: "Gender",
         dataIndex: "gender",
-        filters: [{text: "Male", value: "male"}, {text: "Female", value: "female"}],
-        key: "gender",
+        filters: [
+          { text: "Male", value: "male" },
+          { text: "Female", value: "female" }
+        ],
+        key: "gender"
       },
       {
         title: "Level",
         dataIndex: "level",
         key: "level",
-        ...this.getColumnSearchProps("level"),
+        ...this.getColumnSearchProps("level")
       },
       {
         title: "major",
         dataIndex: "major",
         key: "major",
-        ...this.getColumnSearchProps("major"),
+        ...this.getColumnSearchProps("major")
       },
       {
         title: "Registered Credits",
         dataIndex: "credit",
-        key: "credit",
+        key: "credit"
       },
       {
         title: "Registration Status",
@@ -145,29 +159,33 @@ export default class StudentsTable extends Component {
         dataIndex: "tags",
         render: tags => (
           <span>
-        {tags.map(tag => {
-          let color = "blue";
-          if (tag === "non-eligible") {
-            color = "volcano";
-          }
-          if (tag === "eligible") {
-            color = "green";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </span>
-        ),
-      },
+            {tags.map(tag => {
+              let color = "blue";
+              if (tag === "non-eligible") {
+                color = "volcano";
+              }
+              if (tag === "eligible") {
+                color = "green";
+              }
+              return (
+                <Tag color={color} key={tag}>
+                  {tag.toUpperCase()}
+                </Tag>
+              );
+            })}
+          </span>
+        )
+      }
     ];
-    return <Table columns={columns}
-                  dataSource={data}
-                  size="middle"
-                  bordered
-                  title={() => "Students List"}
-                  footer={() => ""}/>;
+    return (
+      <Table
+        columns={columns}
+        dataSource={data}
+        size="middle"
+        bordered
+        title={() => "Students List"}
+        footer={() => ""}
+      />
+    );
   }
 }

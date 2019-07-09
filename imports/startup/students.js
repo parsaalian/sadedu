@@ -7,9 +7,9 @@ if (!Students.findOne({})) {
     const rn = randomName().split(" ");
     const sid = String(baseSID + i);
     const name = rn[0];
-    const familyName= rn[1];
+    const familyName = rn[1];
     const rand = Math.floor(Math.random() * 4) + 8;
-    const gender = ["m", "f"][Math.floor(Math.random() * 2)]
-    Students.insert({sid, name, familyName, rand, gender});
+    const gender = ["m", "f"][Math.floor(Math.random() * 2)];
+    Students.insert({ sid, name, familyName, rand, gender });
   }
 }

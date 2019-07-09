@@ -14,17 +14,21 @@ export default class CoursesList extends Component {
 
   handleFormChange(changedFields) {
     this.setState(({ fields }) => ({
-      fields: { ...fields, ...changedFields },
+      fields: { ...fields, ...changedFields }
     }));
   }
 
   mapStateToFilter() {
-    return _.reduce(this.state.fields, (result, value, key) => {
-      if (value.value !== "") {
-        result[key] = value.value;
-      }
-      return result;
-    }, {});
+    return _.reduce(
+      this.state.fields,
+      (result, value, key) => {
+        if (value.value !== "") {
+          result[key] = value.value;
+        }
+        return result;
+      },
+      {}
+    );
   }
 
   render() {
@@ -38,7 +42,7 @@ export default class CoursesList extends Component {
               </Col>
             </Row>
           </Col>
-          <Col span={6} style={{position: "fixed", right: "32px"}}>
+          <Col span={6} style={{ position: "fixed", right: "32px" }}>
             <Filter {...this.state.fields} onChange={this.handleFormChange} />
           </Col>
         </Row>

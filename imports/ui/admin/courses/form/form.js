@@ -12,10 +12,14 @@ export default class StudentForm extends Component {
     return (
       <React.Fragment>
         <FormGroup>
-          <Button color="primary"
-            onClick={() => this.setState({manual: !this.state.manual})}
+          <Button
+            color="primary"
+            onClick={() => this.setState({ manual: !this.state.manual })}
             aria-controls="manual-form"
-            aria-expanded={this.state.manual}>Manual</Button>{" "}
+            aria-expanded={this.state.manual}
+          >
+            Manual
+          </Button>{" "}
           <Button color="primary">Upload</Button>{" "}
           <Button color="primary">GET</Button>
         </FormGroup>

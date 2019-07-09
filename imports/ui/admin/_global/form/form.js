@@ -5,7 +5,11 @@ export default class Form extends Component {
   render() {
     return (
       <FormGroup>
-        {this.props.forms ? this.props.forms.map((TheForm, i) => <TheForm key={i} />) : <React.Fragment></React.Fragment>}
+        {this.props.forms ? (
+          this.props.forms.map((TheForm, i) => <TheForm key={i} />)
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
       </FormGroup>
     );
   }

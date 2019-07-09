@@ -19,13 +19,15 @@ export default class InputField extends Component {
     return (
       <Form.Group>
         <Form.Label htmlFor={this.props.name}>{this.props.label}</Form.Label>
-        <Form.Control type={this.props.type}
-              name={this.props.name}
-              id={this.props.name}
-              onChange={this.handleChange}
-              value={this.state.value}
-              autoComplete="off"
-              {...this.props}/>
+        <Form.Control
+          type={this.props.type}
+          name={this.props.name}
+          id={this.props.name}
+          onChange={this.handleChange}
+          value={this.state.value}
+          autoComplete="off"
+          {...this.props}
+        />
       </Form.Group>
     );
   }

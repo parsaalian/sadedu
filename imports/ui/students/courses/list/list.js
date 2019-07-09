@@ -8,19 +8,30 @@ import CourseCard from "/imports/ui/assistant/_global/courseCard";
 
 class CoursesList extends Component {
   filterWithCondition() {
-    return _.filter(this.props.courses, (item) => {
-        return _.reduce(this.props.conditions, (result, value, key) => {
-          return result && (item[key] === undefined || _.startsWith(item[key].toLowerCase(), value.toLowerCase()))
-      }, true)
+    return _.filter(this.props.courses, item => {
+      return _.reduce(
+        this.props.conditions,
+        (result, value, key) => {
+          return (
+            result &&
+            (item[key] === undefined ||
+              _.startsWith(item[key].toLowerCase(), value.toLowerCase()))
+          );
+        },
+        true
+      );
     });
   }
 
   render() {
     return (
-      <List grid={{gutter: 16, column: 2}} itemLayout="vertical"
+      <List
+        grid={{ gutter: 16, column: 2 }}
+        itemLayout="vertical"
         pagination={<Pagination className="fa rtl" style={{}} pageSize={8} />}
         dataSource={this.filterWithCondition()}
-        renderItem={course => (<CourseCard course={course} />)} />
+        renderItem={course => <CourseCard course={course} />}
+      />
     );
   }
 }

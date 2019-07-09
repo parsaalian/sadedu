@@ -52,7 +52,9 @@ class DrawerForm extends Component {
         newCapacity: this.refs.capacity.inputNumberRef.state.value
       });
     }
-    if (course.reserveCapacity !== this.refs.reserve.inputNumberRef.state.value) {
+    if (
+      course.reserveCapacity !== this.refs.reserve.inputNumberRef.state.value
+    ) {
       Meteor.call("courses.changeReserveCapacity", {
         cid: course.cid,
         group: course.group,

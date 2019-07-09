@@ -8,23 +8,36 @@ import Filter from "./filter";
 export default class CoursesList extends Component {
   constructor(props) {
     super(props);
-    this.state = { fields: { capacity: "", faculty: "", section: "", cid: "", title: "", teacher: "" } };
+    this.state = {
+      fields: {
+        capacity: "",
+        faculty: "",
+        section: "",
+        cid: "",
+        title: "",
+        teacher: ""
+      }
+    };
     this.handleFormChange = this.handleFormChange.bind(this);
   }
 
   handleFormChange(changedFields) {
     this.setState(({ fields }) => ({
-      fields: { ...fields, ...changedFields },
+      fields: { ...fields, ...changedFields }
     }));
   }
 
   mapStateToFilter() {
-    return _.reduce(this.state.fields, (result, value, key) => {
-      if (value !== "") {
-        result[key] = value;
-      }
-      return result;
-    }, {});
+    return _.reduce(
+      this.state.fields,
+      (result, value, key) => {
+        if (value !== "") {
+          result[key] = value;
+        }
+        return result;
+      },
+      {}
+    );
   }
 
   render() {

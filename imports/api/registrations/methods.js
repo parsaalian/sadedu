@@ -6,101 +6,218 @@ import { Roles } from "meteor/alanning:roles";
 import { ROLES } from "../../startup/roles";
 
 Meteor.methods({
-  "registrations.add"({cid, prereq, group, credit, sid}) {
+  "registrations.add"({ cid, prereq, group, credit, sid }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
-      if (Students.findOne({sid: sid})) {
-        if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
-          if (!Courses.findOne({
-            cid: cid, prereq: prereq, group: group, credit: credit, $and: [
-              "this.reserveRegistered === this.reserveCapacity", "this.registered === this.capacity"]
-          })) {
-            if (!Registrations.findOne({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid})) {
-              if (Courses.findOne({
-                cid: cid, prereq: prereq, group: group, credit: credit,
-                $where: "this.registered < this.capacity"
-              })) {
-                Registrations.insert({cid, prereq, group, credit, sid, isReserved: false, placeInReservedQueue: 0});
-                Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-                  {$inc: {registered: 1}});
-              } else if (Courses.findOne({
-                cid: cid, prereq: prereq, group: group, credit: credit,
-                $where: "this.reserveRegistered < this.reserveCapacity"
-              })) {
+      if (Students.findOne({ sid: sid })) {
+        if (
+          Courses.findOne({
+            cid: cid,
+            prereq: prereq,
+            group: group,
+            credit: credit
+          })
+        ) {
+          if (
+            !Courses.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              $and: [
+                "this.reserveRegistered === this.reserveCapacity",
+                "this.registered === this.capacity"
+              ]
+            })
+          ) {
+            if (
+              !Registrations.findOne({
+                cid: cid,
+                prereq: prereq,
+                group: group,
+                credit: credit,
+                sid: sid
+              })
+            ) {
+              if (
+                Courses.findOne({
+                  cid: cid,
+                  prereq: prereq,
+                  group: group,
+                  credit: credit,
+                  $where: "this.registered < this.capacity"
+                })
+              ) {
                 Registrations.insert({
-                  cid, prereq, group, credit, sid, isReserved: true,
-                  placeInReservedQueue: Registrations.find({isReserved: true}).count() + 1
+                  cid,
+                  prereq,
+                  group,
+                  credit,
+                  sid,
+                  isReserved: false,
+                  placeInReservedQueue: 0
                 });
-                Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-                  {$inc: {reserveRegistered: 1}});
+                Courses.update(
+                  { cid: cid, prereq: prereq, group: group, credit: credit },
+                  { $inc: { registered: 1 } }
+                );
+              } else if (
+                Courses.findOne({
+                  cid: cid,
+                  prereq: prereq,
+                  group: group,
+                  credit: credit,
+                  $where: "this.reserveRegistered < this.reserveCapacity"
+                })
+              ) {
+                Registrations.insert({
+                  cid,
+                  prereq,
+                  group,
+                  credit,
+                  sid,
+                  isReserved: true,
+                  placeInReservedQueue:
+                    Registrations.find({ isReserved: true }).count() + 1
+                });
+                Courses.update(
+                  { cid: cid, prereq: prereq, group: group, credit: credit },
+                  { $inc: { reserveRegistered: 1 } }
+                );
               }
             } else {
               throw new Meteor.Error("This student already has this course.");
             }
           } else {
-            throw new Meteor.Error("This course capacity and reserve capacity is full.");
+            throw new Meteor.Error(
+              "This course capacity and reserve capacity is full."
+            );
           }
         } else {
-          throw new Meteor.Error("This course doesn\"t exist.");
+          throw new Meteor.Error('This course doesn"t exist.');
         }
       } else {
-        throw new Meteor.Error("This student doesn\"t exist.");
+        throw new Meteor.Error('This student doesn"t exist.');
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
     }
   },
 
-  "registrations.remove"({cid, prereq, group, credit, sid}) {
+  "registrations.remove"({ cid, prereq, group, credit, sid }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
-      if (Students.findOne({sid: sid})) {
-        if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
-          if (Registrations.findOne({
-            cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
-            isReserved: true
-          })) {
-            const thisPlaceInReservedQueue = Registrations.findOne({
-              cid: cid, prereq: prereq, group: group,
-              credit: credit, sid: sid
-            }).placeInReservedQueue;
-            Registrations.remove({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid});
-            Registrations.update({
-                cid: cid, prereq: prereq, group: group, credit: credit,
-                isReserved: true, placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
-              },
-              {$inc: {placeInReservedQueue: -1}});
-            Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-              {$inc: {reserveRegistered: -1}});
-          } else if (Registrations.findOne({
-            cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
-            isReserved: false
-          })) {
-            Registrations.remove({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid});
-            if (Registrations.find({
-              cid: cid, prereq: prereq, group: group, credit: credit,
+      if (Students.findOne({ sid: sid })) {
+        if (
+          Courses.findOne({
+            cid: cid,
+            prereq: prereq,
+            group: group,
+            credit: credit
+          })
+        ) {
+          if (
+            Registrations.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid,
               isReserved: true
-            }).count() > 0) {
-              Registrations.update({
-                cid: cid, prereq: prereq, group: group, credit: credit,
+            })
+          ) {
+            const thisPlaceInReservedQueue = Registrations.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid
+            }).placeInReservedQueue;
+            Registrations.remove({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid
+            });
+            Registrations.update(
+              {
+                cid: cid,
+                prereq: prereq,
+                group: group,
+                credit: credit,
+                isReserved: true,
+                placeInReservedQueue: { $gt: thisPlaceInReservedQueue }
+              },
+              { $inc: { placeInReservedQueue: -1 } }
+            );
+            Courses.update(
+              { cid: cid, prereq: prereq, group: group, credit: credit },
+              { $inc: { reserveRegistered: -1 } }
+            );
+          } else if (
+            Registrations.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid,
+              isReserved: false
+            })
+          ) {
+            Registrations.remove({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid
+            });
+            if (
+              Registrations.find({
+                cid: cid,
+                prereq: prereq,
+                group: group,
+                credit: credit,
                 isReserved: true
-              }, {$inc: {placeInReservedQueue: -1}});
-              Registrations.update({
-                cid: cid, prereq: prereq, group: group, credit: credit,
-                isReserved: true, placeInReservedQueue: 0
-              }, {isReserved: false});
-              Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-                {$inc: {reserveRegistered: -1}});
+              }).count() > 0
+            ) {
+              Registrations.update(
+                {
+                  cid: cid,
+                  prereq: prereq,
+                  group: group,
+                  credit: credit,
+                  isReserved: true
+                },
+                { $inc: { placeInReservedQueue: -1 } }
+              );
+              Registrations.update(
+                {
+                  cid: cid,
+                  prereq: prereq,
+                  group: group,
+                  credit: credit,
+                  isReserved: true,
+                  placeInReservedQueue: 0
+                },
+                { isReserved: false }
+              );
+              Courses.update(
+                { cid: cid, prereq: prereq, group: group, credit: credit },
+                { $inc: { reserveRegistered: -1 } }
+              );
             } else {
-              Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-                {$inc: {registered: -1}});
+              Courses.update(
+                { cid: cid, prereq: prereq, group: group, credit: credit },
+                { $inc: { registered: -1 } }
+              );
             }
           } else {
-            throw new Meteor.Error("This student hasn\"t this course.");
+            throw new Meteor.Error('This student hasn"t this course.');
           }
         } else {
-          throw new Meteor.Error("This course doesn\"t exist.");
+          throw new Meteor.Error('This course doesn"t exist.');
         }
       } else {
-        throw new Meteor.Error("This student doesn\"t exist.");
+        throw new Meteor.Error('This student doesn"t exist.');
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
@@ -115,73 +232,177 @@ Meteor.methods({
     }
   },
 
-  "registrations.forceAdd"({cid, prereq, group, credit, sid}) {
+  "registrations.forceAdd"({ cid, prereq, group, credit, sid }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
-      if (Students.findOne({sid: sid})) {
-        if (Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit})) {
-          if (!Registrations.findOne({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid})) {
-            Registrations.insert({cid, prereq, group, credit, sid, isReserved: false, placeInReservedQueue: 0});
-            const course = Courses.findOne({cid: cid, prereq: prereq, group: group, credit: credit});
+      if (Students.findOne({ sid: sid })) {
+        if (
+          Courses.findOne({
+            cid: cid,
+            prereq: prereq,
+            group: group,
+            credit: credit
+          })
+        ) {
+          if (
+            !Registrations.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid
+            })
+          ) {
+            Registrations.insert({
+              cid,
+              prereq,
+              group,
+              credit,
+              sid,
+              isReserved: false,
+              placeInReservedQueue: 0
+            });
+            const course = Courses.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit
+            });
             if (course.registered < course.capacity) {
-              Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-                {$inc: {registered: 1}});
+              Courses.update(
+                { cid: cid, prereq: prereq, group: group, credit: credit },
+                { $inc: { registered: 1 } }
+              );
             } else {
-              Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-                {$inc: {registered: 1, capacity: 1}});
+              Courses.update(
+                { cid: cid, prereq: prereq, group: group, credit: credit },
+                { $inc: { registered: 1, capacity: 1 } }
+              );
             }
-          } else if (Registrations.findOne({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid,
-          isReserved: true})) {
+          } else if (
+            Registrations.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid,
+              isReserved: true
+            })
+          ) {
             const thisPlaceInReservedQueue = Registrations.findOne({
-              cid: cid, prereq: prereq, group: group,
-              credit: credit, sid: sid
+              cid: cid,
+              prereq: prereq,
+              group: group,
+              credit: credit,
+              sid: sid
             }).placeInReservedQueue;
-            Registrations.update({cid: cid, prereq: prereq, group: group, credit: credit, sid: sid},
-              {isReserved: false, placeInReservedQueue: 0});
-            Registrations.update({
-                cid: cid, prereq: prereq, group: group, credit: credit,
-                isReserved: true, placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
+            Registrations.update(
+              {
+                cid: cid,
+                prereq: prereq,
+                group: group,
+                credit: credit,
+                sid: sid
               },
-              {$inc: {placeInReservedQueue: -1}});
-            Courses.update({cid: cid, prereq: prereq, group: group, credit: credit},
-              {$inc: {reserveRegistered: -1, registered: 1, capacity: 1}});
+              { isReserved: false, placeInReservedQueue: 0 }
+            );
+            Registrations.update(
+              {
+                cid: cid,
+                prereq: prereq,
+                group: group,
+                credit: credit,
+                isReserved: true,
+                placeInReservedQueue: { $gt: thisPlaceInReservedQueue }
+              },
+              { $inc: { placeInReservedQueue: -1 } }
+            );
+            Courses.update(
+              { cid: cid, prereq: prereq, group: group, credit: credit },
+              { $inc: { reserveRegistered: -1, registered: 1, capacity: 1 } }
+            );
           } else {
             throw new Meteor.Error("This student already has this course.");
           }
         } else {
-          throw new Meteor.Error("This course doesn\"t exist.");
+          throw new Meteor.Error('This course doesn"t exist.');
         }
       } else {
-        throw new Meteor.Error("This student doesn\"t exist.");
+        throw new Meteor.Error('This student doesn"t exist.');
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
     }
   },
 
-  "registrations.changeGroup"({cid, prereq, prevGroup, credit, sid, newGroup}) {
+  "registrations.changeGroup"({
+    cid,
+    prereq,
+    prevGroup,
+    credit,
+    sid,
+    newGroup
+  }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
-      if (Students.findOne({sid: sid})) {
-        if (Courses.findOne({cid: cid, prereq: prereq, group: prevGroup, credit: credit})) {
-          if (Courses.findOne({cid: cid, prereq: prereq, group: newGroup, credit: credit})) {
+      if (Students.findOne({ sid: sid })) {
+        if (
+          Courses.findOne({
+            cid: cid,
+            prereq: prereq,
+            group: prevGroup,
+            credit: credit
+          })
+        ) {
+          if (
+            Courses.findOne({
+              cid: cid,
+              prereq: prereq,
+              group: newGroup,
+              credit: credit
+            })
+          ) {
             if (prevGroup !== newGroup) {
-              const course = Courses.findOne({cid: cid, prereq: prereq, group: newGroup, credit: credit});
-              if (!(course.registered === course.capacity && course.reserveRegistered === course.reserveCapacity)) {
-                Meteor.call("registrations.remove", {cid, prereq, prevGroup, credit, sid});
-                Meteor.call("registrations.add", {cid, prereq, newGroup, credit, sid});
+              const course = Courses.findOne({
+                cid: cid,
+                prereq: prereq,
+                group: newGroup,
+                credit: credit
+              });
+              if (
+                !(
+                  course.registered === course.capacity &&
+                  course.reserveRegistered === course.reserveCapacity
+                )
+              ) {
+                Meteor.call("registrations.remove", {
+                  cid,
+                  prereq,
+                  prevGroup,
+                  credit,
+                  sid
+                });
+                Meteor.call("registrations.add", {
+                  cid,
+                  prereq,
+                  newGroup,
+                  credit,
+                  sid
+                });
               } else {
-                throw new Meteor.Error("Capacity and reserve capacity of new group is full.");
+                throw new Meteor.Error(
+                  "Capacity and reserve capacity of new group is full."
+                );
               }
             } else {
               throw new Meteor.Error("New group is equal to previous group.");
             }
           } else {
-            throw new Meteor.Error("New group of course doesn\"t exist.");
+            throw new Meteor.Error('New group of course doesn"t exist.');
           }
         } else {
-          throw new Meteor.Error("This course doesn\"t exist.");
+          throw new Meteor.Error('This course doesn"t exist.');
         }
       } else {
-        throw new Meteor.Error("This student doesn\"t exist.");
+        throw new Meteor.Error('This student doesn"t exist.');
       }
     } else {
       throw new Meteor.Error("You are not allowed to do this action.");
