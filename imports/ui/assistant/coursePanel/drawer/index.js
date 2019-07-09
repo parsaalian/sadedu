@@ -52,6 +52,31 @@ class DrawerForm extends Component {
         newCapacity: this.refs.capacity.inputNumberRef.state.value
       });
     }
+    if (course.reserveCapacity !== this.refs.reserve.inputNumberRef.state.value) {
+      Meteor.call("courses.changeReserveCapacity", {
+        cid: course.cid,
+        group: course.group,
+        credit: course.credit,
+        newReserveCapacity: this.refs.reserve.inputNumberRef.state.value
+      });
+    }
+    if (course.teacher !== this.refs.teacher.state.value) {
+      Meteor.call("courses.changeTeacher", {
+        cid: course.cid,
+        group: course.group,
+        credit: course.credit,
+        newTeacher: this.refs.teacher.state.value
+      });
+    }
+    console.log(this.refs.description);
+    if (course.description !== this.refs.description.state.value) {
+      Meteor.call("courses.changeDescription", {
+        cid: course.cid,
+        group: course.group,
+        credit: course.credit,
+        newDescription: this.refs.description.state.value
+      });
+    }
   }
 
   render() {
@@ -72,8 +97,12 @@ class DrawerForm extends Component {
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16} type="flex" justify="end">
               <Col span={6}>
-                <Form.Item label="شماره گروه">
-                  <InputNumber defaultValue={course.group} min={1} />
+                <Form.Item label="ظرفیت رزرو">
+                  <InputNumber
+                    defaultValue={course.reserveCapacity}
+                    ref="reserve"
+                    min={0}
+                  />
                 </Form.Item>
               </Col>
               <Col span={6}>
@@ -85,21 +114,12 @@ class DrawerForm extends Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={6}>
-                <Form.Item label="ظرفیت رزرو">
-                  <InputNumber
-                    defaultValue={course.reserveCapacity}
-                    min={0}
-                    max={25}
-                  />
-                </Form.Item>
-              </Col>
             </Row>
 
             <Row gutter={16} type="flex" justify="end">
               <Col>
                 <Form.Item label="استاد">
-                  <Input defaultValue={course.teacher} />
+                  <Input defaultValue={course.teacher} ref="teacher" />
                 </Form.Item>
               </Col>
             </Row>
@@ -116,6 +136,7 @@ class DrawerForm extends Component {
                   <Input.TextArea
                     rows={4}
                     defaultValue={course.description}
+                    ref="description"
                     placeholder="در صورت نیاز ملاحظات را وارد کنید."
                   />
                 </Form.Item>

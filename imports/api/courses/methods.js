@@ -181,7 +181,7 @@ Meteor.methods({
       const course = Courses.findOne({ cid, group, credit });
       if (course) {
         if (newCapacity >= course.registered) {
-          Courses.update(course._id, { capacity: newCapacity }, withoutFilter);
+          Courses.update(course._id, { $set: { capacity: newCapacity } });
           if (newCapacity > course.registered && course.reserveRegistered > 0) {
             const len = newCapacity - course.registered;
             const min = min(
@@ -204,8 +204,7 @@ Meteor.methods({
                 isReserved: true,
                 placeInReservedQueue: { $le: len }
               },
-              { isReserved: false, placeInReservedQueue: 0 },
-              withoutFilter
+              { $set: { isReserved: false, placeInReservedQueue: 0 } }
             );
             Registrations.update(
               {
@@ -215,8 +214,7 @@ Meteor.methods({
                 isReserved: true,
                 placeInReservedQueue: { $gt: len }
               },
-              { $inc: { placeInReservedQueue: -min } },
-              withoutFilter
+              { $inc: { placeInReservedQueue: -min } }
             );
           }
         } else {
@@ -232,29 +230,21 @@ Meteor.methods({
     }
   },
 
-  "courses.changeReserveCapacity"({
-    cid,
-    prereq,
-    group,
-    credit,
-    newReserveCapacity
-  }) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
+  "courses.changeReserveCapacity"({ cid, group, credit, newReserveCapacity }) {
+    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
       if (
         Courses.findOne({
           cid: cid,
-          prereq: prereq,
           group: group,
           credit: credit
         })
       ) {
         Courses.update(
-          { cid: cid, prereq: prereq, group: group, credit: credit },
-          { reserveCapacity: newReserveCapacity }
+          { cid: cid, group: group, credit: credit },
+          { $set: { reserveCapacity: newReserveCapacity } }
         );
         Registrations.remove({
           cid: cid,
-          prereq: prereq,
           group: group,
           credit: credit,
           placeInReservedQueue: { $gt: newReserveCapacity }
@@ -267,19 +257,39 @@ Meteor.methods({
     }
   },
 
-  "courses.changePrereq"({ cid, prereq, group, credit, newPrereq }) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
+  "courses.changeTeacher"({ cid, group, credit, newTeacher }) {
+    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
       if (
         Courses.findOne({
           cid: cid,
-          prereq: prereq,
           group: group,
           credit: credit
         })
       ) {
         Courses.update(
-          { cid: cid, prereq: prereq, group: group, credit: credit },
-          { prereq: newPrereq }
+          { cid: cid, group: group, credit: credit },
+          { $set: { teacher: newTeacher } }
+        );
+      } else {
+        throw new Meteor.Error('This course doesn"t exists.');
+      }
+    } else {
+      throw new Meteor.Error("You are not allowed to do this action.");
+    }
+  },
+
+  "courses.changeDescription"({ cid, group, credit, newDescription }) {
+    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
+      if (
+        Courses.findOne({
+          cid: cid,
+          group: group,
+          credit: credit
+        })
+      ) {
+        Courses.update(
+          { cid: cid, group: group, credit: credit },
+          { $set: { description: newDescription } }
         );
       } else {
         throw new Meteor.Error('This course doesn"t exists.');
