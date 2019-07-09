@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Courses } from "/imports/api/courses/courses";
+import { Courses } from "/imports/api/courses";
 import courseList from "./server/courses.json";
 
 _.forEach(courseList, (course) => {

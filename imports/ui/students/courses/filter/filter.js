@@ -26,7 +26,7 @@ export default class Filter extends Component {
             <Select placeholder="مقطع" style={{width: "200px"}}>
               <Option value="bsc"> کارشناسی</Option>
               <Option value="msc">کارشناسی ارشد</Option>
-              <Option value="phd">دکترا</Option>
+              <Option value="phd">دکتری</Option>
             </Select>
           </Row>
         </Row>

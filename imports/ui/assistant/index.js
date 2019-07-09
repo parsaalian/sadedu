@@ -1,9 +1,10 @@
 import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
-import Panel from "./panel/panel";
+
+import Page from "./_global/page";
 
 export default class AssistantPage extends Component {
   render() {
-    return <Panel></Panel>;
+    return <Page></Page>;
   }
 }

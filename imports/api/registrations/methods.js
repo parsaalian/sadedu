@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { Registrations } from "./registrations";
-import { Courses } from "../courses/courses";
+import { Courses } from "../courses";
 import { Students } from "../students/students";
 import { Roles } from "meteor/alanning:roles";
 import { ROLES } from "../../startup/roles";

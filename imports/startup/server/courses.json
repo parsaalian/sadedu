@@ -12,7 +12,7 @@
     "capacity": 50,
     "reserveCapacity": 15,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -28,7 +28,7 @@
     "capacity": 40,
     "reserveCapacity": 10,
     "exam": "2019-04-23T10:00:00",
-    "time": "Sunday, Tuesday 10:30-12",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -43,7 +43,7 @@
     "capacity": 80,
     "reserveCapacity": 15,
     "exam": "2019-04-23T10:00:00",
-    "time": "Sunday, Tuesday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -58,7 +58,7 @@
     "capacity": 45,
     "reserveCapacity": 15,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 13:30-15",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -73,7 +73,7 @@
     "capacity": 100,
     "reserveCapacity": 25,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 7:30-9:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -89,7 +89,7 @@
     "capacity": 70,
     "reserveCapacity": 15,
     "exam": "2019-04-23T10:00:00",
-    "time": "Sunday, Tuesday 7:30-9:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -104,7 +104,7 @@
     "capacity": 25,
     "reserveCapacity": 5,
     "exam": "2019-04-23T10:00:00",
-    "time": "Wednesday 7:30-9:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -119,7 +119,7 @@
     "capacity": 25,
     "reserveCapacity": 5,
     "exam": "2019-04-23T10:00:00",
-    "time": "Wednesday 9:30-11:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -135,7 +135,7 @@
     "capacity": 35,
     "reserveCapacity": 15,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -151,7 +151,7 @@
     "capacity": 35,
     "reserveCapacity": 15,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -167,7 +167,7 @@
     "capacity": 40,
     "reserveCapacity": 15,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -183,7 +183,7 @@
     "capacity": 60,
     "reserveCapacity": 20,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -199,7 +199,7 @@
     "capacity": 70,
     "reserveCapacity": 20,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   },
   {
@@ -214,7 +214,7 @@
     "capacity": 65,
     "reserveCapacity": 20,
     "exam": "2019-04-23T10:00:00",
-    "time": "Saturday, Monday 9-10:30",
+    "time": "یک‌شنبه و سه‌شنبه ۹-۱۰:۳۰",
     "gender": "b"
   }
 ]

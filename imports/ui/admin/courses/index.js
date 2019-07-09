@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Admin from "/imports/ui/admin/_global/admin/admin";
 
 import Form from "./form/form";
-import Table from "./table/table";
+import Table from "./table";
 
 export default class Courses extends Component {
   render() {

@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import { Courses } from "../courses";
+import { Courses } from "../index";
 
 Meteor.publish("courses.admin", function() {
   return Courses.find();

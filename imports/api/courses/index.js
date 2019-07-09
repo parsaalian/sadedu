@@ -2,7 +2,7 @@ import { Mongo } from "meteor/mongo";
 import { SimpleSchema } from "meteor/aldeed:simple-schema";
 import "./methods";
 
-export const Courses = new Mongo.Collection("courses");
+const Courses = new Mongo.Collection("courses");
 
 Courses.schema = new SimpleSchema({
   cid: { type: String, min: 5, max: 5 },
@@ -20,7 +20,10 @@ Courses.schema = new SimpleSchema({
   reserveRegistered: { type: Number, min: 0, defaultValue: 0 },
   exam: { type: Date },
   time: { type: String },
-  gender: { type: String, allowedValues: ["m", "f", "b"] }
+  gender: { type: String, defaultValue: "b", allowedValues: ["m", "f", "b"] },
+  place: { type: String, optional: true }
 });
 
 Courses.attachSchema(Courses.schema);
+
+export { Courses };

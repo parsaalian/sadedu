@@ -36,12 +36,6 @@ body {
   color: #f5222d !important;
 }
 
-.ant-tooltip-inner {
-  text-align: center !important;
-  background: rgba(0, 0, 0, 0.9) !important;
-  direction: rtl;
-}
-
 @font-face {
   font-family: iransans;
   src: url("/fonts/iransans.eot") format("embedded-opentype");

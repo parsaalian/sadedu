@@ -38,7 +38,7 @@ export default class Filter extends Component {
             <Select placeholder="مقطع" style={{width: "100%"}} onChange={this.onChange}>
               <Select.Option value="bsc"> کارشناسی</Select.Option>
               <Select.Option value="msc">کارشناسی ارشد</Select.Option>
-              <Select.Option value="phd">دکترا</Select.Option>
+              <Select.Option value="phd">دکتری</Select.Option>
             </Select>
           </Row>
         </Row>

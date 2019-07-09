@@ -1,0 +1,27 @@
+.ant-tooltip-inner {
+  text-align: center !important;
+  background: rgba(255, 0, 0, 0.9) !important;
+  direction: rtl;
+}
+
+.ant-form-item-label {
+  float: right;
+}
+
+.ant-form-item-control {
+  text-align: right;
+  direction: rtl;
+}
+
+.ant-drawer-title {
+  text-align: right !important;
+}
+
+.ant-drawer-close {
+  left: 0 !important;
+  right: auto !important;
+}
+
+.ant-tabs-nav {
+  text-align: right;
+}

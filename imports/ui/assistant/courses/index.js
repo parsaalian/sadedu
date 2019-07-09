@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { Layout, Row, Col } from "antd";
-import Page from "/imports/ui/assistant/_global/page/page";
-import List from "./list/list";
-import Filter from "./filter/filter";
+import Page from "/imports/ui/assistant/_global/page";
+import List from "./list";
+import Filter from "./filter";
 
 export default class CoursesList extends Component {
   constructor(props) {
