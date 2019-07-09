@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
-import Input from "/imports/ui/_global/input";
-import "./login.css";
+import { Form, Icon, Input, Button, Checkbox } from "antd";
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -19,46 +17,47 @@ export default class LoginForm extends Component {
 
   render() {
     return (
-      <form className="demoForm">
-        <h4>ورود با حساب کاربری</h4>
-        <div className="form-group">
-          <Input
-            type="text"
-            name="username"
-            label="نام کاربری"
-            className="form-control"
-            ref="username"
-            align="center"
-            placeholder="نام کاربری"
-          />
-          {/*<label htmlFor="username">نام کاربری</label>
-                    <input type="username" required className="form-control" name="username"
-                           placeholder="نام کاربری" align={"center"} ref="username"/>*/}
-        </div>
-        <div className="form-group">
-          <Input
-            type="password"
-            name="password"
-            label="کلمه عبور"
-            className="form-control"
-            ref="password"
-            align="center"
-            placeholder="کلمه عبور"
-          />
-          {/*<label htmlFor="password">کلمه عبور</label>
-                    <input type="password" className="form-control" name="password"
-                           placeholder="کلمه عبور" ref="password"/>*/}
-        </div>
-        <Form.Group controlId="formBasicChecbox">
-          <Form.Check type="checkbox" label="مرا به خاطر بسپار" />
-        </Form.Group>
-        <button type="submit" className="btn btn-info" onClick={this.login}>
-          ورود
-        </button>
-        <div>
-          <a href="#">بازیابی کلمه عبور</a>
-        </div>
-      </form>
+      <div className="fa rtl" style={{ margin: "auto" }}>
+        <Form onSubmit={this.login}>
+          <div
+            style={{
+              padding: "2rem",
+              boxShadow: "0px 0px 7px -2px rgba(17,17,17,0.5)",
+              borderRadius: "1rem"
+            }}
+          >
+            <h1>ورود به سامانه</h1>
+            <Form.Item>
+              <Input
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                placeholder="نام کاربری"
+                ref="username"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Input
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                type="password"
+                placeholder="رمز عبور"
+                ref="password"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                style={{ float: "left" }}
+                type="primary"
+                htmlType="submit"
+              >
+                ورود
+              </Button>
+            </Form.Item>
+          </div>
+        </Form>
+      </div>
     );
   }
 }

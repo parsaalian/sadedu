@@ -75,23 +75,21 @@ class Login extends Component {
 
   render() {
     return (
-      <>
+      <div style={{ width: "100vw", height: "100vh", display: "flex" }}>
         {this.state.loading ? (
-          <div style={{ width: "100vw", height: "100vh", display: "flex" }}>
-            <ClipLoader
-              css={`
-                margin: auto;
-              `}
-              sizeUnit={"px"}
-              size={150}
-              color={"#123abc"}
-              loading={this.state.loading}
-            />
-          </div>
+          <ClipLoader
+            css={`
+              margin: auto;
+            `}
+            sizeUnit={"px"}
+            size={150}
+            color={"#123abc"}
+            loading={this.state.loading}
+          />
         ) : (
           <Form error={this.state.error} login={this.handleLogin} />
         )}
-      </>
+      </div>
     );
   }
 }
