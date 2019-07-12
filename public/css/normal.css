@@ -1,6 +1,6 @@
 .ant-tooltip-inner {
   text-align: center !important;
-  background: rgba(255, 0, 0, 0.9) !important;
+  background: rgba(0, 0, 0, 0.9) !important;
   direction: rtl;
 }
 

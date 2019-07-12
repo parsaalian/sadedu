@@ -10,15 +10,9 @@ import {
   Col,
   Row,
   Input,
-  Select,
-  DatePicker,
-  TimePicker,
   Icon,
-  Upload,
   InputNumber
 } from "antd";
-
-import convert from "/imports/ui/_global/convert";
 
 class DrawerForm extends Component {
   constructor(props) {
@@ -29,19 +23,19 @@ class DrawerForm extends Component {
     this.save = this.save.bind(this);
   }
 
-  showDrawer() {
-    this.setState({
-      visible: true
-    });
-  }
-
   onClose() {
     this.setState({
-      visible: false
+      visible: false,
     });
   }
 
-  save(e) {
+  showDrawer() {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  save() {
     this.onClose();
     const { course } = this.props;
     if (course.capacity !== this.refs.capacity.inputNumberRef.state.value) {
@@ -70,6 +64,7 @@ class DrawerForm extends Component {
         newTeacher: this.refs.teacher.state.value
       });
     }
+    console.log(this.refs.description);
   }
 
   render() {

@@ -1,18 +1,17 @@
 import { Meteor } from "meteor/meteor";
-import { Registrations } from "./registrations";
+import { Registrations } from "./index";
 import { Courses } from "../courses";
 import { Students } from "../students/students";
 import { Roles } from "meteor/alanning:roles";
 import { ROLES } from "../../startup/roles";
 
 Meteor.methods({
-  "registrations.add"({ cid, prereq, group, credit, sid }) {
+  "registrations.add"({ cid, group, credit, sid }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
       if (Students.findOne({ sid: sid })) {
         if (
           Courses.findOne({
             cid: cid,
-            prereq: prereq,
             group: group,
             credit: credit
           })
@@ -20,7 +19,6 @@ Meteor.methods({
           if (
             !Courses.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
               credit: credit,
               $and: [
@@ -32,7 +30,6 @@ Meteor.methods({
             if (
               !Registrations.findOne({
                 cid: cid,
-                prereq: prereq,
                 group: group,
                 credit: credit,
                 sid: sid
@@ -41,7 +38,6 @@ Meteor.methods({
               if (
                 Courses.findOne({
                   cid: cid,
-                  prereq: prereq,
                   group: group,
                   credit: credit,
                   $where: "this.registered < this.capacity"
@@ -49,7 +45,6 @@ Meteor.methods({
               ) {
                 Registrations.insert({
                   cid,
-                  prereq,
                   group,
                   credit,
                   sid,
@@ -57,13 +52,12 @@ Meteor.methods({
                   placeInReservedQueue: 0
                 });
                 Courses.update(
-                  { cid: cid, prereq: prereq, group: group, credit: credit },
+                  { cid: cid, group: group, credit: credit },
                   { $inc: { registered: 1 } }
                 );
               } else if (
                 Courses.findOne({
                   cid: cid,
-                  prereq: prereq,
                   group: group,
                   credit: credit,
                   $where: "this.reserveRegistered < this.reserveCapacity"
@@ -71,7 +65,6 @@ Meteor.methods({
               ) {
                 Registrations.insert({
                   cid,
-                  prereq,
                   group,
                   credit,
                   sid,
@@ -80,7 +73,7 @@ Meteor.methods({
                     Registrations.find({ isReserved: true }).count() + 1
                 });
                 Courses.update(
-                  { cid: cid, prereq: prereq, group: group, credit: credit },
+                  { cid: cid, group: group, credit: credit },
                   { $inc: { reserveRegistered: 1 } }
                 );
               }

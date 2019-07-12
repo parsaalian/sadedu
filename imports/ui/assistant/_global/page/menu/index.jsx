@@ -1,37 +1,26 @@
-import { Meteor } from "meteor/meteor";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Layout, Menu, Icon, Avatar } from "antd";
+import { Menu, Icon, Avatar } from "antd";
 
 class TopMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = { collapsed: false };
-    this.onCollapse = this.onCollapse.bind(this);
     this.onClick = this.onClick.bind(this);
     this.logout = this.logout.bind(this);
   }
 
-  onCollapse(collapsed) {
-    this.setState({ collapsed });
-  }
-
   onClick(e) {
-    this.props.history.push("/assistant" + e.key);
+    const { history } = this.props;
+    history.push(`/assistant${e.key}`);
   }
 
   logout(e) {
-    Meteor.logout();
-    if (Meteor.userId()) {
-      setTimeout(() => this.logout(e), 250);
-    } else {
-      this.props.history.push("/");
-    }
+    this.props.logout();
   }
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <div
           style={{
             position: "fixed",
@@ -173,7 +162,7 @@ class TopMenu extends Component {
         <div style={{ lineHeight: "64px" }}>
           let this be here without reason
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

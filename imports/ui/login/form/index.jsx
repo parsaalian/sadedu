@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button } from "antd";
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -9,10 +9,8 @@ export default class LoginForm extends Component {
 
   login(e) {
     e.preventDefault();
-    this.props.login(
-      this.refs.username.state.value,
-      this.refs.password.state.value
-    );
+    const { login } = this.props;
+    login(this.username.state.value, this.password.state.value);
   }
 
   render() {
@@ -24,7 +22,7 @@ export default class LoginForm extends Component {
               padding: "2rem",
               boxShadow: "0px 0px 7px -2px rgba(17,17,17,0.5)",
               borderRadius: "1rem",
-              backgroundColor: "white"
+              backgroundColor: "white",
             }}
           >
             <h1>ورود به سامانه</h1>
@@ -34,7 +32,9 @@ export default class LoginForm extends Component {
                   <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 placeholder="نام کاربری"
-                ref="username"
+                ref={(ref) => {
+                  this.username = ref;
+                }}
               />
             </Form.Item>
             <Form.Item>
@@ -44,7 +44,9 @@ export default class LoginForm extends Component {
                 }
                 type="password"
                 placeholder="رمز عبور"
-                ref="password"
+                ref={(ref) => {
+                  this.password = ref;
+                }}
               />
             </Form.Item>
             <Form.Item>

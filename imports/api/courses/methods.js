@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { Courses } from "./index";
-import { Registrations } from "../registrations/registrations";
+import { Registrations } from "../registrations";
 import { Roles } from "meteor/alanning:roles";
 import { ROLES } from "../../startup/roles";
 
@@ -231,7 +231,7 @@ Meteor.methods({
   },
 
   "courses.changeReserveCapacity"({ cid, group, credit, newReserveCapacity }) {
-    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
           cid: cid,
@@ -258,7 +258,7 @@ Meteor.methods({
   },
 
   "courses.changeTeacher"({ cid, group, credit, newTeacher }) {
-    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
           cid: cid,
@@ -279,7 +279,7 @@ Meteor.methods({
   },
 
   "courses.changeDescription"({ cid, group, credit, newDescription }) {
-    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
           cid: cid,
