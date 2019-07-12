@@ -1,8 +1,8 @@
-import { Meteor } from "meteor/meteor";
-import { Courses } from "./index";
-import { Registrations } from "../registrations";
-import { Roles } from "meteor/alanning:roles";
-import { ROLES } from "../../startup/roles";
+import {Meteor} from "meteor/meteor";
+import {Courses} from "./index";
+import {Registrations} from "../registrations";
+import {Roles} from "meteor/alanning:roles";
+import {ROLES} from "../../startup/roles";
 
 const withoutFilter = {
   filter: false
@@ -10,22 +10,22 @@ const withoutFilter = {
 
 Meteor.methods({
   "courses.add"({
-    cid,
-    title,
-    prereq,
-    group,
-    credit,
-    teacher,
-    description,
-    faculty,
-    section,
-    capacity,
-    registered,
-    reserveCapacity,
-    reserveRegistered,
-    exam,
-    time
-  }) {
+                  cid,
+                  title,
+                  prereq,
+                  group,
+                  credit,
+                  teacher,
+                  description,
+                  faculty,
+                  section,
+                  capacity,
+                  registered,
+                  reserveCapacity,
+                  reserveRegistered,
+                  exam,
+                  time
+                }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
@@ -60,7 +60,7 @@ Meteor.methods({
     }
   },
 
-  "courses.remove"({ cid, prereq, group, credit }) {
+  "courses.remove"({cid, prereq, group, credit}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
@@ -100,24 +100,24 @@ Meteor.methods({
   },
 
   "courses.changeInfo"({
-    prevCid,
-    prevPrereq,
-    prevGroup,
-    prevCredit,
-    cid,
-    title,
-    group,
-    prereq,
-    credit,
-    teacher,
-    description,
-    faculty,
-    section,
-    capacity,
-    reserveCapacity,
-    exam,
-    time
-  }) {
+                         prevCid,
+                         prevPrereq,
+                         prevGroup,
+                         prevCredit,
+                         cid,
+                         title,
+                         group,
+                         prereq,
+                         credit,
+                         teacher,
+                         description,
+                         faculty,
+                         section,
+                         capacity,
+                         reserveCapacity,
+                         exam,
+                         time
+                       }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
@@ -135,16 +135,18 @@ Meteor.methods({
             credit: prevCredit
           },
           {
-            cid: cid,
-            title: title,
-            group: group,
-            credit: credit,
-            teacher: teacher,
-            description: description,
-            faculty: faculty,
-            section: section,
-            exam: exam,
-            time: time
+            $set: {
+              cid: cid,
+              title: title,
+              group: group,
+              credit: credit,
+              teacher: teacher,
+              description: description,
+              faculty: faculty,
+              section: section,
+              exam: exam,
+              time: time
+            }
           }
         );
         Meteor.call("courses.changePrereq", {
@@ -176,12 +178,12 @@ Meteor.methods({
     }
   },
 
-  "courses.changeCapacity"({ cid, group, credit, newCapacity }) {
+  "courses.changeCapacity"({cid, group, credit, newCapacity}) {
     if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
-      const course = Courses.findOne({ cid, group, credit });
+      const course = Courses.findOne({cid, group, credit});
       if (course) {
         if (newCapacity >= course.registered) {
-          Courses.update(course._id, { $set: { capacity: newCapacity } });
+          Courses.update(course._id, {$set: {capacity: newCapacity}});
           if (newCapacity > course.registered && course.reserveRegistered > 0) {
             const len = newCapacity - course.registered;
             const min = min(
@@ -194,7 +196,7 @@ Meteor.methods({
               }).count()
             );
             Courses.update(course, {
-              $inc: { registered: min, reserveRegistered: -min }
+              $inc: {registered: min, reserveRegistered: -min}
             });
             Registrations.update(
               {
@@ -202,9 +204,9 @@ Meteor.methods({
                 group,
                 credit,
                 isReserved: true,
-                placeInReservedQueue: { $le: len }
+                placeInReservedQueue: {$le: len}
               },
-              { $set: { isReserved: false, placeInReservedQueue: 0 } }
+              {$set: {isReserved: false, placeInReservedQueue: 0}}
             );
             Registrations.update(
               {
@@ -212,9 +214,9 @@ Meteor.methods({
                 group,
                 credit,
                 isReserved: true,
-                placeInReservedQueue: { $gt: len }
+                placeInReservedQueue: {$gt: len}
               },
-              { $inc: { placeInReservedQueue: -min } }
+              {$inc: {placeInReservedQueue: -min}}
             );
           }
         } else {
@@ -230,7 +232,7 @@ Meteor.methods({
     }
   },
 
-  "courses.changeReserveCapacity"({ cid, group, credit, newReserveCapacity }) {
+  "courses.changeReserveCapacity"({cid, group, credit, newReserveCapacity}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
@@ -240,14 +242,14 @@ Meteor.methods({
         })
       ) {
         Courses.update(
-          { cid: cid, group: group, credit: credit },
-          { $set: { reserveCapacity: newReserveCapacity } }
+          {cid: cid, group: group, credit: credit},
+          {$set: {reserveCapacity: newReserveCapacity}}
         );
         Registrations.remove({
           cid: cid,
           group: group,
           credit: credit,
-          placeInReservedQueue: { $gt: newReserveCapacity }
+          placeInReservedQueue: {$gt: newReserveCapacity}
         });
       } else {
         throw new Meteor.Error('This course doesn"t exists.');
@@ -257,7 +259,7 @@ Meteor.methods({
     }
   },
 
-  "courses.changeTeacher"({ cid, group, credit, newTeacher }) {
+  "courses.changeTeacher"({cid, group, credit, newTeacher}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
@@ -267,8 +269,8 @@ Meteor.methods({
         })
       ) {
         Courses.update(
-          { cid: cid, group: group, credit: credit },
-          { $set: { teacher: newTeacher } }
+          {cid: cid, group: group, credit: credit},
+          {$set: {teacher: newTeacher}}
         );
       } else {
         throw new Meteor.Error('This course doesn"t exists.');
@@ -278,7 +280,7 @@ Meteor.methods({
     }
   },
 
-  "courses.changeDescription"({ cid, group, credit, newDescription }) {
+  "courses.changeDescription"({cid, group, credit, newDescription}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
         Courses.findOne({
@@ -288,8 +290,8 @@ Meteor.methods({
         })
       ) {
         Courses.update(
-          { cid: cid, group: group, credit: credit },
-          { $set: { description: newDescription } }
+          {cid: cid, group: group, credit: credit},
+          {$set: {description: newDescription}}
         );
       } else {
         throw new Meteor.Error('This course doesn"t exists.');
