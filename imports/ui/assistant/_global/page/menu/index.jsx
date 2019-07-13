@@ -14,31 +14,33 @@ class TopMenu extends Component {
     history.push(`/assistant${e.key}`);
   }
 
-  logout(e) {
-    this.props.logout();
+  logout() {
+    const { logout } = this.props;
+    logout();
   }
 
   render() {
+    const { history } = this.props;
     return (
-      <>
+      <React.Fragment>
         <div
           style={{
             position: "fixed",
             zIndex: "100",
             width: "100%",
-            boxShadow: "0 1px 2px 0 rgba(34,36,38,.15)"
+            boxShadow: "0 1px 2px 0 rgba(34,36,38,.15)",
           }}
         >
           <Menu
             className="rtl"
             defaultSelectedKeys={[
-              this.props.history.location.pathname.replace("/assistant", "")
+              history.location.pathname.replace("/assistant", ""),
             ]}
             mode="horizontal"
             style={{ lineHeight: "64px" }}
           >
             <Menu.Item className="float-right">
-              <img style={{ height: "54px" }} src="/images/logob.png" />
+              <img style={{ height: "54px" }} alt="logo" src="/images/logob.png" />
             </Menu.Item>
 
             <Menu.Item
@@ -52,7 +54,7 @@ class TopMenu extends Component {
                   marginRight: 0,
                   marginLeft: "10px",
                   position: "relative",
-                  top: "-3px"
+                  top: "-3px",
                 }}
               />
               <span style={{ fontFamily: "IRANSans", fontWeight: "600" }}>
@@ -71,7 +73,7 @@ class TopMenu extends Component {
                   marginRight: 0,
                   marginLeft: "10px",
                   position: "relative",
-                  top: "-3px"
+                  top: "-3px",
                 }}
               />
               <span style={{ fontFamily: "iransans", fontWeight: "600" }}>
@@ -90,7 +92,7 @@ class TopMenu extends Component {
                   marginRight: 0,
                   marginLeft: "10px",
                   position: "relative",
-                  top: "-3px"
+                  top: "-3px",
                 }}
               />
               <span style={{ fontFamily: "iransans", fontWeight: "600" }}>
@@ -105,14 +107,14 @@ class TopMenu extends Component {
                 style={{
                   fontSize: "1.5rem",
                   marginLeft: "auto",
-                  marginRight: "auto"
+                  marginRight: "auto",
                 }}
               />
             </Menu.Item>
 
             <Menu.SubMenu
               style={{ marginLeft: "10px" }}
-              title={
+              title={(
                 <React.Fragment>
                   <Avatar size="large" style={{ backgroundColor: "#00a2ae" }}>
                     <Icon
@@ -125,7 +127,7 @@ class TopMenu extends Component {
                     style={{ position: "relative", top: "-3px" }}
                   />
                 </React.Fragment>
-              }
+              )}
             >
               <Menu.Item
                 style={{ direction: "rtl", margin: 0 }}
@@ -162,7 +164,7 @@ class TopMenu extends Component {
         <div style={{ lineHeight: "64px" }}>
           let this be here without reason
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }

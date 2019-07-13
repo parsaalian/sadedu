@@ -32,26 +32,26 @@ class Login extends Component {
 
   render() {
     const { user, history } = this.props;
+    const { loading, error } = this.state;
     if (user && user.roles) {
-      return <Redirect to={"/" + user.roles[0]} />;
-    } else {
-      return (
-        <div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            backgroundColor: "#F5F5F5"
-          }}
-        >
-          {this.state.loading ? (
-            <></>
-          ) : (
-            <Form error={this.state.error} login={this.login} />
-          )}
-        </div>
-      );
+      return <Redirect to={`/${user.roles[0]}`} />;
     }
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          backgroundColor: "#F5F5F5"
+        }}
+      >
+        {loading ? (
+          <React.Fragment />
+        ) : (
+          <Form error={error} login={this.login} />
+        )}
+      </div>
+    );
   }
 }
 
