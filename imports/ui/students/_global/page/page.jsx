@@ -5,12 +5,12 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Layout } from "antd";
 
 import Forbidden from "/imports/ui/_global/403";
-import Menu from "./menu";
+import Menu from "./menu/menu";
 
 function Page(props) {
   const { user, id, children, logout } = props;
   if (user && user.roles) {
-    if (user.roles[0] !== "assistant") {
+    if (user.roles[0] !== "student") {
       return <Forbidden />;
     }
     return (

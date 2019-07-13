@@ -36,15 +36,15 @@ export default function App() {
           component={AssistantCoursePanel}
         />
 
-        <Route path="/students" exact component={StudentHome} />
-        <Route path="/students/courses" exact component={StudentCourses} />
+        <Route path="/student" exact component={StudentHome} />
+        <Route path="/student/courses" exact component={StudentCourses} />
         <Route
-          path="/students/registration"
+          path="/student/registration"
           exact
           component={RegistrationPage}
         />
-        <Route path="/students/calendar" exact component={SchedulePage} />
-        <Route path="/students/chart" exact component={ChartPage} />
+        <Route path="/student/calendar" exact component={SchedulePage} />
+        <Route path="/student/chart" exact component={ChartPage} />
 
         <Route exact component={NotFound} />
       </Switch>
