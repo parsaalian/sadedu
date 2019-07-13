@@ -21,7 +21,7 @@ export default class CourseCard extends Component {
           extra={
             <a
               href={
-                "/assistant/courses/" +
+                "/students/courses/" +
                 item.cid +
                 "-" +
                 item.group +
