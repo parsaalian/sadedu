@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { withTracker } from "meteor/react-meteor-data";
 import { Courses } from "/imports/api/courses";
 import { List, Pagination } from "antd";
-import CourseCard from "/imports/ui/assistant/_global/courseCard";
+import CourseCard from "/imports/ui/students/_global/courseCard";
 
 class CoursesList extends Component {
   filterWithCondition() {
