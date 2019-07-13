@@ -6,21 +6,19 @@ import {Roles} from "meteor/alanning:roles";
 import {ROLES} from "../../startup/roles";
 
 Meteor.methods({
-  "registrations.add"({cid, group, credit, sid}) {
+  "registrations.add"({cid, group, sid}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
       if (Students.findOne({sid: sid})) {
         if (
           Courses.findOne({
             cid: cid,
             group: group,
-            credit: credit
           })
         ) {
           if (
             !Courses.findOne({
               cid: cid,
               group: group,
-              credit: credit,
               $and: [
                 "this.reserveRegistered === this.reserveCapacity",
                 "this.registered === this.capacity"
@@ -31,7 +29,6 @@ Meteor.methods({
               !Registrations.findOne({
                 cid: cid,
                 group: group,
-                credit: credit,
                 sid: sid
               })
             ) {
@@ -39,41 +36,37 @@ Meteor.methods({
                 Courses.findOne({
                   cid: cid,
                   group: group,
-                  credit: credit,
                   $where: "this.registered < this.capacity"
                 })
               ) {
                 Registrations.insert({
                   cid,
                   group,
-                  credit,
                   sid,
                   isReserved: false,
                   placeInReservedQueue: 0
                 });
                 Courses.update(
-                  {cid: cid, group: group, credit: credit},
+                  {cid: cid, group: group},
                   {$inc: {registered: 1}}
                 );
               } else if (
                 Courses.findOne({
                   cid: cid,
                   group: group,
-                  credit: credit,
                   $where: "this.reserveRegistered < this.reserveCapacity"
                 })
               ) {
                 Registrations.insert({
                   cid,
                   group,
-                  credit,
                   sid,
                   isReserved: true,
                   placeInReservedQueue:
                     Registrations.find({isReserved: true}).count() + 1
                 });
                 Courses.update(
-                  {cid: cid, group: group, credit: credit},
+                  {cid: cid, group: group},
                   {$inc: {reserveRegistered: 1}}
                 );
               }
@@ -96,88 +89,70 @@ Meteor.methods({
     }
   },
 
-  "registrations.remove"({cid, prereq, group, credit, sid}) {
+  "registrations.remove"({cid, group, sid}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
       if (Students.findOne({sid: sid})) {
         if (
           Courses.findOne({
             cid: cid,
-            prereq: prereq,
             group: group,
-            credit: credit
           })
         ) {
           if (
             Registrations.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid,
               isReserved: true
             })
           ) {
             const thisPlaceInReservedQueue = Registrations.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid
             }).placeInReservedQueue;
             Registrations.remove({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid
             });
             Registrations.update(
               {
                 cid: cid,
-                prereq: prereq,
                 group: group,
-                credit: credit,
                 isReserved: true,
                 placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
               },
               {$inc: {placeInReservedQueue: -1}}
             );
             Courses.update(
-              {cid: cid, prereq: prereq, group: group, credit: credit},
+              {cid: cid, group: group},
               {$inc: {reserveRegistered: -1}}
             );
           } else if (
             Registrations.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid,
               isReserved: false
             })
           ) {
             Registrations.remove({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid
             });
             if (
               Registrations.find({
                 cid: cid,
-                prereq: prereq,
                 group: group,
-                credit: credit,
                 isReserved: true
               }).count() > 0
             ) {
               Registrations.update(
                 {
                   cid: cid,
-                  prereq: prereq,
                   group: group,
-                  credit: credit,
                   isReserved: true
                 },
                 {$inc: {placeInReservedQueue: -1}}
@@ -185,21 +160,19 @@ Meteor.methods({
               Registrations.update(
                 {
                   cid: cid,
-                  prereq: prereq,
                   group: group,
-                  credit: credit,
                   isReserved: true,
                   placeInReservedQueue: 0
                 },
                 {$set: {isReserved: false}}
               );
               Courses.update(
-                {cid: cid, prereq: prereq, group: group, credit: credit},
+                {cid: cid, group: group},
                 {$inc: {reserveRegistered: -1}}
               );
             } else {
               Courses.update(
-                {cid: cid, prereq: prereq, group: group, credit: credit},
+                {cid: cid, group: group},
                 {$inc: {registered: -1}}
               );
             }
@@ -225,75 +198,61 @@ Meteor.methods({
     }
   },
 
-  "registrations.forceAdd"({cid, prereq, group, credit, sid}) {
+  "registrations.forceAdd"({cid, group, sid}) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (Students.findOne({sid: sid})) {
         if (
           Courses.findOne({
             cid: cid,
-            prereq: prereq,
             group: group,
-            credit: credit
           })
         ) {
           if (
             !Registrations.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid
             })
           ) {
             Registrations.insert({
               cid,
-              prereq,
               group,
-              credit,
               sid,
               isReserved: false,
               placeInReservedQueue: 0
             });
             const course = Courses.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit
             });
             if (course.registered < course.capacity) {
               Courses.update(
-                {cid: cid, prereq: prereq, group: group, credit: credit},
+                {cid: cid, group: group},
                 {$inc: {registered: 1}}
               );
             } else {
               Courses.update(
-                {cid: cid, prereq: prereq, group: group, credit: credit},
+                {cid: cid, group: group},
                 {$inc: {registered: 1, capacity: 1}}
               );
             }
           } else if (
             Registrations.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid,
               isReserved: true
             })
           ) {
             const thisPlaceInReservedQueue = Registrations.findOne({
               cid: cid,
-              prereq: prereq,
               group: group,
-              credit: credit,
               sid: sid
             }).placeInReservedQueue;
             Registrations.update(
               {
                 cid: cid,
-                prereq: prereq,
                 group: group,
-                credit: credit,
                 sid: sid
               },
               {$set: {isReserved: false, placeInReservedQueue: 0}}
@@ -301,16 +260,14 @@ Meteor.methods({
             Registrations.update(
               {
                 cid: cid,
-                prereq: prereq,
                 group: group,
-                credit: credit,
                 isReserved: true,
                 placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
               },
               {$inc: {placeInReservedQueue: -1}}
             );
             Courses.update(
-              {cid: cid, prereq: prereq, group: group, credit: credit},
+              {cid: cid, group: group},
               {$inc: {reserveRegistered: -1, registered: 1, capacity: 1}}
             );
           } else {
@@ -329,9 +286,7 @@ Meteor.methods({
 
   "registrations.changeGroup"({
                                 cid,
-                                prereq,
                                 prevGroup,
-                                credit,
                                 sid,
                                 newGroup
                               }) {
@@ -340,25 +295,19 @@ Meteor.methods({
         if (
           Courses.findOne({
             cid: cid,
-            prereq: prereq,
             group: prevGroup,
-            credit: credit
           })
         ) {
           if (
             Courses.findOne({
               cid: cid,
-              prereq: prereq,
               group: newGroup,
-              credit: credit
             })
           ) {
             if (prevGroup !== newGroup) {
               const course = Courses.findOne({
                 cid: cid,
-                prereq: prereq,
                 group: newGroup,
-                credit: credit
               });
               if (
                 !(
@@ -368,16 +317,12 @@ Meteor.methods({
               ) {
                 Meteor.call("registrations.remove", {
                   cid,
-                  prereq,
                   prevGroup,
-                  credit,
                   sid
                 });
                 Meteor.call("registrations.add", {
                   cid,
-                  prereq,
                   newGroup,
-                  credit,
                   sid
                 });
               } else {
