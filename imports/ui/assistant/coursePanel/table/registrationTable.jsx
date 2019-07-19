@@ -61,21 +61,28 @@ class RegistrationTable extends Component {
     Meteor.call("registrations.add", {
       cid: course.cid,
       group: course.group,
-      credit: course.credit,
-      sid: this.refs.sid.state.value,
+      sid: this.sid.state.value
     });
   }
 
   render() {
     const { registrations } = this.props;
+    console.log(registrations);
     return registrations ? (
       <React.Fragment>
         <Form layout="inline">
           <Form.Item>
-            <Input type="text" ref="sid" />
+            <Input
+              type="text"
+              ref={c => {
+                this.sid = c;
+              }}
+            />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" onClick={this.addStudent}>اضافه‌کردن</Button>
+            <Button type="primary" onClick={this.addStudent}>
+              اضافه‌کردن
+            </Button>
           </Form.Item>
         </Form>
         <Table

@@ -22,8 +22,8 @@ class NotFound extends Component {
             transform: "translateY(-50%)"
           }}
         >
-          <img src="/images/404.png" style={{ maxWidth: "50vw" }} />
-          <h4 className="fa rtl">صفحه‌ی مورد نظر یافت نشد.</h4>
+          <img src="/images/403.png" style={{ maxWidth: "50vw" }} />
+          <h4 className="fa rtl">شما نمی‌توانید وارد این صفحه شوید.</h4>
           <h1 className="fa" onClick={this.back}>
             <a>برگشت</a>
           </h1>

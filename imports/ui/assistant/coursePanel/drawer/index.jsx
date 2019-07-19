@@ -120,7 +120,7 @@ class DrawerForm extends Component {
             </Row>
             <Row gutter={16}>
               <Col span={24}>
-                <Form.Item label="ملاحضات">
+                <Form.Item label="ملاحظات">
                   <Input.TextArea
                     rows={4}
                     defaultValue={course.description}
