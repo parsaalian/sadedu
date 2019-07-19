@@ -24,9 +24,11 @@ Meteor.methods({
                   reserveCapacity,
                   reserveRegistered,
                   exam,
-                  time
+                  time,
+                  gender,
+                  place
                 }) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant]) || true) { //TODO: Remove || true
       if (
         Courses.findOne({
           cid: cid,
@@ -50,7 +52,9 @@ Meteor.methods({
           reserveCapacity,
           reserveRegistered,
           exam,
-          time
+          time,
+          gender,
+          place
         });
       }
     } else {
@@ -59,7 +63,7 @@ Meteor.methods({
   },
 
   "courses.remove"({cid, group}) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
+    if (true || Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) { //TODO: remove true
       if (
         Courses.findOne({
           cid: cid,
@@ -106,7 +110,9 @@ Meteor.methods({
                          capacity,
                          reserveCapacity,
                          exam,
-                         time
+                         time,
+                         gender,
+                         place
                        }) {
     if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
       if (
@@ -131,7 +137,9 @@ Meteor.methods({
               faculty: faculty,
               section: section,
               exam: exam,
-              time: time
+              time: time,
+              gender: gender,
+              place: place
             }
           }
         );
@@ -159,14 +167,14 @@ Meteor.methods({
   },
 
   "courses.changeCapacity"({cid, group, newCapacity}) {
-    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) {
+    if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) { //TODO: remove true //TODO: after increasing the capacity of the course, reserved people didn't add to the main capacity
       const course = Courses.findOne({cid, group});
       if (course) {
         if (newCapacity >= course.registered) {
           Courses.update(course._id, {$set: {capacity: newCapacity}});
           if (newCapacity > course.registered && course.reserveRegistered > 0) {
             const len = newCapacity - course.registered;
-            const min = min(
+            const min = Math.min(
               len,
               Registrations.find({
                 cid,
@@ -182,7 +190,7 @@ Meteor.methods({
                 cid,
                 group,
                 isReserved: true,
-                placeInReservedQueue: {$le: len}
+                placeInReservedQueue: {$lte: len}
               },
               {$set: {isReserved: false, placeInReservedQueue: 0}}
             );
