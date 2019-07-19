@@ -22,11 +22,19 @@ class CourseCard extends Component {
     e.preventDefault();
     this.props.history.push(
       "/assistant/courses/" +
+<<<<<<< HEAD
+        this.props.course.cid +
+        "-" +
+        this.props.course.group +
+        "-" +
+        this.props.course.credit
+=======
       this.props.course.cid +
       "-" +
       this.props.course.group +
       "-" +
       this.props.course.credit
+>>>>>>> 7053879bbc68bc7c8f5f5b52509deeb63b148acc
     );
   };
 
@@ -89,7 +97,11 @@ class CourseCard extends Component {
                       {
                         { bsc: "کارشناسی", ms: "کارشناسی ارشد", phd: "دکتری" }[
                           course.section
+<<<<<<< HEAD
+                        ]
+=======
                           ]
+>>>>>>> 7053879bbc68bc7c8f5f5b52509deeb63b148acc
                       }{" "}
                       دانشکده‌ی {course.faculty}
                     </p>
@@ -100,7 +112,11 @@ class CourseCard extends Component {
                     placement="bottom"
                     title={<span className="fa rtl">{course.description}</span>}
                   >
+<<<<<<< HEAD
                     <span className="error">ملاحظات</span>
+=======
+                    <span className="error">ملاحضات</span>
+>>>>>>> 7053879bbc68bc7c8f5f5b52509deeb63b148acc
                   </Tooltip>
                 ) : (
                   <span style={{ opacity: 0 }}>پرکن</span>
