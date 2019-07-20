@@ -11,6 +11,7 @@ import AdminCourses from "./admin/courses";
 import AssistantHome from "./assistant";
 import AssistantCourses from "./assistant/courses";
 import AssistantCoursePanel from "./assistant/coursePanel";
+import AssistantNotifications from "./assistant/notifications/notification";
 // student panel pages
 import StudentHome from "./students/home";
 import StudentCourses from "./students/courses/courses";
@@ -30,12 +31,13 @@ export default function App() {
 
         <Route path="/assistant" exact component={AssistantHome} />
         <Route path="/assistant/courses" exact component={AssistantCourses} />
+        <Route path="/assistant/notifications" exact component={AssistantNotifications} />
         <Route
           path="/assistant/courses/:id"
           exact
           component={AssistantCoursePanel}
         />
-
+F
         <Route path="/student" exact component={StudentHome} />
         <Route path="/student/courses" exact component={StudentCourses} />
         <Route
