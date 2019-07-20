@@ -22,32 +22,14 @@ export default class ReplyForm extends Component {
     return (
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16} type="flex" justify="end">
-              <Col span={6}>
-                <Form.Item label="شماره درس">
-                  <InputNumber
-                    defaultValue={1}
-                    ref="reserve"
-                    min={0}
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={6}>
-                <Form.Item label="شماره گروه">
-                  <InputNumber
-                    defaultValue={1}
-                    ref="capacity"
-                    min={0}
-                  />
-                </Form.Item>
-              </Col>
+              <h5>درخواست آموزشی</h5>
             </Row>
-
             <Row gutter={16} type="flex" justify="end">
               <Col span={6}>
                 <Form.Item label="شماره درس">
                   <InputNumber
                     defaultValue={1}
-                    ref="reserve"
+                    ref="num"
                     min={0}
                   />
                 </Form.Item>
@@ -56,7 +38,7 @@ export default class ReplyForm extends Component {
                 <Form.Item label="شماره گروه">
                   <InputNumber
                     defaultValue={1}
-                    ref="capacity"
+                    ref="group"
                     min={0}
                   />
                 </Form.Item>
@@ -70,8 +52,8 @@ export default class ReplyForm extends Component {
                     placeholder="نوع درخواست"
                     style={{ width: "200px" }}
                   >
-                    <Option value="ce">حذف درس</Option>
-                    <Option value="cs">اخذ درس</Option>
+                    <Option value="remove">حذف درس</Option>
+                    <Option value="get">اخذ درس</Option>
                   </Select>
                 </Form.Item>
               </Col>
@@ -101,6 +83,19 @@ export default class ReplyForm extends Component {
                     placeholder="در صورت نیاز توضیحات اضافه را وارد کنید."
                   />
                 </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16} type="flex" justify="end">
+              <Col span={6}>
+                <Button type="danger" style={{ marginRight: 8 }}>
+                  لغو
+                </Button>
+              </Col>
+              <Col span={6}>
+                <Button type="primary">
+                  ارسال
+                </Button>
               </Col>
             </Row>
           </Form>
