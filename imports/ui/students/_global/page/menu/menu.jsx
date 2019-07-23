@@ -83,25 +83,6 @@ class TopMenu extends Component {
 
             <Menu.Item
               className="float-right"
-              key="/chart"
-              onClick={this.onClick}
-            >
-              <Icon
-                type="cluster"
-                style={{
-                  marginRight: 0,
-                  marginLeft: "10px",
-                  position: "relative",
-                  top: "-3px",
-                }}
-              />
-              <span style={{ fontFamily: "iransans", fontWeight: "600" }}>
-                جدول درسی
-              </span>
-            </Menu.Item>
-
-            <Menu.Item
-              className="float-right"
               key="/calendar"
               onClick={this.onClick}
             >

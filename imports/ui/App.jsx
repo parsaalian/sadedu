@@ -17,7 +17,6 @@ import StudentHome from "./students/home";
 import StudentCourses from "./students/courses/courses";
 import RegistrationPage from "./students/registration/registration";
 import SchedulePage from "./students/calendar/calendar";
-import ChartPage from "./students/chart/chart";
 import StudentNotifications from "./students/notifications/notification";
 
 export default function App() {
@@ -47,7 +46,6 @@ F
           component={RegistrationPage}
         />
         <Route path="/student/calendar" exact component={SchedulePage} />
-        <Route path="/student/chart" exact component={ChartPage} />
         <Route path="/student/notifications" exact component={StudentNotifications} />
         <Route exact component={NotFound} />
       </Switch>
