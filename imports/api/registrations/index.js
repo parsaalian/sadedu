@@ -6,7 +6,7 @@ export const Registrations = new Mongo.Collection("registrations");
 
 Registrations.schema = new SimpleSchema({
   cid: { type: String, min: 5, max: 5 },
-  group: { type: String, optional: true, defaultValue: "1" },
+  group: { type: Number, optional: true, defaultValue: "1" },
   sid: { type: String },
   isReserved: { type: Boolean },
   placeInReservedQueue: { type: Number, optional: true },

@@ -9,21 +9,12 @@ Meteor.methods({
   "registrations.add"({cid, group, sid}) {
     if (true || Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
       if (Students.findOne({sid})) {
-        let course = Courses.findOne({
+        const course = Courses.findOne({
           cid: cid,
           group: group
         });
         if (course) {
-          if (!(course.reserveRegistered === course.reserveCapacity && course.registered === course.capabilities)
-            // !Courses.findOne({
-            //   cid: cid,
-            //   group: group,
-            //   $and: [
-            //     {"course.reserveRegistered": "course.reserveCapacity"},
-            //     {"course.registered": "course.capacity"}
-            //   ]
-            // })
-          ) {
+          if (!(course.reserveRegistered === course.reserveCapacity && course.registered === course.capacity)) {
             if (
               !Registrations.findOne({
                 cid: cid,
@@ -31,31 +22,20 @@ Meteor.methods({
                 sid: sid
               })
             ) {
-              if (course.registered < course.capacity
-                // Courses.findOne({
-                //   cid: cid,
-                //   group: group,
-                //   $where: "this.registered < this.capacity"
-                // })
-              ) {
+              if (course.registered < course.capacity) {
                 Registrations.insert({
                   cid: cid,
                   group: group,
                   sid: sid,
                   isReserved: false,
-                  placeInReservedQueue: 0
+                  placeInReservedQueue: 0,
+                  request: ""
                 });
                 Courses.update(
                   {cid: cid, group: group},
                   {$inc: {registered: 1}}
                 );
-              } else if (course.reserveRegistered < course.reserveCapacity
-                // Courses.findOne({
-                //   cid: cid,
-                //   group: group,
-                //   $where: "this.reserveRegistered < this.reserveCapacity"
-                // })
-              ) {
+              } else if (course.reserveRegistered < course.reserveCapacity) {
                 Registrations.insert({
                   cid: cid,
                   group: group,
