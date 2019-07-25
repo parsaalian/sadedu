@@ -1,6 +1,8 @@
 import {Meteor} from "meteor/meteor";
 import assert from "assert";
 import {Courses} from "../imports/api/courses";
+import {Registrations} from "../imports/api/registrations";
+import {Students} from "../imports/api/students/students";
 
 describe("edu", function () {
   it("package.json has correct name", async function () {
@@ -41,12 +43,52 @@ const sampleCourse = {
   place: "100"
 };
 
+const s1 = {sid: "1", name: "1", familyName: "1", rand: 9, gender: "m"};
+const s2 = {sid: "2", name: "2", familyName: "2", rand: 9, gender: "m"};
+const s3 = {sid: "3", name: "3", familyName: "3", rand: 9, gender: "m"};
+const s4 = {sid: "4", name: "4", familyName: "4", rand: 9, gender: "m"};
+const s5 = {sid: "5", name: "5", familyName: "5", rand: 9, gender: "m"};
+const s6 = {sid: "6", name: "6", familyName: "6", rand: 9, gender: "m"};
+
+const r1 = {cid: sampleCourse.cid, group: sampleCourse.group, sid: s1.sid};
+const r2 = {cid: sampleCourse.cid, group: sampleCourse.group, sid: s2.sid};
+const r3 = {cid: sampleCourse.cid, group: sampleCourse.group, sid: s3.sid};
+const r4 = {cid: sampleCourse.cid, group: sampleCourse.group, sid: s4.sid};
+const r5 = {cid: sampleCourse.cid, group: sampleCourse.group, sid: s5.sid};
+const r6 = {cid: sampleCourse.cid, group: sampleCourse.group, sid: s6.sid};
+
 describe("courses.add and courses.remove", function () {
   it("should add a course to database and then remove it", function () {
     Meteor.call("courses.add", sampleCourse);
     assert.strictEqual(Courses.find({cid: sampleCourse.cid, group: sampleCourse.group}).count(), 1);
     Meteor.call("courses.remove", {cid: sampleCourse.cid, group: sampleCourse.group});
     assert.strictEqual(Courses.find({cid: sampleCourse.cid, group: sampleCourse.group}).count(), 0);
+  });
+});
+
+describe("students.add and students.remove", function () {
+  it("should add students to database", function () {
+    Meteor.call("students.add", s1);
+    assert.strictEqual(Students.find({sid: s1.sid}).count(), 1);
+    Meteor.call("students.remove", s1);
+    assert.strictEqual(Students.find({sid: s1.sid}).count(), 0);
+  });
+});
+
+describe("registers.add and registers.remove", function () {
+  it("should register students in course", function () {
+    Meteor.call("courses.add", sampleCourse);
+    Meteor.call("students.add", s1);
+    Meteor.call("registrations.add", r1);
+    assert.strictEqual(Courses.findOne({cid: sampleCourse.cid, group: sampleCourse.group}).registered, 1);
+    assert.strictEqual(Registrations.find({cid: r1.cid, group: r1.group, sid: r1.sid}).count(), 1);
+    Meteor.call("courses.remove", sampleCourse);
+    Meteor.call("students.remove", s1);
+    Meteor.call("registrations.remove", r1);
+
+    let myCourse = sampleCourse;
+
+
   });
 });
 
@@ -72,11 +114,40 @@ describe("courses.changeCapacity", function () {
     myCourse.registered = 40;
     myCourse.reserveRegistered = 6;
     Meteor.call("courses.add", myCourse);
+    Meteor.call("students.add", s1);
+    Meteor.call("students.add", s2);
+    Meteor.call("students.add", s3);
+    Meteor.call("students.add", s4);
+    Meteor.call("students.add", s5);
+    Meteor.call("students.add", s6);
+    assert.strictEqual(Students.find({sid: "1"}).count(), 1);
+    assert.strictEqual(Students.find({sid: "2"}).count(), 1);
+    assert.strictEqual(Students.find({sid: "3"}).count(), 1);
+    assert.strictEqual(Students.find({sid: "4"}).count(), 1);
+    assert.strictEqual(Students.find({sid: "5"}).count(), 1);
+    assert.strictEqual(Students.find({sid: "6"}).count(), 1);
+    Meteor.call("registrations.add", r1);
+    Meteor.call("registrations.add", r2);
+    Meteor.call("registrations.add", r3);
+    Meteor.call("registrations.add", r4);
+    Meteor.call("registrations.add", r5);
+    Meteor.call("registrations.add", r6);
+    assert.strictEqual(Registrations.find({
+      cid: sampleCourse.cid,
+      group: sampleCourse.group,
+      isReserved: true
+    }).count(), 6);
     Meteor.call("courses.changeCapacity", {cid: myCourse.cid, group: myCourse.group, newCapacity: 50});
     course = Courses.findOne({cid: myCourse.cid, group: myCourse.group});
     assert.strictEqual(course.registered, 46);
     assert.strictEqual(course.reserveRegistered, 0);
     Meteor.call("courses.remove", {cid: myCourse.cid, group: myCourse.group});
+    Meteor.call("registrations.remove", r1);
+    Meteor.call("registrations.remove", r2);
+    Meteor.call("registrations.remove", r3);
+    Meteor.call("registrations.remove", r4);
+    Meteor.call("registrations.remove", r5);
+    Meteor.call("registrations.remove", r6);
   });
 });
 

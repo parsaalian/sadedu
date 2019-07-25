@@ -1,29 +1,28 @@
-import { Meteor } from "meteor/meteor";
-import { Registrations } from "./index";
-import { Courses } from "../courses";
-import { Students } from "../students/students";
-import { Roles } from "meteor/alanning:roles";
-import { ROLES } from "../../startup/roles";
+import {Meteor} from "meteor/meteor";
+import {Registrations} from "./index";
+import {Courses} from "../courses";
+import {Students} from "../students/students";
+import {Roles} from "meteor/alanning:roles";
+import {ROLES} from "../../startup/roles";
 
 Meteor.methods({
-  "registrations.add"({ cid, group, sid }) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
-      if (Students.findOne({ sid })) {
-        if (
-          Courses.findOne({
-            cid: cid,
-            group: group
-          })
-        ) {
-          if (
-            !Courses.findOne({
-              cid: cid,
-              group: group,
-              $and: [
-                {"this.reserveRegistered": "this.reserveCapacity"},
-                {"this.registered": "this.capacity"}
-              ]
-            })
+  "registrations.add"({cid, group, sid}) {
+    if (true || Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
+      if (Students.findOne({sid})) {
+        let course = Courses.findOne({
+          cid: cid,
+          group: group
+        });
+        if (course) {
+          if (!(course.reserveRegistered === course.reserveCapacity && course.registered === course.capabilities)
+            // !Courses.findOne({
+            //   cid: cid,
+            //   group: group,
+            //   $and: [
+            //     {"course.reserveRegistered": "course.reserveCapacity"},
+            //     {"course.registered": "course.capacity"}
+            //   ]
+            // })
           ) {
             if (
               !Registrations.findOne({
@@ -32,42 +31,42 @@ Meteor.methods({
                 sid: sid
               })
             ) {
-              if (
-                Courses.findOne({
-                  cid: cid,
-                  group: group,
-                  $where: "this.registered < this.capacity"
-                })
+              if (course.registered < course.capacity
+                // Courses.findOne({
+                //   cid: cid,
+                //   group: group,
+                //   $where: "this.registered < this.capacity"
+                // })
               ) {
                 Registrations.insert({
-                  cid,
-                  group,
-                  sid,
+                  cid: cid,
+                  group: group,
+                  sid: sid,
                   isReserved: false,
                   placeInReservedQueue: 0
                 });
                 Courses.update(
-                  { cid: cid, group: group },
-                  { $inc: { registered: 1 } }
+                  {cid: cid, group: group},
+                  {$inc: {registered: 1}}
                 );
-              } else if (
-                Courses.findOne({
-                  cid: cid,
-                  group: group,
-                  $where: "this.reserveRegistered < this.reserveCapacity"
-                })
+              } else if (course.reserveRegistered < course.reserveCapacity
+                // Courses.findOne({
+                //   cid: cid,
+                //   group: group,
+                //   $where: "this.reserveRegistered < this.reserveCapacity"
+                // })
               ) {
                 Registrations.insert({
-                  cid,
-                  group,
-                  sid,
+                  cid: cid,
+                  group: group,
+                  sid: sid,
                   isReserved: true,
                   placeInReservedQueue:
-                    Registrations.find({ isReserved: true }).count() + 1
+                    Registrations.find({isReserved: true}).count() + 1
                 });
                 Courses.update(
-                  { cid: cid, group: group },
-                  { $inc: { reserveRegistered: 1 } }
+                  {cid: cid, group: group},
+                  {$inc: {reserveRegistered: 1}}
                 );
               }
             } else {
@@ -89,9 +88,9 @@ Meteor.methods({
     }
   },
 
-  "registrations.remove"({ cid, group, sid }) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
-      if (Students.findOne({ sid: sid })) {
+  "registrations.remove"({cid, group, sid}) {
+    if (true || Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
+      if (Students.findOne({sid: sid})) {
         if (
           Courses.findOne({
             cid: cid,
@@ -121,13 +120,13 @@ Meteor.methods({
                 cid: cid,
                 group: group,
                 isReserved: true,
-                placeInReservedQueue: { $gt: thisPlaceInReservedQueue }
+                placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
               },
-              { $inc: { placeInReservedQueue: -1 } }
+              {$inc: {placeInReservedQueue: -1}}
             );
             Courses.update(
-              { cid: cid, group: group },
-              { $inc: { reserveRegistered: -1 } }
+              {cid: cid, group: group},
+              {$inc: {reserveRegistered: -1}}
             );
           } else if (
             Registrations.findOne({
@@ -155,7 +154,7 @@ Meteor.methods({
                   group: group,
                   isReserved: true
                 },
-                { $inc: { placeInReservedQueue: -1 } }
+                {$inc: {placeInReservedQueue: -1}}
               );
               Registrations.update(
                 {
@@ -164,16 +163,16 @@ Meteor.methods({
                   isReserved: true,
                   placeInReservedQueue: 0
                 },
-                { $set: { isReserved: false } }
+                {$set: {isReserved: false}}
               );
               Courses.update(
-                { cid: cid, group: group },
-                { $inc: { reserveRegistered: -1 } }
+                {cid: cid, group: group},
+                {$inc: {reserveRegistered: -1}}
               );
             } else {
               Courses.update(
-                { cid: cid, group: group },
-                { $inc: { registered: -1 } }
+                {cid: cid, group: group},
+                {$inc: {registered: -1}}
               );
             }
           } else {
@@ -198,9 +197,9 @@ Meteor.methods({
     }
   },
 
-  "registrations.forceAdd"({ cid, group, sid }) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
-      if (Students.findOne({ sid: sid })) {
+  "registrations.forceAdd"({cid, group, sid}) {
+    if (true || Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])) {
+      if (Students.findOne({sid: sid})) {
         if (
           Courses.findOne({
             cid: cid,
@@ -227,13 +226,13 @@ Meteor.methods({
             });
             if (course.registered < course.capacity) {
               Courses.update(
-                { cid: cid, group: group },
-                { $inc: { registered: 1 } }
+                {cid: cid, group: group},
+                {$inc: {registered: 1}}
               );
             } else {
               Courses.update(
-                { cid: cid, group: group },
-                { $inc: { registered: 1, capacity: 1 } }
+                {cid: cid, group: group},
+                {$inc: {registered: 1, capacity: 1}}
               );
             }
           } else if (
@@ -255,20 +254,20 @@ Meteor.methods({
                 group: group,
                 sid: sid
               },
-              { $set: { isReserved: false, placeInReservedQueue: 0 } }
+              {$set: {isReserved: false, placeInReservedQueue: 0}}
             );
             Registrations.update(
               {
                 cid: cid,
                 group: group,
                 isReserved: true,
-                placeInReservedQueue: { $gt: thisPlaceInReservedQueue }
+                placeInReservedQueue: {$gt: thisPlaceInReservedQueue}
               },
-              { $inc: { placeInReservedQueue: -1 } }
+              {$inc: {placeInReservedQueue: -1}}
             );
             Courses.update(
-              { cid: cid, group: group },
-              { $inc: { reserveRegistered: -1, registered: 1, capacity: 1 } }
+              {cid: cid, group: group},
+              {$inc: {reserveRegistered: -1, registered: 1, capacity: 1}}
             );
           } else {
             throw new Meteor.Error("This student already has this course.");
@@ -284,9 +283,9 @@ Meteor.methods({
     }
   },
 
-  "registrations.changeGroup"({ cid, prevGroup, sid, newGroup }) {
-    if (Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
-      if (Students.findOne({ sid: sid })) {
+  "registrations.changeGroup"({cid, prevGroup, sid, newGroup}) {
+    if (true || Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant, ROLES.Student])) {
+      if (Students.findOne({sid: sid})) {
         if (
           Courses.findOne({
             cid: cid,
