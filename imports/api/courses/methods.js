@@ -168,27 +168,25 @@ Meteor.methods({
 
   "courses.changeCapacity"({cid, group, newCapacity}) {
     if (true /*Roles.userIsInRole(Meteor.userId(), [ROLES.Assistant])*/) { //TODO: remove true //TODO: after increasing the capacity of the course, reserved people didn't add to the main capacity
-      const course = Courses.findOne({cid, group});
+      const course = Courses.findOne({cid: cid, group: group});
       if (course) {
         if (newCapacity >= course.registered) {
           Courses.update(course._id, {$set: {capacity: newCapacity}});
           if (newCapacity > course.registered && course.reserveRegistered > 0) {
             const len = newCapacity - course.registered;
-            const min = Math.min(
-              len,
-              Registrations.find({
-                cid,
-                group,
-                isReserved: true
-              }).count()
-            );
-            Courses.update(course, {
+            const num = Registrations.find({
+              cid: cid,
+              group: group,
+              isReserved: true
+            }).count();
+            const min = Math.min(len, num);
+            Courses.update(course._id, {
               $inc: {registered: min, reserveRegistered: -min}
             });
             Registrations.update(
               {
-                cid,
-                group,
+                cid: cid,
+                group: group,
                 isReserved: true,
                 placeInReservedQueue: {$lte: len}
               },
@@ -196,8 +194,8 @@ Meteor.methods({
             );
             Registrations.update(
               {
-                cid,
-                group,
+                cid: cid,
+                group: group,
                 isReserved: true,
                 placeInReservedQueue: {$gt: len}
               },

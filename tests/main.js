@@ -170,10 +170,15 @@ describe("courses.changeCapacity", function () {
       group: sampleCourse.group,
       isReserved: true
     }).count(), 6);
+    course = Courses.findOne({cid: myCourse.cid, group: myCourse.group});
+    assert.strictEqual(course.reserveRegistered, 6);
     Meteor.call("courses.changeCapacity", {cid: myCourse.cid, group: myCourse.group, newCapacity: 50});
     course = Courses.findOne({cid: myCourse.cid, group: myCourse.group});
     assert.strictEqual(course.registered, 46);
     assert.strictEqual(course.reserveRegistered, 0);
+    assert.strictEqual(Registrations.findOne({cid: r4.cid, group: r4.group, sid: r4.sid}).placeInReservedQueue, 0);
+    assert.strictEqual(Registrations.findOne({cid: r4.cid, group: r4.group, sid: r4.sid}).isReserved, false);
+
     Meteor.call("registrations.remove", r1);
     Meteor.call("registrations.remove", r2);
     Meteor.call("registrations.remove", r3);
